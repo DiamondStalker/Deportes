@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-jul-2019, 9:59:04
+    Author     : user
+*/
+
+body{
+    background-color: #E7E7E7;
+}
+#loggin{
+    width:  25%;
+    border:2px solid #009220;
+    margin: 0 auto;
+    box-shadow: 0 0 10px grey;
+    padding: 1em;
+}
+#loggin h2{
+     background-color: #009220;
+}
+#loggin  #User{
+   margin-left: 45px;
+}
+#loggin  #Password{
+   margin-left: 50px;
+}
