@@ -30,6 +30,8 @@ public class loggin extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -50,14 +52,13 @@ public class loggin extends HttpServlet {
                         con.setCorreof(correo);
                         
                         if (con.tipou(correo) == 0) {//Administrador 
-
+                            
                             out.println("<!DOCTYPE html>\n"
                                     + "<html>\n"
                                     + "<body onload=\"location.href='inicioadministrador.jsp'\">"
                                     + "</body>\n"
                                     + "</html> ");
                         } else {//Usuario
-                            
                              out.println("<!DOCTYPE html>\n"
                                     + "<html>\n"
                                     + "<body onload=\"location.href='usuariousuario.jsp'\">"

@@ -5,6 +5,15 @@
  */
 package conexion;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,6 +35,8 @@ public class conectar {
     Connection conect = null;
 
     public static String correof = "";
+
+    public static InputStream img;
 
     public String getCorreof() {
         return correof;
@@ -196,7 +207,7 @@ public class conectar {
     }
     //------------------------------------------------//
 
-    public int clases(String id_sala, String estado, String fecha, int reserva, String equipo, String hora,String Descripcion) {
+    public int clases(String id_sala, String estado, String fecha, int reserva, String equipo, String hora, String Descripcion) {
         ////Crear Reserva
         int resultado = 0;
         try {
@@ -220,5 +231,62 @@ public class conectar {
             JOptionPane.showMessageDialog(null, e);
         }
         return resultado;
+    }
+
+    //------------------------------------------------//
+    //Pruba para insertar imagenes
+    public void InsertarImagen() throws FileNotFoundException {
+        File imageFile = new File("C:\\Users\\user\\Desktop\\Server3\\server-icon.png");  //Direccion de la imagen
+        FileInputStream fis = new FileInputStream(imageFile);
+
+        try {
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO usuario"
+                    + "(e_mail,Clave,tipo_usuario,Imagen)"
+                    + "VALUES (?,?,?,?)");
+            rs.setString(1, "C@gmail.com");
+            rs.setString(2, "C@gmail.com");
+            rs.setInt(3, 0);
+            rs.setBinaryStream(4, (InputStream) fis, (int) imageFile.length());//Convertir los datos a blond
+            rs.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+
+    public OutputStream VerImagen() {
+        try {
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("SELECT Imagen FROM usuario"
+                    + " WHERE e_mail='carlos_moreno82151@elpoli.edu.co'");
+            ResultSet res = rs.executeQuery();
+            int i = 0;
+            while (res.next()) {
+                img = res.getBinaryStream(1);
+                OutputStream out = new FileOutputStream(new File("C:\\Users\\user\\Desktop\\Server3\\Imagendelusuari00o.png"));
+                i++;
+                int c = 0;
+                while ((c = img.read()) > -1) {
+                    System.out.println(c);
+                    out.write(c);
+                }
+            }
+            InputStreamReader isReader = new InputStreamReader(img);
+            //Creating a BufferedReader object
+            BufferedReader reader = new BufferedReader(isReader);
+            StringBuffer sb = new StringBuffer();
+            String str;
+            while ((str = reader.readLine()) != null) {
+                sb.append(str);
+            }
+            JOptionPane.showMessageDialog(null, "La imagen esta"+sb.toString());
+            out.close();
+            img.close();
+            return out;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return out;
+
+        }
     }
 }
