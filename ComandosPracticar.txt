@@ -1,0 +1,1 @@
+sv_cheats 1;sv_grenade_trajectory 1;sv_showimpacts 1;sv_infinite_ammo 2;mp_freezetime 0;mp_roundtime_defuse 60;mp_roundtime_hostage 60;mp_roundtime 60;mp_maxrounds 30;mp_startmoney 30000;bot_kick;mp_restartgame 1
