@@ -45,6 +45,7 @@ public class InsertarUsuario extends HttpServlet {
 
             String Sdeporte = request.getParameter("Sdeporte");
             String horario = request.getParameter("horario");
+            
             if (Sdeporte.equalsIgnoreCase("Seleccione un deporte") || horario.equalsIgnoreCase("Seleccione un horario")) {
                 out.println("<!DOCTYPE html>\n"
                         + "<html>\n"

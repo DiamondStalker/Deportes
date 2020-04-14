@@ -404,6 +404,7 @@ public class conectar {
         String codigode = verCodigoDeporte(deporte);
         
         
+        
     }
     //Metodo que devuelve el codigo segun el tipo de deporte
     public String verCodigoDeporte(String deporte){
@@ -453,6 +454,35 @@ public class conectar {
             System.err.println(e.getMessage());
         }
         return Deportes;
+    }
+    
+    public int Cuantos_Deportes(){
+        int count=0;
+        
+        
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT count(*)"
+                    + " FROM deporte ");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                count = (res.getInt("count(*)"));
+
+            }
+            JOptionPane.showMessageDialog(null, count);
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return count;
     }
 }
 

@@ -66,6 +66,7 @@ public class Excell {
                 String Apellido = fila.getCell(2).toString();
                 String Fecha_nacimiento = fila.getCell(3).toString();
                 String Id_tutuor = fila.getCell(4).toString();
+                
                 System.out.println(Cedula + " " + Nombre + " " + Apellido + " " + Fecha_nacimiento + " " + Id_tutuor);
                 JOptionPane.showMessageDialog(null, Cedula + " " + Nombre + " " + Apellido + " " + Fecha_nacimiento + " " + Id_tutuor);
 
