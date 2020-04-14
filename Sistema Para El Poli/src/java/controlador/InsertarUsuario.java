@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import conexion.conectar;
+import conexion.Conectar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -123,11 +123,11 @@ public class InsertarUsuario extends HttpServlet {
                             String NAcudiente2 = request.getParameter("NAcudiente2");
                             String aAcudiente2 = request.getParameter("aAcudiente2");
                             if (!Telefono2.isEmpty() && !Direccion2.isEmpty() && !idacu12.isEmpty() && !NAcudiente2.isEmpty() && !aAcudiente2.isEmpty()) {//Si todos estan diferentes de null se puede insertar
-                                conectar con = new conectar();
-                                int matricula = con.Matricular(Ides, Nes, Aes, Fechan);
+                                Conectar con = new Conectar();
+                                int matricula = con.matricular(Ides, Nes, Aes, Fechan);
                                 int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                                 int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
-                                int estudiante_tutor = con.Estudiante_tutor(Ides, idacu1);
+                                int estudiante_tutor = con.estudianteTutor(Ides, idacu1);
                                 if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
                                     JOptionPane.showMessageDialog(null, "Todo se inserto bien");
                                 } else {
@@ -154,12 +154,12 @@ public class InsertarUsuario extends HttpServlet {
 
                         }
                     } else {// No se escojio la opcion De segundo acudiente
-                        conectar con = new conectar();
-                        int matricula = con.Matricular(Ides, Nes, Aes, Fechan);
+                        Conectar con = new Conectar();
+                        int matricula = con.matricular(Ides, Nes, Aes, Fechan);
                         int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                         int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
-                        int estudiante_tutor = con.Estudiante_tutor(Ides, idacu1);
-                        con.matricularcurso(Fechan,Sdeporte,Ides);
+                        int estudiante_tutor = con.estudianteTutor(Ides, idacu1);
+                        con.matricularCurso(Fechan,Sdeporte,Ides);
                         if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
                             out.println("<!DOCTYPE html>\n"
                                         + "<html>\n"

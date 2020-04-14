@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import conexion.conectar;
+import conexion.Conectar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author user
  */
 @WebServlet(name = "loggin", urlPatterns = {"/loggin"})
-public class loggin extends HttpServlet {
+public class Loggin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,13 +45,13 @@ public class loggin extends HttpServlet {
             String clave = request.getParameter("Contrasena");
             //Capturo los datos//
             
-            conectar con = new conectar();
+            Conectar con = new Conectar();
             
             if (con.checkEmail(correo)) {
                 if (con.validar(correo)) {
                     if (con.contrasena(correo, clave)) {
 //////-------------------------------------------------------------------------------------------------////// 
-                        con.setCorreof(correo);
+                        con.setCorreoF(correo);
                         
                         if (con.tipou(correo) == 0) {//Administrador 
                             
@@ -142,7 +142,7 @@ public class loggin extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(loggin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Loggin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -160,7 +160,7 @@ public class loggin extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(loggin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Loggin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

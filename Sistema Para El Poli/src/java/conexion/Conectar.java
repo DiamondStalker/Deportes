@@ -33,26 +33,22 @@ import java.util.Random;
 /**
  *
  * @author user
+ * 
+ * Clase que permite conectar a bases de datos
  */
-public class conectar {
+public class Conectar {
 
     Connection conect = null;
 
-    public static String correof = "";
+    private static String correoF = "";
 
     public static InputStream img;
     
-    public static Fechas f = new Fechas();
+    public static Fechas fecha = new Fechas();
 
-    public String getCorreof() {
-        return correof;
-    }
-
-    public void setCorreof(String correof) {
-        this.correof = correof;
-    }
     public static Random rm = new Random();
-
+  
+    
     public Connection conexion() {
 
         try {
@@ -64,10 +60,10 @@ public class conectar {
             System.out.println("Se conecto");
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(conectar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Conectar.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("No se conecto");
         } catch (SQLException ex) {
-            Logger.getLogger(conectar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Conectar.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("No se conecto");
         }
 
@@ -76,7 +72,7 @@ public class conectar {
 
     //Validar el correo//
     public boolean checkEmail(String email) {
-        if (correo_invalido(email)) {
+        if (correoInvalido(email)) {
             System.out.println("Correo no valido");
         } else {
             // Establecer el patron
@@ -99,7 +95,7 @@ public class conectar {
         "test@example101.com", "example@test@test.com",
         "example@test.com.a5"};
 
-    public static boolean correo_invalido(String correo) {
+    public static boolean correoInvalido(String correo) {
         for (int i = 0; i < invalidos.length; i++) {
             if (correo.equalsIgnoreCase(invalidos[i])) {
                 return true;
@@ -261,7 +257,7 @@ public class conectar {
         }
     }
 
-    public OutputStream VerImagen() {
+    public OutputStream verImagen() {
         try {
             Connection cn = conexion();
             PreparedStatement rs = cn.prepareStatement("SELECT Imagen FROM usuario"
@@ -297,7 +293,7 @@ public class conectar {
         }
     }
 
-    public int Matricular(String id, String Nombre, String Apellido, String fechan) {
+    public int matricular(String id, String Nombre, String Apellido, String fechan) {
         int bien = 0;
         try {
 
@@ -321,7 +317,7 @@ public class conectar {
 
     }
 
-    public int Estudiante_tutor(String id, String idtutor) {
+    public int estudianteTutor(String id, String idtutor) {
         int bien = 0;
         try {
 
@@ -391,9 +387,9 @@ public class conectar {
 
     }
 
-    public void matricularcurso(String fechn,String deporte, String id) {
+    public void matricularCurso(String fechn,String deporte, String id) {
         
-        int categoria = f.Calcular_categoria(fechn);
+        int categoria = fecha.calcularCategoria(fechn);
         //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
         int vect[] = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         String codigo = "";
@@ -406,7 +402,12 @@ public class conectar {
         
         
     }
-    //Metodo que devuelve el codigo segun el tipo de deporte
+    /**
+     * Metodo que devuelve el codigo segun el tipo de deporte
+     * 
+     * @param deporte
+     * @return String
+     */
     public String verCodigoDeporte(String deporte){
         String codigod="";
         try {
@@ -431,7 +432,7 @@ public class conectar {
         return codigod;
     }
     
-    public String[] Deportes(){
+    public String[] deportes(){
         String Deportes[] = new String[8];
         try {
 
@@ -456,7 +457,12 @@ public class conectar {
         return Deportes;
     }
     
-    public int Cuantos_Deportes(){
+    /**
+     * Metodo que permite saber cuantos deportes hay registrados
+     * 
+     * @return int cantidad de deportes
+     */
+    public int cuantosDeportes(){
         int count=0;
         
         
@@ -475,7 +481,7 @@ public class conectar {
                 count = (res.getInt("count(*)"));
 
             }
-            JOptionPane.showMessageDialog(null, count);
+//            JOptionPane.showMessageDialog(null, count);
             res.close();
 
         } catch (SQLException e) {
@@ -484,5 +490,17 @@ public class conectar {
         }
         return count;
     }
+    
+    /*
+    getters y setters
+    */
+    public static String getCorreoF() {
+        return correoF;
+    }
+    
+    public static void setCorreoF(String aCorreoF) {
+        correoF = aCorreoF;
+    }
+    
 }
 

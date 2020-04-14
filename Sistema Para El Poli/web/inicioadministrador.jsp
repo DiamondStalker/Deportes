@@ -1,6 +1,6 @@
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="Metodos.Fechas"%>
-<%@page import="conexion.conectar"%>
+<%@page import="conexion.Conectar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -141,9 +141,9 @@
                         --%>
                         <select>
                             <%-- Creamos un objeto conexion para que nos devuelva cuantos deportes hya y cuales son--%>
-                            <%conectar con = new conectar();
-                                String DD[] = con.Deportes();
-                                int cuantos = con.Cuantos_Deportes();%>
+                            <%Conectar con = new Conectar();
+                                String DD[] = con.deportes();
+                                int cuantos = con.cuantosDeportes();%>
 
                             <% for (int i = 0; i < cuantos; i++) {%>
                             <option> <%=DD[i]%></option>

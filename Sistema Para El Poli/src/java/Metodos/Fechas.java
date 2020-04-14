@@ -14,17 +14,26 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author user
+ * 
+ * Clase que permite validar la categoria a partir de una fecha recibida como 
+ * String
  */
 public class Fechas {
     
-    public int Calcular_categoria(String fechal) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");// Ponemos el formato que desemaos que tenga nuesta fecha
+    /**
+     * Metodo que permite calcular la categoria a partir de la fecha
+     * 
+     * @param fechal fecha recibida
+     * @return int categoria
+     */
+    public int calcularCategoria(String fechal) {
+        
+        // Ponemos el formato que deseamos que tenga nuesta fecha
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
         int categoria=0;
         try {
             Date date = formatter.parse(fechal);// Convertimos el string a tipo dato con el formato que pusimos
             
-            
-            Date Fechaa = new Date();
             Calendar c1 = Calendar.getInstance(); //Creamos una variable tipo dato para luego sacar el año presente
             String annio = Integer.toString(c1.get(Calendar.YEAR)); 
 
