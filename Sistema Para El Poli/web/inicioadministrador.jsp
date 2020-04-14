@@ -63,24 +63,24 @@
                 return patron.test(tecla_final);
             }
 
-            
-                //--- Funcion mejorada de mostar y ocultar ---//
-                    function muestra(id) { //Si le da al radio que si muestra 
+
+            //--- Funcion mejorada de mostar y ocultar ---//
+            function muestra(id) { //Si le da al radio que si muestra 
                 if (document.getElementById) { //se obtiene el id
                     var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
-            el.style.display = (el.style.display == 'block') ? 'block' : 'block'; //damos un atributo display:none que oculta el div
+                    el.style.display = (el.style.display == 'block') ? 'block' : 'block'; //damos un atributo display:none que oculta el div
                 }
             }
 
 
-                    function oculta(id) {//Si le da al radio que no oculta 
+            function oculta(id) {//Si le da al radio que no oculta 
                 if (document.getElementById) { //se obtiene el id
                     var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
-            el.style.display = (el.style.display == 'none') ? 'none' : 'none'; //damos un atributo display:none que oculta el div
+                    el.style.display = (el.style.display == 'none') ? 'none' : 'none'; //damos un atributo display:none que oculta el div
                 }
             }
-                window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
-            muestra_oculta('contenido');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+            window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+                muestra_oculta('contenido');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
             }
 
         </script>
@@ -110,8 +110,8 @@
 
 
                     <%-- Ingresar Usuario Manualmente--%>
-                    
-                        <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" maxlength="11">   
+                    <form id="estudiante" action="InsertarUsuario" method="post">
+                        <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" maxlength="11" min="10">   
                         <br>
                         <br>
                         <label id="Textonombre">Nombre del estudiante: </label><input id="NEstudiante" type="text" name="NombreEstudiante" onclick="valueOf('')" required="">   
@@ -124,35 +124,37 @@
                         <br>
                         <br>
                         Deporte:
-                        <select id="Sdeporte" name="Sdeporte">
-                            <option>Seleccione un deporte</option>
-                            <option value="Futbol">Futbol</option>
-                            <option>Baloncesto</option>
-                            <option>Natacion</option>
-                            <option>Tenis</option>
-                            <option>Gimnasia</option>
-                            <option>Patinaje</option>
-                            <option>Artes marciales</option>
-                            <option>Beisbol</option>
+                        <%-- 
+                            Valores quemados
+                            <select id="Sdeporte" name="Sdeporte">
+                             <option>Seleccione un deporte</option>
+                             <option value="Futbol">Futbol</option>
+                             <option>Baloncesto</option>
+                             <option>Natacion</option>
+                             <option>Tenis</option>
+                             <option>Gimnasia</option>
+                             <option>Patinaje</option>
+                             <option>Artes marciales</option>
+                             <option>Beisbol</option>
 
                         </select>
-                        
+                        --%>
                         <select>
-                            <%conectar con = new conectar();  
-                        String DD[] = con.Deportes();%>
-                        
-                        <% for(int i=0;i<4;i++){%>
-                        <option> <%=DD[i]%></option>
-                        <% }%>
-                        
-                            
+                            <%-- Creamos un objeto conexion para que nos devuelva cuantos deportes hya y cuales son--%>
+                            <%conectar con = new conectar();
+                                String DD[] = con.Deportes();
+                                int cuantos = con.Cuantos_Deportes();%>
+
+                            <% for (int i = 0; i < cuantos; i++) {%>
+                            <option> <%=DD[i]%></option>
+                            <% }%>
+
+
                         </select>
-                        
-                        
-                        
+
                         <br>
                         <br>
-                         Horario:
+                        Horario:
                         <select id="Horario" name="horario">
                             <option>Seleccione un horario</option>
                             <option> Sabados 6-8</option>
@@ -239,47 +241,47 @@
                         <br>
                         <br>
                         <input type="submit" id="submit" value="Login">
-                    
+                        <form>
 
-                </div>    
-            </li>
-            <%--Ingresar Profesor--%>
-            <li>
-                <a id="ingresarp" href="#">Ingresar Profesor</a>
-                <div id="profesor-content">
-                    <form id="estudiante">
-                        <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')">   
-                        <br>
-                        <br>
-                        <label id="Textonombre">Nombre del estudiante: </label><input id="NEstudiante" type="text" name="NombreEstudiante" onclick="valueOf('')">   
-                        <br>
-                        <br>
-                        <label>Apellido del estudiante: </label><input id="AEstudiante" type="text" name="AombreEstudiante" onclick="valueOf('')">   
-                        <br>
-                        <br>
-                        <label>Fecha de nacimiento: </label> <input id="Fechan" type="date" name="Fechan" onclick="valueOf('')">   
-                        <br>
-                        <br>
-                    </form>
-                </div>
+                            </div>    
+                            </li>
+                            <%--Ingresar Profesor--%>
+                            <li>
+                                <a id="ingresarp" href="#">Ingresar Profesor</a>
+                                <div id="profesor-content">
+                                    <form id="estudiante">
+                                        <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')">   
+                                        <br>
+                                        <br>
+                                        <label id="Textonombre">Nombre del estudiante: </label><input id="NEstudiante" type="text" name="NombreEstudiante" onclick="valueOf('')">   
+                                        <br>
+                                        <br>
+                                        <label>Apellido del estudiante: </label><input id="AEstudiante" type="text" name="AombreEstudiante" onclick="valueOf('')">   
+                                        <br>
+                                        <br>
+                                        <label>Fecha de nacimiento: </label> <input id="Fechan" type="date" name="Fechan" onclick="valueOf('')">   
+                                        <br>
+                                        <br>
+                                    </form>
+                                </div>
 
-            </li>
+                            </li>
 
-            <%-- Menu que desea ver--%>
-            <li>
-                <a id="Ver" href="#">Administrar</a>
-                <div id="ver-content">
-                    <a id="VerEstudiantes" href="VerEstudiantes">Ver Estudiantes</a>
-                    <br>
-                    <br>
-                    <a id="VerProfesores" href="VerProfesores">Ver Profesores</a>
-                    <br>
-                    <br>
-                </div>
+                            <%-- Menu que desea ver--%>
+                            <li>
+                                <a id="Ver" href="#">Administrar</a>
+                                <div id="ver-content">
+                                    <a id="VerEstudiantes" href="VerEstudiantes">Ver Estudiantes</a>
+                                    <br>
+                                    <br>
+                                    <a id="VerProfesores" href="VerProfesores">Ver Profesores</a>
+                                    <br>
+                                    <br>
+                                </div>
 
-            </li>
-        </ul>
-    </nav>
+                            </li>
+                            </ul>
+                            </nav>
 
-</body>
-</html>
+                            </body>
+                            </html>
