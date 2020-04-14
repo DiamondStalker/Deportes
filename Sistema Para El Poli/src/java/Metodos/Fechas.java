@@ -18,31 +18,24 @@ import javax.swing.JOptionPane;
 public class Fechas {
     
     public int Calcular_categoria(String fechal) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");// Ponemos el formato que desemaos que tenga nuesta fecha
         int categoria=0;
         try {
-            Date date = formatter.parse(fechal);
+            Date date = formatter.parse(fechal);// Convertimos el string a tipo dato con el formato que pusimos
             
             
             Date Fechaa = new Date();
-            Calendar c1 = Calendar.getInstance();
-            String annio = Integer.toString(c1.get(Calendar.YEAR));
+            Calendar c1 = Calendar.getInstance(); //Creamos una variable tipo dato para luego sacar el año presente
+            String annio = Integer.toString(c1.get(Calendar.YEAR)); 
 
-            System.out.println("El año actual es:"+annio);
-            
-            
             Calendar calendar = Calendar.getInstance();
             
             calendar.setTime(date);
-            System.out.println("año del recivido: "+calendar.getWeekYear());
+            
+            calendar.add(Calendar.YEAR, -Integer.parseInt(annio)); //HAcemso una resta de años para luego poder calcular a la categoria a la que pertenece el 
             
             
-            calendar.add(Calendar.YEAR, -Integer.parseInt(annio));
-            
-            
-            categoria = calendar.getWeekYear()*-1;
-            System.out.println("El resultado es:"+calendar.getWeekYear());
-            System.out.println("El resultado es:"+categoria);
+            categoria = calendar.getWeekYear()*-1;//La multiplicamos por menos 1 para que quede positiva y este valor es el que devolvemos
             
             JOptionPane.showMessageDialog(null,"La categoria es"+ categoria);
             

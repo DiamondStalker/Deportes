@@ -391,13 +391,68 @@ public class conectar {
 
     }
 
-    public void matricularcurso(String fechn) {
+    public void matricularcurso(String fechn,String deporte, String id) {
         
         int categoria = f.Calcular_categoria(fechn);
+        //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
         int vect[] = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         String codigo = "";
         for (int i = 0; i < 5; i++) {
             codigo += rm.nextInt(10);
         }
+        //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
+        String codigode = verCodigoDeporte(deporte);
+        
+        
+    }
+    //Metodo que devuelve el codigo segun el tipo de deporte
+    public String verCodigoDeporte(String deporte){
+        String codigod="";
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT codigo "
+                    + " FROM deporte  "
+                    + " WHERE descripcion = '" + deporte + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                codigod = (res.getString("codigo"));
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return codigod;
+    }
+    
+    public String[] Deportes(){
+        String Deportes[] = new String[8];
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT descripcion "
+                    + " FROM deporte  ");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            int i = 0;
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                Deportes[i] = (res.getString("descripcion"));
+                i++;
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return Deportes;
     }
 }
+

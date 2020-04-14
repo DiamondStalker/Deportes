@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2020 a las 00:12:59
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Host: 127.0.0.1
+-- Generation Time: Apr 14, 2020 at 08:02 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `deportepoli`
+-- Database: `deportepoli`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria`
+-- Table structure for table `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -36,7 +36,7 @@ CREATE TABLE `categoria` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria_horario`
+-- Table structure for table `categoria_horario`
 --
 
 CREATE TABLE `categoria_horario` (
@@ -47,7 +47,7 @@ CREATE TABLE `categoria_horario` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `deporte`
+-- Table structure for table `deporte`
 --
 
 CREATE TABLE `deporte` (
@@ -55,10 +55,24 @@ CREATE TABLE `deporte` (
   `descripcion` varchar(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `deporte`
+--
+
+INSERT INTO `deporte` (`codigo`, `descripcion`) VALUES
+('1', 'Futbol'),
+('2', 'Baloncesto'),
+('3', 'Natacion'),
+('4', 'Tenis'),
+('5', 'Gimnasia'),
+('6', 'Patinaje'),
+('7', 'Artes marciales'),
+('8', 'Beisbol');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `deporte_categoria`
+-- Table structure for table `deporte_categoria`
 --
 
 CREATE TABLE `deporte_categoria` (
@@ -69,7 +83,7 @@ CREATE TABLE `deporte_categoria` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `entrenador`
+-- Table structure for table `entrenador`
 --
 
 CREATE TABLE `entrenador` (
@@ -79,21 +93,32 @@ CREATE TABLE `entrenador` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estudiante`
+-- Table structure for table `estudiante`
 --
 
 CREATE TABLE `estudiante` (
   `id` varchar(400) NOT NULL,
   `nombre` varchar(400) NOT NULL,
   `apellido` varchar(400) NOT NULL,
-  `fecha_nacimiento` varchar(400) NOT NULL,
-  `foto` varchar(400) NOT NULL
+  `fecha_nacimiento` varchar(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `estudiante`
+--
+
+INSERT INTO `estudiante` (`id`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
+('123', '123123123123123123123', '123123123123123123123123123123123123123123123123123123', '1998-03-04'),
+('1231231', '23123', '123123', '1998-03-04'),
+('132222222', '222222222222222', '222222222222222', '1998-03-04'),
+('321', '11111111111', '111111111111111111', '1998-03-04'),
+('32111111111', '111111111111', '111111111111111111', '2020-04-08'),
+('33333333333', '3333333333333', '333333333333333', '1998-03-04');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estudiante_tutor`
+-- Table structure for table `estudiante_tutor`
 --
 
 CREATE TABLE `estudiante_tutor` (
@@ -101,10 +126,26 @@ CREATE TABLE `estudiante_tutor` (
   `tutor_id` varchar(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `estudiante_tutor`
+--
+
+INSERT INTO `estudiante_tutor` (`estudiante_id`, `tutor_id`) VALUES
+('123', '123'),
+('123', '132'),
+('123', '213'),
+('123', '231'),
+('123', '312'),
+('1231231', '213'),
+('132222222', '12333333'),
+('321', '321'),
+('32111111111', '32111111111'),
+('33333333333', '312');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `horario`
+-- Table structure for table `horario`
 --
 
 CREATE TABLE `horario` (
@@ -112,10 +153,19 @@ CREATE TABLE `horario` (
   `descripcion` varchar(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `horario`
+--
+
+INSERT INTO `horario` (`codigo`, `descripcion`) VALUES
+('cl1012', 'Clase sabados 10 am a 12 am'),
+('cl68', 'Clase sabados 6 am a 8 am'),
+('cl810', 'Clase sabados 8 am a 10 am');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `matricula`
+-- Table structure for table `matricula`
 --
 
 CREATE TABLE `matricula` (
@@ -126,7 +176,7 @@ CREATE TABLE `matricula` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `matricula_deporte`
+-- Table structure for table `matricula_deporte`
 --
 
 CREATE TABLE `matricula_deporte` (
@@ -137,7 +187,7 @@ CREATE TABLE `matricula_deporte` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `persoan`
+-- Table structure for table `persoan`
 --
 
 CREATE TABLE `persoan` (
@@ -145,14 +195,28 @@ CREATE TABLE `persoan` (
   `nombre` varchar(400) NOT NULL,
   `apellido` varchar(400) NOT NULL,
   `telefono` varchar(400) DEFAULT NULL,
-  `celular` varchar(400) NOT NULL,
-  `foto` varchar(400) NOT NULL
+  `celular` varchar(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `persoan`
+--
+
+INSERT INTO `persoan` (`id`, `nombre`, `apellido`, `telefono`, `celular`) VALUES
+('123', '321', '123', '213', '123'),
+('12333333', '333333333333', '3333333333333', '3333333', '3333333333'),
+('132', '22222222', '22222222222', '2222222', '2222222222'),
+('213', '333333333', '33333333333333', '3333333', '3333333333'),
+('231', '123', '213', '312', '231'),
+('312', '22222222', '22222222222', '2222222', '2222222222'),
+('321', '11111111', '1111111111111', '1111111', '1111111111'),
+('32111111', '111111111111', '11111111111111', '1111111', '1111111111'),
+('32111111111', '11111111111', '111111111111111111', '1111111', '1111111111');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `profesor_deporte`
+-- Table structure for table `profesor_deporte`
 --
 
 CREATE TABLE `profesor_deporte` (
@@ -163,7 +227,7 @@ CREATE TABLE `profesor_deporte` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `seguimiento`
+-- Table structure for table `seguimiento`
 --
 
 CREATE TABLE `seguimiento` (
@@ -176,7 +240,7 @@ CREATE TABLE `seguimiento` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tutor`
+-- Table structure for table `tutor`
 --
 
 CREATE TABLE `tutor` (
@@ -186,159 +250,198 @@ CREATE TABLE `tutor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Índices para tablas volcadas
+-- Dumping data for table `tutor`
+--
+
+INSERT INTO `tutor` (`parentesco`, `id`, `direccion`) VALUES
+('Tia', '123', '213'),
+('Hermana', '12333333', '3333333333'),
+('Hermano', '132', '22222222'),
+('Hermano', '213', '3333333333'),
+('Padre', '231', '123'),
+('Hermano', '312', '2222222222'),
+('Hermana', '321', '1111111111'),
+('Vecino', '32111111111', '1111111111');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `e_mail` varchar(40) NOT NULL,
+  `clave` varchar(30) NOT NULL,
+  `tipo_usuario` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`e_mail`, `clave`, `tipo_usuario`) VALUES
+('carlos_moreno82151@elpoli.edu.co', '12344', 0);
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categoria`
+-- Indexes for table `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Indices de la tabla `categoria_horario`
+-- Indexes for table `categoria_horario`
 --
 ALTER TABLE `categoria_horario`
   ADD PRIMARY KEY (`categoria_codigo`,`horario_codigo`),
   ADD KEY `categoria_horario_horario_fk` (`horario_codigo`);
 
 --
--- Indices de la tabla `deporte`
+-- Indexes for table `deporte`
 --
 ALTER TABLE `deporte`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Indices de la tabla `deporte_categoria`
+-- Indexes for table `deporte_categoria`
 --
 ALTER TABLE `deporte_categoria`
   ADD PRIMARY KEY (`deporte_codigo`,`categoria_codigo`),
   ADD KEY `deporte_categoria_categoria_fk` (`categoria_codigo`);
 
 --
--- Indices de la tabla `entrenador`
+-- Indexes for table `entrenador`
 --
 ALTER TABLE `entrenador`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `estudiante`
+-- Indexes for table `estudiante`
 --
 ALTER TABLE `estudiante`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `estudiante_tutor`
+-- Indexes for table `estudiante_tutor`
 --
 ALTER TABLE `estudiante_tutor`
   ADD PRIMARY KEY (`estudiante_id`,`tutor_id`),
   ADD KEY `estudiante_tutor_tutor_fk` (`tutor_id`);
 
 --
--- Indices de la tabla `horario`
+-- Indexes for table `horario`
 --
 ALTER TABLE `horario`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Indices de la tabla `matricula`
+-- Indexes for table `matricula`
 --
 ALTER TABLE `matricula`
   ADD PRIMARY KEY (`codigo`),
   ADD KEY `matricula_estudiante_fk` (`estudiante_id`);
 
 --
--- Indices de la tabla `matricula_deporte`
+-- Indexes for table `matricula_deporte`
 --
 ALTER TABLE `matricula_deporte`
   ADD PRIMARY KEY (`matricula_codigo`,`deporte_codigo`),
   ADD KEY `matricula_deporte_deporte_fk` (`deporte_codigo`);
 
 --
--- Indices de la tabla `persoan`
+-- Indexes for table `persoan`
 --
 ALTER TABLE `persoan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `profesor_deporte`
+-- Indexes for table `profesor_deporte`
 --
 ALTER TABLE `profesor_deporte`
   ADD PRIMARY KEY (`entrenador_id`,`deporte_codigo`),
   ADD KEY `profesor_deporte_deporte_fk` (`deporte_codigo`);
 
 --
--- Indices de la tabla `seguimiento`
+-- Indexes for table `seguimiento`
 --
 ALTER TABLE `seguimiento`
   ADD PRIMARY KEY (`codigo`),
   ADD KEY `seguimiento_estudiante_fk` (`estudiante_id`);
 
 --
--- Indices de la tabla `tutor`
+-- Indexes for table `tutor`
 --
 ALTER TABLE `tutor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Restricciones para tablas volcadas
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`e_mail`);
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `categoria_horario`
+-- Constraints for table `categoria_horario`
 --
 ALTER TABLE `categoria_horario`
   ADD CONSTRAINT `categoria_horario_categoria_fk` FOREIGN KEY (`categoria_codigo`) REFERENCES `categoria` (`codigo`),
   ADD CONSTRAINT `categoria_horario_horario_fk` FOREIGN KEY (`horario_codigo`) REFERENCES `horario` (`codigo`);
 
 --
--- Filtros para la tabla `deporte_categoria`
+-- Constraints for table `deporte_categoria`
 --
 ALTER TABLE `deporte_categoria`
   ADD CONSTRAINT `deporte_categoria_categoria_fk` FOREIGN KEY (`categoria_codigo`) REFERENCES `categoria` (`codigo`),
   ADD CONSTRAINT `deporte_categoria_deporte_fk` FOREIGN KEY (`deporte_codigo`) REFERENCES `deporte` (`codigo`);
 
 --
--- Filtros para la tabla `entrenador`
+-- Constraints for table `entrenador`
 --
 ALTER TABLE `entrenador`
   ADD CONSTRAINT `entrenador_persoan_fk` FOREIGN KEY (`id`) REFERENCES `persoan` (`id`);
 
 --
--- Filtros para la tabla `estudiante_tutor`
+-- Constraints for table `estudiante_tutor`
 --
 ALTER TABLE `estudiante_tutor`
   ADD CONSTRAINT `estudiante_tutor_estudiante_fk` FOREIGN KEY (`estudiante_id`) REFERENCES `estudiante` (`id`),
   ADD CONSTRAINT `estudiante_tutor_tutor_fk` FOREIGN KEY (`tutor_id`) REFERENCES `tutor` (`id`);
 
 --
--- Filtros para la tabla `matricula`
+-- Constraints for table `matricula`
 --
 ALTER TABLE `matricula`
   ADD CONSTRAINT `matricula_estudiante_fk` FOREIGN KEY (`estudiante_id`) REFERENCES `estudiante` (`id`);
 
 --
--- Filtros para la tabla `matricula_deporte`
+-- Constraints for table `matricula_deporte`
 --
 ALTER TABLE `matricula_deporte`
   ADD CONSTRAINT `matricula_deporte_deporte_fk` FOREIGN KEY (`deporte_codigo`) REFERENCES `deporte` (`codigo`),
   ADD CONSTRAINT `matricula_deporte_matricula_fk` FOREIGN KEY (`matricula_codigo`) REFERENCES `matricula` (`codigo`);
 
 --
--- Filtros para la tabla `profesor_deporte`
+-- Constraints for table `profesor_deporte`
 --
 ALTER TABLE `profesor_deporte`
   ADD CONSTRAINT `profesor_deporte_deporte_fk` FOREIGN KEY (`deporte_codigo`) REFERENCES `deporte` (`codigo`),
   ADD CONSTRAINT `profesor_deporte_entrenador_fk` FOREIGN KEY (`entrenador_id`) REFERENCES `entrenador` (`id`);
 
 --
--- Filtros para la tabla `seguimiento`
+-- Constraints for table `seguimiento`
 --
 ALTER TABLE `seguimiento`
   ADD CONSTRAINT `seguimiento_estudiante_fk` FOREIGN KEY (`estudiante_id`) REFERENCES `estudiante` (`id`);
 
 --
--- Filtros para la tabla `tutor`
+-- Constraints for table `tutor`
 --
 ALTER TABLE `tutor`
   ADD CONSTRAINT `tutor_persoan_fk` FOREIGN KEY (`id`) REFERENCES `persoan` (`id`);

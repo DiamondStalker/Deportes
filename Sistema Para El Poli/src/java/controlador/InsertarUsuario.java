@@ -88,8 +88,6 @@ public class InsertarUsuario extends HttpServlet {
 
                     String Fechan = (request.getParameter("Fechan") == null ? "" : request.getParameter("Fechan"));
 
-                    JOptionPane.showMessageDialog(null, Fechan);
-                    
                     String idacu1 = request.getParameter("idacu1");
                     String NAcudiente = request.getParameter("NAcudiente");
                     String AAcudiente = request.getParameter("aAcudiente");
@@ -160,7 +158,7 @@ public class InsertarUsuario extends HttpServlet {
                         int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                         int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
                         int estudiante_tutor = con.Estudiante_tutor(Ides, idacu1);
-                        con.matricularcurso(Fechan);
+                        con.matricularcurso(Fechan,Sdeporte,Ides);
                         if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
                             out.println("<!DOCTYPE html>\n"
                                         + "<html>\n"

@@ -1,3 +1,6 @@
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="Metodos.Fechas"%>
+<%@page import="conexion.conectar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -107,7 +110,7 @@
 
 
                     <%-- Ingresar Usuario Manualmente--%>
-                    <form id="estudiante" action="InsertarUsuario">
+                    
                         <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" maxlength="11">   
                         <br>
                         <br>
@@ -123,7 +126,7 @@
                         Deporte:
                         <select id="Sdeporte" name="Sdeporte">
                             <option>Seleccione un deporte</option>
-                            <option> Futbol</option>
+                            <option value="Futbol">Futbol</option>
                             <option>Baloncesto</option>
                             <option>Natacion</option>
                             <option>Tenis</option>
@@ -133,6 +136,20 @@
                             <option>Beisbol</option>
 
                         </select>
+                        
+                        <select>
+                            <%conectar con = new conectar();  
+                        String DD[] = con.Deportes();%>
+                        
+                        <% for(int i=0;i<4;i++){%>
+                        <option> <%=DD[i]%></option>
+                        <% }%>
+                        
+                            
+                        </select>
+                        
+                        
+                        
                         <br>
                         <br>
                          Horario:
@@ -222,7 +239,7 @@
                         <br>
                         <br>
                         <input type="submit" id="submit" value="Login">
-                    </form>
+                    
 
                 </div>    
             </li>
