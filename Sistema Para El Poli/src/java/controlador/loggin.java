@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import Metodos.MensajesErrores;
 import conexion.conectar;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,6 +46,8 @@ public class loggin extends HttpServlet {
             String clave = request.getParameter("Contrasena");
             //Capturo los datos//
             
+            MensajesErrores msg = new MensajesErrores();
+            
             conectar con = new conectar();
             
             if (con.checkEmail(correo)) {
@@ -55,72 +58,22 @@ public class loggin extends HttpServlet {
                         
                         if (con.tipou(correo) == 0) {//Administrador 
                             
-                            out.println("<!DOCTYPE html>\n"
-                                    + "<html>\n"
-                                    + "<body onload=\"location.href='inicioadministrador.jsp'\">"
-                                    + "</body>\n"
-                                    + "</html> ");
+                            out.println(msg.administrador);
                         } else {//Usuario
-                             out.println("<!DOCTYPE html>\n"
-                                    + "<html>\n"
-                                    + "<body onload=\"location.href='usuariousuario.jsp'\">"
-                                    + "</body>\n"
-                                    + "</html> ");
+                             out.println(msg.usuario);
                             
                         }
 //////-------------------------------------------------------------------------------------------------//////
                     } else {//La contrasena es incorrecta
-                        out.println("<!DOCTYPE html>\n"
-                                + "<html>\n"
-                                + "<body onload=\"mensaje()\">\n"
-                                + "\n"
-                                + "<p id=\"demo\"></p>\n"
-                                + "\n"
-                                + "<script>\n"
-                               + "function mensaje() {\n"
-                                + "    alert('El usuario y/o contrasena son incorrectas')\n"
-                                + "    window.location.href = 'index.jsp';  \n"
-                                + "}\n"
-                                + "</script>\n"
-                                + "\n"
-                                + "</body>\n"
-                                + "</html> ");
+                        out.println(msg.ErrorUsuarioClave);
                     }
 //////-------------------------------------------------------------------------------------------------//////
                 } else {//El correo no existe
-                    out.println("<!DOCTYPE html>\n"
-                            + "<html>\n"
-                            + "<body onload=\"mensaje()\">\n"
-                            + "\n"
-                            + "<p id=\"demo\"></p>\n"
-                            + "\n"
-                            + "<script>\n"
-                            + "function mensaje() {\n"
-                            + "    alert('El correo no existe')\n"
-                            + "    window.location.href = 'index.jsp';  \n"
-                            + "}\n"
-                            + "</script>\n"
-                            + "\n"
-                            + "</body>\n"
-                            + "</html> ");
+                    out.println(msg.CorreoNExiste);
                 }
 //////-------------------------------------------------------------------------------------------------//////
             } else {//El correo no es valido
-                out.println("<!DOCTYPE html>\n"
-                                + "<html>\n"
-                                + "<body onload=\"mensaje()\">\n"
-                                + "\n"
-                                + "<p id=\"demo\"></p>\n"
-                                + "\n"
-                                + "<script>\n"
-                                + "function mensaje() {\n"
-                                + "    alert('El Correo no es valido')\n"
-                                + "    window.location.href = 'index.jsp';  \n"
-                                + "}\n"
-                                + "</script>\n"
-                                + "\n"
-                                + "</body>\n"
-                                + "</html> ");
+                out.println(msg.ErrorCorreo);
             }
         } finally {
             out.close();

@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import Metodos.MensajesErrores;
 import conexion.conectar;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,44 +43,18 @@ public class InsertarUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
+            
+            MensajesErrores msg = new MensajesErrores();
+            
             String Sdeporte = request.getParameter("Sdeporte");
             String horario = request.getParameter("horario");
             
             if (Sdeporte.equalsIgnoreCase("Seleccione un deporte") || horario.equalsIgnoreCase("Seleccione un horario")) {
-                out.println("<!DOCTYPE html>\n"
-                        + "<html>\n"
-                        + "<body onload=\"mensaje()\">\n"
-                        + "\n"
-                        + "<p id=\"demo\"></p>\n"
-                        + "\n"
-                        + "<script>\n"
-                        + "function mensaje() {\n"
-                        + "    alert('No se escojio un deporte / horario valido')\n"
-                        + "    window.location.href = 'inicioadministrador.jsp';  \n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "\n"
-                        + "</body>\n"
-                        + "</html> ");
+                out.println(msg.ErrorDeporte_Horario);
             } else {
                 String Seleccione_parentesco = request.getParameter("Seleccione_parentesco");
                 if (Seleccione_parentesco.equalsIgnoreCase("Seleccione parentesco")) {
-                    out.println("<!DOCTYPE html>\n"
-                            + "<html>\n"
-                            + "<body onload=\"mensaje()\">\n"
-                            + "\n"
-                            + "<p id=\"demo\"></p>\n"
-                            + "\n"
-                            + "<script>\n"
-                            + "function mensaje() {\n"
-                            + "    alert('No se escojio un parentesco valido para el segundo acudiente')\n"
-                            + "    window.location.href = 'inicioadministrador.jsp';  \n"
-                            + "}\n"
-                            + "</script>\n"
-                            + "\n"
-                            + "</body>\n"
-                            + "</html> ");
+                    out.println(msg.ErrorParenteso);
                 } else {
                     
                     String ingresarac2 = request.getParameter("pregunta");
@@ -101,55 +76,36 @@ public class InsertarUsuario extends HttpServlet {
                         String Seleccione_parentesco2 = request.getParameter("Seleccione_parentesco2");
 
                         if (Seleccione_parentesco2.equalsIgnoreCase("Seleccione parentesco")) {
-                            out.println("<!DOCTYPE html>\n"
-                                    + "<html>\n"
-                                    + "<body onload=\"mensaje()\">\n"
-                                    + "\n"
-                                    + "<p id=\"demo\"></p>\n"
-                                    + "\n"
-                                    + "<script>\n"
-                                    + "function mensaje() {\n"
-                                    + "    alert('No se escojio un parentesco valido para el secundo acudiente')\n"
-                                    + "    window.location.href = 'inicioadministrador.jsp';  \n"
-                                    + "}\n"
-                                    + "</script>\n"
-                                    + "\n"
-                                    + "</body>\n"
-                                    + "</html> ");
-                        } else {
+                            out.println(msg.ErrorParenteso2);
+                        } else {//////Llamamiento para insetart con segundo acudiente
                             String Telefono2 = request.getParameter("Telefono2");
                             String Direccion2 = request.getParameter("Direccion2");
                             String idacu12 = request.getParameter("idacu12");
                             String NAcudiente2 = request.getParameter("NAcudiente2");
                             String aAcudiente2 = request.getParameter("aAcudiente2");
+                            String celular2 = request.getParameter("celular2");
+                            
                             if (!Telefono2.isEmpty() && !Direccion2.isEmpty() && !idacu12.isEmpty() && !NAcudiente2.isEmpty() && !aAcudiente2.isEmpty()) {//Si todos estan diferentes de null se puede insertar
+                               
                                 conectar con = new conectar();
                                 int matricula = con.Matricular(Ides, Nes, Aes, Fechan);
                                 int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                                 int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
                                 int estudiante_tutor = con.Estudiante_tutor(Ides, idacu1);
-                                if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
-                                    JOptionPane.showMessageDialog(null, "Todo se inserto bien");
+                                
+                                int persona2 = con.persona(idacu12, NAcudiente2, aAcudiente2, Telefono2, celular2);
+                                int tutor2 = con.tutor(Seleccione_parentesco2, idacu12, Direccion2);
+                                int estudiante_tutor2 = con.Estudiante_tutor(Ides, idacu12);
+                                int matricularcurso = con.matricularcurso(Fechan,Sdeporte,Ides);
+                                
+                                if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0 && tutor2 != 0 && estudiante_tutor2 != 0) {
+                                   out.println(msg.Correcto);
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "hubo un error al insertar los datos");
+                                   out.println(msg.ErrorInsertar);
                                 }
 
                             } else {
-                                out.println("<!DOCTYPE html>\n"
-                                        + "<html>\n"
-                                        + "<body onload=\"mensaje()\">\n"
-                                        + "\n"
-                                        + "<p id=\"demo\"></p>\n"
-                                        + "\n"
-                                        + "<script>\n"
-                                        + "function mensaje() {\n"
-                                        + "    alert('Faltan datos del acudiente dos')\n"
-                                        + "    window.location.href = 'inicioadministrador.jsp';  \n"
-                                        + "}\n"
-                                        + "</script>\n"
-                                        + "\n"
-                                        + "</body>\n"
-                                        + "</html> ");
+                                out.println(msg.FaltanDatos);
                             }
 
                         }
@@ -159,39 +115,11 @@ public class InsertarUsuario extends HttpServlet {
                         int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                         int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
                         int estudiante_tutor = con.Estudiante_tutor(Ides, idacu1);
-                        con.matricularcurso(Fechan,Sdeporte,Ides);
+                        int matricularcurso = con.matricularcurso(Fechan,Sdeporte,Ides);
                         if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
-                            out.println("<!DOCTYPE html>\n"
-                                        + "<html>\n"
-                                        + "<body onload=\"mensaje()\">\n"
-                                        + "\n"
-                                        + "<p id=\"demo\"></p>\n"
-                                        + "\n"
-                                        + "<script>\n"
-                                        + "function mensaje() {\n"
-                                        + "    alert('Se insertaron todos los datos correctamente)\n"
-                                        + "    window.location.href = 'inicioadministrador.jsp';  \n"
-                                        + "}\n"
-                                        + "</script>\n"
-                                        + "\n"
-                                        + "</body>\n"
-                                        + "</html> ");
+                            out.println(msg.Correcto);
                         } else {
-                            out.println("<!DOCTYPE html>\n"
-                                        + "<html>\n"
-                                        + "<body onload=\"mensaje()\">\n"
-                                        + "\n"
-                                        + "<p id=\"demo\"></p>\n"
-                                        + "\n"
-                                        + "<script>\n"
-                                        + "function mensaje() {\n"
-                                        + "    alert('Hubo un error al insertar los datos')\n"
-                                        + "    window.location.href = 'inicioadministrador.jsp';  \n"
-                                        + "}\n"
-                                        + "</script>\n"
-                                        + "\n"
-                                        + "</body>\n"
-                                        + "</html> ");
+                            out.println(msg.ErrorInsertar);
                         }
                     }
                 }
