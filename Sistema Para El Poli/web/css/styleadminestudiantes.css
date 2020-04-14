@@ -1,0 +1,68 @@
+body{
+    background-color: #E7E7E7;
+}
+
+nav.acceder #estudiante-content {
+    display: none;
+}
+
+nav.acceder #profesor-content{
+    display: none;
+}
+
+nav.acceder #ver-content{
+    display: none;
+    border:2px solid #009220;
+}
+
+#estudiante{
+    border:2px solid #009220;
+    margin: 0 auto;
+    box-shadow: 0 0 10px grey;
+    padding: 1em;
+}
+
+nav.acceder #ingresare{
+    display: inline-block;
+    font-size: 16px;
+    padding: 2px 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #009220;
+    font-weight: 600
+
+}
+
+nav.acceder #ingresarp{
+    display: inline-block;
+    font-size: 16px;
+    padding: 2px 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #009220;
+    font-weight: 600
+}
+
+nav.acceder #Ver{
+    display: inline-block;
+    font-size: 16px;
+    padding: 2px 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #009220;
+    font-weight: 600
+}
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-left: 25%;
+
+}
+li  {
+    background-color: #dddddd;
+    float: left;
+    margin-left: 10px;
+}
+

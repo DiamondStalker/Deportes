@@ -5,6 +5,7 @@
  */
 package conexion;
 
+import Metodos.Fechas;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,12 +20,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -37,6 +41,8 @@ public class conectar {
     public static String correof = "";
 
     public static InputStream img;
+    
+    public static Fechas f = new Fechas();
 
     public String getCorreof() {
         return correof;
@@ -45,6 +51,7 @@ public class conectar {
     public void setCorreof(String correof) {
         this.correof = correof;
     }
+    public static Random rm = new Random();
 
     public Connection conexion() {
 
@@ -52,7 +59,7 @@ public class conectar {
             //Cargamos el Driver MySQL
             Class.forName("com.mysql.jdbc.Driver");
             Class.forName("org.gjt.mm.mysql.Driver");
-            conect = DriverManager.getConnection("jdbc:mysql://localhost/deportes?"
+            conect = DriverManager.getConnection("jdbc:mysql://localhost/deportepoli?"
                     + "user=root&password=");
             System.out.println("Se conecto");
 
@@ -113,8 +120,8 @@ public class conectar {
 
             Connection cn = conexion();
 
-            PreparedStatement pstm = cn.prepareStatement(" SELECT Clave"
-                    + " FROM usuario "
+            PreparedStatement pstm = cn.prepareStatement(" SELECT clave"
+                    + " FROM usuarios "
                     + " WHERE e_mail = '" + correo + "'");
             //Se crea un objeto donde se almacena el resultado
             //Y con el comando executeQuery se ejecuta la consulta en la base de datos
@@ -122,7 +129,7 @@ public class conectar {
             //Recorre el resultado para mostrarlo en los jtf
             while (res.next()) {
                 //jTF_identificacion.setText(res.getString( "id_persona" ));
-                clave = (res.getString("Clave"));
+                clave = (res.getString("clave"));
 
             }
 
@@ -150,8 +157,8 @@ public class conectar {
 
             Connection cn = conexion();
 
-            PreparedStatement pstm = cn.prepareStatement(" SELECT Clave"
-                    + " FROM usuario"
+            PreparedStatement pstm = cn.prepareStatement(" SELECT clave"
+                    + " FROM usuarios"
                     + " WHERE e_mail = '" + correo + "'");
             //Se crea un objeto donde se almacena el resultado
             //Y con el comando executeQuery se ejecuta la consulta en la base de datos
@@ -159,7 +166,7 @@ public class conectar {
             //Recorre el resultado para mostrarlo en los jtf
             while (res.next()) {
                 //jTF_identificacion.setText(res.getString( "id_persona" ));
-                clave = (res.getString("Clave"));
+                clave = (res.getString("clave"));
 
             }
 
@@ -186,7 +193,7 @@ public class conectar {
             Connection cn = conexion();
 
             PreparedStatement pstm = cn.prepareStatement(" SELECT tipo_usuario"
-                    + " FROM usuario "
+                    + " FROM usuarios "
                     + " WHERE e_mail = '" + correo + "'");
             //Se crea un objeto donde se almacena el resultado
             //Y con el comando executeQuery se ejecuta la consulta en la base de datos
@@ -279,7 +286,7 @@ public class conectar {
             while ((str = reader.readLine()) != null) {
                 sb.append(str);
             }
-            JOptionPane.showMessageDialog(null, "La imagen esta"+sb.toString());
+            JOptionPane.showMessageDialog(null, "La imagen esta" + sb.toString());
             out.close();
             img.close();
             return out;
@@ -287,6 +294,110 @@ public class conectar {
             JOptionPane.showMessageDialog(null, e);
             return out;
 
+        }
+    }
+
+    public int Matricular(String id, String Nombre, String Apellido, String fechan) {
+        int bien = 0;
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO estudiante"
+                    + "(id,nombre,apellido,fecha_nacimiento)"
+                    + "VALUES (?,?,?,?)");
+
+            rs.setString(1, id);
+            rs.setString(2, Nombre);
+            rs.setString(3, Apellido);
+            rs.setString(4, fechan);
+
+            rs.executeUpdate();
+            bien = 1;
+        } catch (Exception e) {
+            bien = 0;
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return bien;
+
+    }
+
+    public int Estudiante_tutor(String id, String idtutor) {
+        int bien = 0;
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO estudiante_tutor"
+                    + "(estudiante_id,tutor_id)"
+                    + "VALUES (?,?)");
+
+            rs.setString(1, id);
+            rs.setString(2, idtutor);
+
+            rs.executeUpdate();
+            bien = 1;
+        } catch (Exception e) {
+            bien = 0;
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return bien;
+
+    }
+
+    public int tutor(String parentensco, String id, String Direccion) {
+        int bien = 0;
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO tutor"
+                    + "(parentesco,id,direccion)"
+                    + "VALUES (?,?,?)");
+
+            rs.setString(1, parentensco);
+            rs.setString(2, id);
+            rs.setString(3, Direccion);
+
+            rs.executeUpdate();
+            bien = 1;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            bien = 0;
+        }
+        return bien;
+
+    }
+
+    public int persona(String id, String nombre, String apellido, String telefono, String celular) {
+        int bien = 0;
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO persoan"
+                    + "(id,nombre,apellido,telefono,celular)"
+                    + "VALUES (?,?,?,?,?)");
+
+            rs.setString(1, id);
+            rs.setString(2, nombre);
+            rs.setString(3, apellido);
+            rs.setString(4, telefono);
+            rs.setString(5, celular);
+
+            rs.executeUpdate();
+            bien = 1;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            bien = 0;
+        }
+        return bien;
+
+    }
+
+    public void matricularcurso(String fechn) {
+        
+        int categoria = f.Calcular_categoria(fechn);
+        int vect[] = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        String codigo = "";
+        for (int i = 0; i < 5; i++) {
+            codigo += rm.nextInt(10);
         }
     }
 }
