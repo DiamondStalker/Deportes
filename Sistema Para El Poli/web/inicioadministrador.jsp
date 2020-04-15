@@ -82,15 +82,23 @@
             window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                 muestra_oculta('contenido');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
             }
-
+        </script>
+        
+        <script type="text/javascript">
+            function reFresh()
+                    location.reload(true)
+        }
+        /* Establece el tiempo 1 minuto = 60000 milliseconds. */
+        window.setInterval("reFresh()", 300000);
+// -->
         </script>
 
     </head>
     <body>
 
     <center>
-        <img src="imagenes/refresh.JPG" alt="">
-    </center> 
+            <a onclick="javascript:window.location.reload();"> <img src="imagenes/refresh.JPG" alt=""></a>
+        </center> 
 
     <br>
     <br>
@@ -139,7 +147,7 @@
 
                         </select>
                         --%>
-                        <select>
+                        <select id="Sdeporte" name="Sdeporte">
                             <%-- Creamos un objeto conexion para que nos devuelva cuantos deportes hya y cuales son--%>
                             <%Conectar con = new Conectar();
                                 String DD[] = con.deportes();
@@ -241,47 +249,47 @@
                         <br>
                         <br>
                         <input type="submit" id="submit" value="Login">
-                        <form>
+                    </form>
 
-                            </div>    
-                            </li>
-                            <%--Ingresar Profesor--%>
-                            <li>
-                                <a id="ingresarp" href="#">Ingresar Profesor</a>
-                                <div id="profesor-content">
-                                    <form id="estudiante">
-                                        <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')">   
-                                        <br>
-                                        <br>
-                                        <label id="Textonombre">Nombre del estudiante: </label><input id="NEstudiante" type="text" name="NombreEstudiante" onclick="valueOf('')">   
-                                        <br>
-                                        <br>
-                                        <label>Apellido del estudiante: </label><input id="AEstudiante" type="text" name="AombreEstudiante" onclick="valueOf('')">   
-                                        <br>
-                                        <br>
-                                        <label>Fecha de nacimiento: </label> <input id="Fechan" type="date" name="Fechan" onclick="valueOf('')">   
-                                        <br>
-                                        <br>
-                                    </form>
-                                </div>
+                </div>    
+            </li>
+            <%--Ingresar Profesor--%>
+            <li>
+                <a id="ingresarp" href="#">Ingresar Profesor</a>
+                <div id="profesor-content">
+                    <form id="estudiante">
+                        <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')">   
+                        <br>
+                        <br>
+                        <label id="Textonombre">Nombre del estudiante: </label><input id="NEstudiante" type="text" name="NombreEstudiante" onclick="valueOf('')">   
+                        <br>
+                        <br>
+                        <label>Apellido del estudiante: </label><input id="AEstudiante" type="text" name="AombreEstudiante" onclick="valueOf('')">   
+                        <br>
+                        <br>
+                        <label>Fecha de nacimiento: </label> <input id="Fechan" type="date" name="Fechan" onclick="valueOf('')">   
+                        <br>
+                        <br>
+                    </form>
+                </div>
 
-                            </li>
+            </li>
 
-                            <%-- Menu que desea ver--%>
-                            <li>
-                                <a id="Ver" href="#">Administrar</a>
-                                <div id="ver-content">
-                                    <a id="VerEstudiantes" href="VerEstudiantes">Ver Estudiantes</a>
-                                    <br>
-                                    <br>
-                                    <a id="VerProfesores" href="VerProfesores">Ver Profesores</a>
-                                    <br>
-                                    <br>
-                                </div>
+            <%-- Menu que desea ver--%>
+            <li>
+                <a id="Ver" href="#">Administrar</a>
+                <div id="ver-content">
+                    <a id="VerEstudiantes" href="VerEstudiantes">Ver Estudiantes</a>
+                    <br>
+                    <br>
+                    <a id="VerProfesores" href="VerProfesores">Ver Profesores</a>
+                    <br>
+                    <br>
+                </div>
 
-                            </li>
-                            </ul>
-                            </nav>
+            </li>
+        </ul>
+    </nav>
 
-                            </body>
-                            </html>
+</body>
+</html>

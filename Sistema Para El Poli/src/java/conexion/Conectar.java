@@ -387,9 +387,13 @@ public class Conectar {
 
     }
 
-    public void matricularCurso(String fechn,String deporte, String id) {
+
+    public int matricularCurso(String fechn,String deporte, String id) {
         
         int categoria = fecha.calcularCategoria(fechn);
+
+        int controlador = 0;
+
         //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
         int vect[] = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         String codigo = "";
@@ -397,11 +401,47 @@ public class Conectar {
             codigo += rm.nextInt(10);
         }
         //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
-        String codigode = verCodigoDeporte(deporte);
         
-        
-        
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO matricula"
+                    + "(codigo,estudiante_id)"
+                    + "VALUES (?,?)");
+
+            rs.setString(1, codigo);
+            rs.setString(2, id);
+
+            rs.executeUpdate();
+
+            controlador = 1;
+            Matricula_Deporte(codigo, deporte);
+        } catch (Exception e) {
+            controlador = 0;
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return controlador;
     }
+
+    public void Matricula_Deporte(String codigomatricula, String Deporte) {
+        String codigode = verCodigoDeporte(Deporte);
+        int bien=0;
+        try {
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO matricula_deporte"
+                    + "(matricula_codigo,deporte_codigo)"
+                    + "VALUES (?,?)");
+
+            rs.setString(1, codigomatricula);
+            rs.setString(2, codigode);
+
+            rs.executeUpdate();
+            bien=1;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     /**
      * Metodo que devuelve el codigo segun el tipo de deporte
      * 
@@ -410,6 +450,7 @@ public class Conectar {
      */
     public String verCodigoDeporte(String deporte){
         String codigod="";
+
         try {
 
             Connection cn = conexion();
@@ -433,6 +474,7 @@ public class Conectar {
     }
     
     public String[] deportes(){
+
         String Deportes[] = new String[8];
         try {
 
@@ -464,7 +506,6 @@ public class Conectar {
      */
     public int cuantosDeportes(){
         int count=0;
-        
         
         try {
 
@@ -503,4 +544,3 @@ public class Conectar {
     }
     
 }
-

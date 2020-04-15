@@ -17,17 +17,25 @@
         <script src="js/html5.js"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
         <![endif]-->
+
+        <script type="text/javascript">
+            function reFresh()
+                    location.reload(true)
+        }
+        /* Establece el tiempo 1 minuto = 60000 milliseconds. */
+        window.setInterval("reFresh()", 300000);
+// -->
+        </script>
     <body>
     </head>
     <section >
         <!--==============================FORM=================================-->
         <center>
-            <img src="imagenes/refresh.JPG" alt="">
+            <a onclick="javascript:window.location.reload();"> <img src="imagenes/refresh.JPG" alt=""></a>
         </center> 
+        <br>
+        <br>
 
-        <br>
-        <br>
-        
         <form action="loggin" id="loggin" method="post" >
             <h2 id="TituloLoggin">Login</h2>
             <label>User name</label><input id="User"autocomplete="on" placeholder="ejemplo@dominio.com" type="email" name="Correo" onclick="valueOf('')" required="">
