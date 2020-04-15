@@ -248,7 +248,7 @@
 
                         <br>
                         <br>
-                        <input type="submit" id="submit" value="Login">
+                        <input type="submit" id="submit" value="Matricular">
                     </form>
 
                 </div>    
