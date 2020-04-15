@@ -31,7 +31,7 @@
     <section >
         <!--==============================FORM=================================-->
         <center>
-            <a onclick="javascript:window.location.reload();"> <img src="imagenes/refresh.JPG" alt=""></a>
+            <a onclick="javascript:window.location.reload();"> <img src="imagenes/refresh.gif" alt=""></a>
         </center> 
         <br>
         <br>

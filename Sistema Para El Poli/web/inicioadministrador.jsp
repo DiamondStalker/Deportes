@@ -97,7 +97,7 @@
     <body>
 
     <center>
-            <a onclick="javascript:window.location.reload();"> <img src="imagenes/refresh.JPG" alt=""></a>
+        <a onclick="javascript:window.location.reload();"> <img src="imagenes/refresh.gif" alt=""></a>
         </center> 
 
     <br>
@@ -119,7 +119,7 @@
 
                     <%-- Ingresar Usuario Manualmente--%>
                     <form id="estudiante" action="InsertarUsuario" method="post">
-                        <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" maxlength="11" min="10">   
+                        <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" minlength="10" maxlength="11">   
                         <br>
                         <br>
                         <label id="Textonombre">Nombre del estudiante: </label><input id="NEstudiante" type="text" name="NombreEstudiante" onclick="valueOf('')" required="">   
@@ -169,7 +169,7 @@
                         </select>
                         <br>
                         <br>
-                        <label>Identificacion acudiente: </label><input id="idacu1" type="text" name="idacu1" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" maxlength=11>   
+                        <label>Identificacion acudiente: </label><input id="idacu1" type="text" name="idacu1" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" minlength="11" maxlength=11>   
                         <br>
                         <br>
                         <label>Nombre acudiente: </label><input id="NAcudiente" type="text" name="NAcudiente" onclick="valueOf('')" required="">   
@@ -184,7 +184,7 @@
                         <label>Celular: </label><input id="celular" type="text" name="celular" onclick="valueOf('')" required="" maxlength="10"  onkeypress="return SoloN(event)">   
                         <br>
                         <br>
-                        <label>Direccion: </label><input id="Direccion" type="text" name="Direccion" onclick="valueOf('')" required="" maxlength="10"  onkeypress="return SoloN(event)">   
+                        <label>Direccion: </label><input id="Direccion" type="text" name="Direccion" onclick="valueOf('')" required="">   
                         <br>
                         <br>
                         Parentesco: 
@@ -212,7 +212,7 @@
 
                             <br>
                             <br>
-                            <label>Identificacion acudiente: </label><input id="idacu1" type="text" name="idacu12" onclick="valueOf('')" onkeypress="return SoloN(event)" maxlength=11>   
+                            <label>Identificacion acudiente: </label><input id="idacu1" type="text" name="idacu12" onclick="valueOf('')" onkeypress="return SoloN(event)" minlength="11" maxlength=11>   
                             <br>
                             <br>
                             <label>Nombre acudiente: </label><input id="NAcudiente" type="text" name="NAcudiente2" onclick="valueOf('')" >   
@@ -241,7 +241,7 @@
                             <label>Celular: </label><input id="celular" type="text" name="celular2" onclick="valueOf('')"  maxlength="10"  onkeypress="return SoloN(event)">   
                             <br>
                             <br>
-                            <label>Direccion: </label><input id="Direccion" type="text" name="Direccion2" onclick="valueOf('')"  maxlength="10"  onkeypress="return SoloN(event)">   
+                            <label>Direccion: </label><input id="Direccion" type="text" name="Direccion2" onclick="valueOf('')">   
                             <br>
                             <br>
                         </div>
