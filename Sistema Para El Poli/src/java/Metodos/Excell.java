@@ -5,6 +5,7 @@
  */
 package Metodos;
 
+import conexion.Conectar;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,27 +34,28 @@ public class Excell {
             //Cuando se lea el archivo excel, lea  la hoja del mes actual
             // Obtenemos el mes actual
             Month mes = LocalDate.now().getMonth();
-            
+
             // Obtenemos el nombre del mes
             String Nmes = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
-            
+
             // Convierte a mayúscula la primera letra del nombre.
             String primeraLetra = Nmes.substring(0, 1);
             String mayuscula = primeraLetra.toUpperCase();
             String demasLetras = Nmes.substring(1, Nmes.length());
             Nmes = mayuscula + demasLetras;
-            
+
             //Direccion del archivo para poder leerlo
-            FileInputStream file = new FileInputStream(new File("C:\\Users\\user\\Google Drive\\workcare2\\Sistema Para El Poli\\build\\web\\uploadFiles\\" + Nombrea));
-            
+            FileInputStream file = new FileInputStream(new File("C:\\Users\\user\\Desktop\\Sistema Para El Poli\\build\\web\\uploadFiles\\" + Nombrea));
+
             //Traemo la informacion del archivo
             XSSFWorkbook wb = new XSSFWorkbook(file);
-            
+
             //Declaramo con cual hoja va a trabajar
             //REcibe un String con el nombre de la hoja la cual obtuvimos 
             XSSFSheet sheet = wb.getSheet(Nmes);
-            
-            
+
+            JOptionPane.showMessageDialog(null, "El mes a leer es: " + Nmes);
+
             //Capturamos cuantas filas tiene
             int numFilas = sheet.getLastRowNum();
 
@@ -61,41 +63,42 @@ public class Excell {
                 //Capturamos la fila
                 Row fila = sheet.getRow(a);
 
-                String Cedula = fila.getCell(0).toString();
+                String Identificacion_estudiante = fila.getCell(0).toString();
                 String Nombre = fila.getCell(1).toString();
                 String Apellido = fila.getCell(2).toString();
                 String Fecha_nacimiento = fila.getCell(3).toString();
-                String Id_tutuor = fila.getCell(4).toString();
-                
-                System.out.println(Cedula + " " + Nombre + " " + Apellido + " " + Fecha_nacimiento + " " + Id_tutuor);
-                JOptionPane.showMessageDialog(null, Cedula + " " + Nombre + " " + Apellido + " " + Fecha_nacimiento + " " + Id_tutuor);
+                String Deporte = fila.getCell(4).toString();
+                String Id_tutuor = fila.getCell(5).toString();
+                String Parentesco = fila.getCell(6).toString();
+                String Nombre_tutor = fila.getCell(7).toString();
+                String Apellido_tutor = fila.getCell(8).toString();
+                String Telefono_tutor = fila.getCell(9).toString();
+                String Celular_tutor = fila.getCell(10).toString();
+                String Direccion_tutor = fila.getCell(11).toString();
+                String Pregunta_tutor_2 = fila.getCell(12).toString();
 
-                //Cuantas columnas tiene
-                //int numCols = fila.getLastCellNum();
-                /*for (int b = 0; b < numCols; b+=numCols) {
-                 //Capturamos el valor de la fila con la columna
-                 // el tamaño es de 18
-                 Cell celda = fila.getCell(b);
-                 String Nombre = fila.getCell(0).toString();
-                 JOptionPane.showMessageDialog(null, Nombre);
-                    
-                 //Miramos que tipo de dato es
-                 switch (celda.getCellTypeEnum().toString()) {
-                 case "NUMERIC":
-                 System.out.print(celda.getNumericCellValue() + " ");
-                 break;
-                        
-                 case "STRING":
-                 System.out.print(celda.getStringCellValue() + " ");
-                 break;
-                        
-                 case "FORMULA":
-                 System.out.print(celda.getCellFormula() + " ");
-                 break;
-                 }
-                    
-                 }
-                 */
+                Conectar Con = new Conectar();
+
+                int Matricula = Con.matricular(Identificacion_estudiante, Nombre, Apellido, Fecha_nacimiento);
+                int Persona = Con.persona(Id_tutuor, Nombre_tutor, Apellido_tutor, Telefono_tutor, Celular_tutor);
+                int Tutor = Con.tutor(Parentesco, Id_tutuor, Direccion_tutor);
+                int Estudiante_tutor = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor);
+                int Matricularcurso = Con.matricularCurso(Fecha_nacimiento, Deporte, Identificacion_estudiante);
+
+                if (Pregunta_tutor_2.equalsIgnoreCase("Si")) {
+                    String Id_tutuor_2 = fila.getCell(13).toString();
+                    String Parentesco_2 = fila.getCell(14).toString();
+                    String Nombre_tutor_2 = fila.getCell(15).toString();
+                    String Apellido_tutor_2 = fila.getCell(16).toString();
+                    String Telefono_tutor_2 = fila.getCell(17).toString();
+                    String Celular_tutor_2 = fila.getCell(18).toString();
+                    String Direccion_tutor_2 = fila.getCell(19).toString();
+
+                    int Persona_2 = Con.persona(Id_tutuor_2, Nombre_tutor_2, Apellido_tutor_2, Telefono_tutor_2, Celular_tutor_2);
+                    int Tutor_2 = Con.tutor(Parentesco_2, Id_tutuor_2, Direccion_tutor_2);
+                    int Estudiante_tutor_2 = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor_2);
+
+                }
                 System.out.println("");
 
             }

@@ -36,7 +36,7 @@
         <br>
         <br>
 
-        <form action="Loggin" id="Loggin" method="post" >
+        <form action="Loggin" id="loggin" method="post" >
             <h2 id="TituloLoggin">Login</h2>
             <label>User name</label><input id="User"autocomplete="on" placeholder="ejemplo@dominio.com" type="email" name="Correo" onclick="valueOf('')" required="">
             <br>

@@ -33,29 +33,28 @@ import java.util.Random;
 /**
  *
  * @author user
- * 
+ *
  * Clase que permite conectar a bases de datos
  */
 public class Conectar {
 
-    Connection conect = null;
+    Connection Conect = null;
 
     private static String correoF = "";
 
     public static InputStream img;
-    
+
     public static Fechas fecha = new Fechas();
 
     public static Random rm = new Random();
-  
-    
+
     public Connection conexion() {
 
         try {
             //Cargamos el Driver MySQL
             Class.forName("com.mysql.jdbc.Driver");
             Class.forName("org.gjt.mm.mysql.Driver");
-            conect = DriverManager.getConnection("jdbc:mysql://localhost/deportepoli?"
+            Conect = DriverManager.getConnection("jdbc:mysql://localhost/deportepoli?"
                     + "user=root&password=");
             System.out.println("Se conecto");
 
@@ -67,7 +66,7 @@ public class Conectar {
             System.out.println("No se conecto");
         }
 
-        return conect;
+        return Conect;
     }
 
     //Validar el correo//
@@ -387,9 +386,8 @@ public class Conectar {
 
     }
 
+    public int matricularCurso(String fechn, String deporte, String id) {
 
-    public int matricularCurso(String fechn,String deporte, String id) {
-        
         int categoria = fecha.calcularCategoria(fechn);
 
         int controlador = 0;
@@ -401,7 +399,7 @@ public class Conectar {
             codigo += rm.nextInt(10);
         }
         //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
-        
+
         try {
 
             Connection cn = conexion();
@@ -418,14 +416,14 @@ public class Conectar {
             Matricula_Deporte(codigo, deporte);
         } catch (Exception e) {
             controlador = 0;
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, e);
         }
         return controlador;
     }
 
     public void Matricula_Deporte(String codigomatricula, String Deporte) {
         String codigode = verCodigoDeporte(Deporte);
-        int bien=0;
+        int bien = 0;
         try {
             Connection cn = conexion();
             PreparedStatement rs = cn.prepareStatement("INSERT INTO matricula_deporte"
@@ -436,7 +434,7 @@ public class Conectar {
             rs.setString(2, codigode);
 
             rs.executeUpdate();
-            bien=1;
+            bien = 1;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -444,12 +442,12 @@ public class Conectar {
 
     /**
      * Metodo que devuelve el codigo segun el tipo de deporte
-     * 
+     *
      * @param deporte
      * @return String
      */
-    public String verCodigoDeporte(String deporte){
-        String codigod="";
+    public String verCodigoDeporte(String deporte) {
+        String codigod = "";
 
         try {
 
@@ -472,8 +470,8 @@ public class Conectar {
         }
         return codigod;
     }
-    
-    public String[] deportes(){
+
+    public String[] deportes() {
 
         String Deportes[] = new String[8];
         try {
@@ -498,15 +496,15 @@ public class Conectar {
         }
         return Deportes;
     }
-    
+
     /**
      * Metodo que permite saber cuantos deportes hay registrados
-     * 
+     *
      * @return int cantidad de deportes
      */
-    public int cuantosDeportes(){
-        int count=0;
-        
+    public int cuantosDeportes() {
+        int count = 0;
+
         try {
 
             Connection cn = conexion();
@@ -531,16 +529,49 @@ public class Conectar {
         }
         return count;
     }
-    
+
+    /**
+     * Metodo que permite saber si el estudiante ya esta matriculado
+     *
+     * @return int cantidad de matriculas
+     */
+    public int Estudiante_prematriculado(String id) {
+        int Count = 0;
+
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT Count(*) "
+                    + " FROM matricula  "
+                    + " WHERE estudiante_id = '" + id + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                Count = (res.getInt("Count(*)"));
+
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return Count;
+    }
+
     /*
-    getters y setters
-    */
+     getters y setters
+     */
     public static String getCorreoF() {
         return correoF;
     }
-    
+
     public static void setCorreoF(String aCorreoF) {
         correoF = aCorreoF;
     }
-    
+
 }

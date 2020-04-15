@@ -49,6 +49,8 @@ public class InsertarUsuario extends HttpServlet {
             String Sdeporte = request.getParameter("Sdeporte");
             String horario = request.getParameter("horario");
             
+             
+            
             if (Sdeporte.equalsIgnoreCase("Seleccione un deporte") || horario.equalsIgnoreCase("Seleccione un horario")) {
                 out.println(msg.ErrorDeporte_Horario);
             } else {
@@ -70,6 +72,8 @@ public class InsertarUsuario extends HttpServlet {
                     String Telefono = request.getParameter("Telefono");
                     String celular = request.getParameter("celular");
                     String Direccion = request.getParameter("Direccion");
+                    
+                    
 
                     if (ingresarac2.equalsIgnoreCase("Si")) {//Se ecogio la opcion de ingresar al segundo acudiente
 
@@ -114,6 +118,9 @@ public class InsertarUsuario extends HttpServlet {
                         }
                     } else {// No se escojio la opcion De segundo acudiente
                         Conectar con = new Conectar();
+                        
+                        con.Estudiante_prematriculado(Ides);
+                        
                         int matricula = con.matricular(Ides, Nes, Aes, Fechan);
                         int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                         int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
