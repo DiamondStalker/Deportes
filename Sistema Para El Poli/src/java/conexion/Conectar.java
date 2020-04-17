@@ -208,33 +208,35 @@ public class Conectar {
         return h;
     }
     //------------------------------------------------//
-
-    public int clases(String id_sala, String estado, String fecha, int reserva, String equipo, String hora, String Descripcion) {
-        ////Crear Reserva
-        int resultado = 0;
-        try {
+    
+    public int Ver_estudiante(String Id_estudiante){
+        int i =0 ;
+        
+         try {
 
             Connection cn = conexion();
-            PreparedStatement rs = cn.prepareStatement("INSERT INTO sala"
-                    + "(id_sala,estado,Fecha,reserva_idreserva,id_equipo,Hora,Descripcion)"
-                    + "VALUES (?,?,?,?,?,?,?)");
 
-            rs.setString(1, id_sala);
-            rs.setString(2, estado);
-            rs.setString(3, fecha);
-            rs.setInt(4, reserva);
-            rs.setString(5, equipo);
-            rs.setString(6, hora);
-            rs.setString(7, Descripcion);
+            PreparedStatement pstm = cn.prepareStatement(" SELECT count(*)"
+                    + " FROM estudiante"
+                    + " WHERE id = '" + Id_estudiante + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                i = (res.getInt("count(*)"));
+            }
+            res.close();
 
-            rs.executeUpdate();
-            resultado = 1;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
+
         }
-        return resultado;
+        return i;
     }
 
+    
     //------------------------------------------------//
     //Pruba para insertar imagenes
     public void InsertarImagen() throws FileNotFoundException {

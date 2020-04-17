@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.swing.JOptionPane;
 
 @WebServlet("/UploadServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
@@ -36,12 +35,12 @@ public class UploadServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+        HttpServletResponse response) throws ServletException, IOException {
         // gets absolute path of the web application
         String appPath = request.getServletContext().getRealPath("");
         // constructs path of the directory to save uploaded file
         String savePath = appPath + File.separator + SAVE_DIR;
-
+        
         // creates the save directory if it does not exists
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {

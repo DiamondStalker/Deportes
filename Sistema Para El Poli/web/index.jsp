@@ -13,6 +13,7 @@
         <link rel="icon"    href="imagenes/escudo.jpg">
         <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
         <script src="js/jquery.easing.1.3.js"></script>
+        
         <!--[if lt IE 9]>
         <script src="js/html5.js"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">

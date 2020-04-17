@@ -1,42 +1,86 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 02-abr-2020, 16:20:51
-    Author     : user
-*/
-
-body{
-   background-color: #E7E7E7;
-}
-
-nav.acceder #estudiante-content {
-  display: none;
-}
-
-nav.acceder #estudianteexcell-content{
-    display: none;
-}
-
 #estudiante{
     width:  25%;
     border:2px solid #009220;
-    margin: 0 auto;
+    margin: auto auto;
     box-shadow: 0 0 10px grey;
     padding: 1em;
 }
+body{
+    background-color: #E7E7E7;
+}
+#contenido{
+    margin: -295px auto auto auto;
+}
+#accordian {
+    background: linear-gradient(#86B351,transparent);
+    width: 250px;
+    margin: 45px auto auto 125px;
+    color: white;
+    box-shadow: 
+        0 5px 15px 1px rgba(0, 0, 0, 0.6), 
+        0 0 200px 1px rgba(255, 255, 255, 0.5);
+}
 
-nav.acceder #ingresare{
-  display: inline-block;
-  font-size: 16px;
-  padding: 2px 10px;
-  text-decoration: none;
-  color: white;
-  border: 1px solid #009220;
-  background-color: #009220;
-  font-weight: 600
+#accordian h3 {
+    background-color:#009231 ;
+}
+#accordian h3 a {
+    padding: 0 10px;
+    font-size: 30px;
+    line-height: 34px;
+    display: block;
+    color: white;
+    text-decoration: none;
+}
 
+#accordian h3:hover {
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+#accordian h3 span {
+    font-size: 27px;
+    margin-right: 10px;
+}
+
+#accordian li {
+    list-style-type: none;
+}
+
+#accordian ul ul li a, #accordian h4 {
+    color: white;
+    text-decoration: none;
+    font-size: 27px;
+    line-height: 27px;
+    display: block;
+    padding: 0 15px;
+
+    transition: all 0.15s;
+    position: relative;
+}
+
+#accordian ul ul li a:hover {
+    background: #009231;
+    border-left: 5px solid lightgreen;
+}
+
+#accordian ul ul {
+    display: none;
+}
+#accordian li.active>ul {
+    display: block;
+}
+
+#accordian ul ul ul{
+    margin-left: 15px; border-left: 1px dotted rgba(0, 0, 0, 0.5);
+}
+
+#accordian a:not(:only-child):after {
+    content: "\f104";
+    font-family: fontawesome;
+    position: absolute; right: 10px; top: 0;
+    font-size: 14px;
+}
+#accordian .active>a:not(:only-child):after {
+    content: "\f107";
 }
 

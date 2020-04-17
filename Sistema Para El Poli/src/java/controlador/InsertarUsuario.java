@@ -7,6 +7,7 @@ package controlador;
 
 import conexion.Conectar;
 import Metodos.MensajesErrores;
+import Metodos.Textos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -43,96 +44,142 @@ public class InsertarUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+
             MensajesErrores msg = new MensajesErrores();
-            
+            String appPath = request.getServletContext().getRealPath("");
+
             String Sdeporte = request.getParameter("Sdeporte");
             String horario = request.getParameter("horario");
-            
-             
-            
+
+            Textos txt = new Textos();
+            txt.Direccion_archivo = appPath;
+
             if (Sdeporte.equalsIgnoreCase("Seleccione un deporte") || horario.equalsIgnoreCase("Seleccione un horario")) {
                 out.println(msg.ErrorDeporte_Horario);
             } else {
-                String Seleccione_parentesco = request.getParameter("Seleccione_parentesco");
-                if (Seleccione_parentesco.equalsIgnoreCase("Seleccione parentesco")) {
-                    out.println(msg.ErrorParenteso);
+
+                String Ides = request.getParameter("ides");
+                String Fechan = (request.getParameter("Fechan") == null ? "" : request.getParameter("Fechan"));
+                Conectar con = new Conectar();
+
+                int i = con.Ver_estudiante(Ides);
+
+                /**
+                 * Capturamos el Id_estudiate para preguntar si ya esta
+                 * previamente matriculado en el caso que la consulta devuelva
+                 * un si es por ya esta previamente patriculado y solo le
+                 * pediremos los datos de matricula en caso contrario validamos
+                 * de que haya ingresado todos los campos
+                 *
+                 */
+                if (i == 1) {
+                    int matricularcurso = con.matricularCurso(Fechan, Sdeporte, Ides);
                 } else {
-                    
-                    String ingresarac2 = request.getParameter("pregunta");
-                    String Ides = request.getParameter("ides");
-                    String Nes = request.getParameter("NombreEstudiante");
-                    String Aes = request.getParameter("ApellidoEstudiante");
 
-                    String Fechan = (request.getParameter("Fechan") == null ? "" : request.getParameter("Fechan"));
+                    /**
+                     * Caso en el que el estudiante no tenga almenos una
+                     * matricula previa
+                     */
+                    String Seleccione_parentesco = request.getParameter("Seleccione_parentesco");
+                    if (Seleccione_parentesco.equalsIgnoreCase("Seleccione parentesco")) {
+                        out.println(msg.ErrorParenteso);
+                    } else {
 
-                    String idacu1 = request.getParameter("idacu1");
-                    String NAcudiente = request.getParameter("NAcudiente");
-                    String AAcudiente = request.getParameter("aAcudiente");
-                    String Telefono = request.getParameter("Telefono");
-                    String celular = request.getParameter("celular");
-                    String Direccion = request.getParameter("Direccion");
-                    
-                    
+                        String ingresarac2 = request.getParameter("pregunta");
 
-                    if (ingresarac2.equalsIgnoreCase("Si")) {//Se ecogio la opcion de ingresar al segundo acudiente
+                        String Nes = request.getParameter("NombreEstudiante");
+                        String Aes = request.getParameter("ApellidoEstudiante");
 
-                        String Seleccione_parentesco2 = request.getParameter("Seleccione_parentesco2");
+                        String idacu1 = request.getParameter("idacu1");
+                        String NAcudiente = request.getParameter("NAcudiente");
+                        String AAcudiente = request.getParameter("aAcudiente");
+                        String Telefono = request.getParameter("Telefono");
+                        String celular = request.getParameter("celular");
+                        String Direccion = request.getParameter("Direccion");
 
-                        if (Seleccione_parentesco2.equalsIgnoreCase("Seleccione parentesco")) {
-                            out.println(msg.ErrorParenteso2);
-                        } else {//////Llamamiento para insetart con segundo acudiente
-                            String Telefono2 = request.getParameter("Telefono2");
-                            String Direccion2 = request.getParameter("Direccion2");
-                            String idacu12 = request.getParameter("idacu12");
-                            String NAcudiente2 = request.getParameter("NAcudiente2");
-                            String aAcudiente2 = request.getParameter("aAcudiente2");
-                            String celular2 = request.getParameter("celular2");
-                            
-                            if (!Telefono2.isEmpty() && !Direccion2.isEmpty() && !idacu12.isEmpty() && !NAcudiente2.isEmpty() 
-                                    && !aAcudiente2.isEmpty()) {//Si todos estan diferentes de null se puede insertar
+                        /*
+                         *Despues de capturar todos los datos necesarios para poder matricular
+                         *preguntamos si cada uno de ellos estan llenos
+                         */
+                        if (Nes.isEmpty() || Aes.isEmpty() || idacu1.isEmpty() || NAcudiente.isEmpty() || AAcudiente.isEmpty() || Telefono.isEmpty() || celular.isEmpty() || Direccion.isEmpty()) {
 
-                                Conectar con = new Conectar();
+                            out.println(msg.FaltanDatos_por_llenar);
+
+                        } else {
+                            /*
+                             *En caso Contrario preguntamos si escogio la opcion del segundo acudiente
+                             */
+                            if (ingresarac2.equalsIgnoreCase("Si")) {//Se ecogio la opcion de ingresar al segundo acudiente
+
+                                String Seleccione_parentesco2 = request.getParameter("Seleccione_parentesco2");
+
+                                if (Seleccione_parentesco2.equalsIgnoreCase("Seleccione parentesco")) {
+                                    out.println(msg.ErrorParenteso2);
+                                } else {//////Llamamiento para insetart con segundo acudiente
+                                    String Telefono2 = request.getParameter("Telefono2");
+                                    String Direccion2 = request.getParameter("Direccion2");
+                                    String idacu12 = request.getParameter("idacu12");
+                                    String NAcudiente2 = request.getParameter("NAcudiente2");
+                                    String aAcudiente2 = request.getParameter("aAcudiente2");
+                                    String celular2 = request.getParameter("celular2");
+
+                                    if (!Telefono2.isEmpty() || !Direccion2.isEmpty() || !idacu12.isEmpty() || !NAcudiente2.isEmpty()
+                                            || !aAcudiente2.isEmpty()) {//Si todos estan diferentes de null se puede insertar
+
+                                        int matricula = con.matricular(Ides, Nes, Aes, Fechan);
+                                        int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
+                                        int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
+                                        int estudiante_tutor = con.estudianteTutor(Ides, idacu1);
+
+                                        int persona2 = con.persona(idacu12, NAcudiente2, aAcudiente2, Telefono2, celular2);
+                                        int tutor2 = con.tutor(Seleccione_parentesco2, idacu12, Direccion2);
+                                        int estudiante_tutor2 = con.estudianteTutor(Ides, idacu12);
+                                        int matricularcurso = con.matricularCurso(Fechan, Sdeporte, Ides);
+
+                                        if (matricula != 0 && persona != 0 && tutor != 0
+                                                && estudiante_tutor != 0 && tutor2 != 0 && estudiante_tutor2 != 0) {
+                                            out.println(msg.Correcto);
+
+                                            txt.Crear_registro_estudiante(Ides, Nes, Aes, Fechan);
+                                            txt.Concatenar_acudiente(Nes, idacu1, NAcudiente, AAcudiente, Seleccione_parentesco, Telefono, celular, Direccion);
+                                            txt.Concatenar_acudiente(Nes, idacu12, NAcudiente2, aAcudiente2, Seleccione_parentesco2, Telefono2, celular2, Direccion2);
+                                            txt.Concatenar_matricula(Nes, Sdeporte, Fechan, horario);
+
+                                        } else {
+                                            out.println(msg.ErrorInsertar);
+                                        }
+
+                                    } else {
+                                        out.println(msg.FaltanDatos);
+                                    }
+
+                                }
+                            } else {// No se escojio la opcion De segundo acudiente
+
+                                con.Estudiante_prematriculado(Ides);
+
                                 int matricula = con.matricular(Ides, Nes, Aes, Fechan);
                                 int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                                 int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
                                 int estudiante_tutor = con.estudianteTutor(Ides, idacu1);
-               
-                                
-                                int persona2 = con.persona(idacu12, NAcudiente2, aAcudiente2, Telefono2, celular2);
-                                int tutor2 = con.tutor(Seleccione_parentesco2, idacu12, Direccion2);
-                                int estudiante_tutor2 = con.estudianteTutor(Ides, idacu12);
-                                int matricularcurso = con.matricularCurso(Fechan,Sdeporte,Ides);
-                                
-                                if (matricula != 0 && persona != 0 && tutor != 0 
-                                        && estudiante_tutor != 0 && tutor2 != 0 && estudiante_tutor2 != 0) {
-                                   out.println(msg.Correcto);
-                                } else {
-                                   out.println(msg.ErrorInsertar);
-                                }
+                                int matricularcurso = con.matricularCurso(Fechan, Sdeporte, Ides);
 
-                            } else {
-                                out.println(msg.FaltanDatos);
+                                if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
+                                    out.println(msg.Correcto);
+
+                                    txt.Crear_registro_estudiante(Ides, Nes, Aes, Fechan);
+                                    txt.Concatenar_acudiente(Nes, idacu1, NAcudiente, AAcudiente, Seleccione_parentesco, Telefono, celular, Direccion);
+                                    txt.Concatenar_matricula(Nes, Sdeporte, Fechan, horario);
+
+                                } else {
+                                    out.println(msg.ErrorInsertar);
+                                }
                             }
 
                         }
-                    } else {// No se escojio la opcion De segundo acudiente
-                        Conectar con = new Conectar();
-                        
-                        con.Estudiante_prematriculado(Ides);
-                        
-                        int matricula = con.matricular(Ides, Nes, Aes, Fechan);
-                        int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
-                        int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
-                        int estudiante_tutor = con.estudianteTutor(Ides, idacu1);
-                        int matricularcurso = con.matricularCurso(Fechan,Sdeporte,Ides);
 
-                        if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
-                            out.println(msg.Correcto);
-                        } else {
-                            out.println(msg.ErrorInsertar);
-                        }
                     }
+
                 }
             }
         }
