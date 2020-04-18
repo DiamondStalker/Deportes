@@ -11,6 +11,9 @@ body{
 #contenido{
     margin: -295px auto auto auto;
 }
+#tablaestudiantes {
+    margin: -420px auto auto auto;
+}
 #accordian {
     background: linear-gradient(#86B351,transparent);
     width: 250px;
@@ -20,7 +23,6 @@ body{
         0 5px 15px 1px rgba(0, 0, 0, 0.6), 
         0 0 200px 1px rgba(255, 255, 255, 0.5);
 }
-
 #accordian h3 {
     background-color:#009231 ;
 }
@@ -82,5 +84,18 @@ body{
 }
 #accordian .active>a:not(:only-child):after {
     content: "\f107";
+}
+
+#Alerta {
+    border-radius: 25px;
+    background-color: #D9EDF7;
+    border:2px solid #77B2D0;
+    padding: 20px;
+    color: #77B2D0;
+    margin: aunto auto 50px auto;
+    // background-image:url(../imagenes/escudo.jpg);
+}
+#Alerta strong {
+    font-size: 16px;
 }
 

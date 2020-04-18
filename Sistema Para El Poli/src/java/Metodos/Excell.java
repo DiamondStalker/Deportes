@@ -85,6 +85,12 @@ public class Excell {
                 int Estudiante_tutor = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor);
                 int Matricularcurso = Con.matricularCurso(Fecha_nacimiento, Deporte, Identificacion_estudiante);
 
+                Textos txt = new Textos();
+
+                txt.Crear_registro_estudiante(Identificacion_estudiante, Nombre, Apellido, Fecha_nacimiento);
+                txt.Concatenar_acudiente(Nombre, Id_tutuor, Nombre_tutor, Apellido_tutor, Parentesco, Telefono_tutor, Celular_tutor, Direccion_tutor);
+                txt.Concatenar_matricula(Nombre, Deporte, Fecha_nacimiento, "");
+
                 if (Pregunta_tutor_2.equalsIgnoreCase("Si")) {
                     String Id_tutuor_2 = fila.getCell(13).toString();
                     String Parentesco_2 = fila.getCell(14).toString();
@@ -97,6 +103,8 @@ public class Excell {
                     int Persona_2 = Con.persona(Id_tutuor_2, Nombre_tutor_2, Apellido_tutor_2, Telefono_tutor_2, Celular_tutor_2);
                     int Tutor_2 = Con.tutor(Parentesco_2, Id_tutuor_2, Direccion_tutor_2);
                     int Estudiante_tutor_2 = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor_2);
+                    
+                     txt.Concatenar_acudiente(Nombre, Id_tutuor_2, Nombre_tutor_2, Apellido_tutor_2, Parentesco_2, Telefono_tutor_2, Celular_tutor_2, Direccion_tutor_2);
 
                 }
                 System.out.println("");

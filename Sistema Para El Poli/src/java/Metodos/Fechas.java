@@ -26,11 +26,14 @@ public class Fechas {
      * @param fechal fecha recibida
      * @return int categoria
      */
+    
+    
+    public static int Categoria = 0;
+    
     public int calcularCategoria(String fechal) {
         
         // Ponemos el formato que deseamos que tenga nuesta fecha
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
-        int categoria=0;
         try {
             Date date = formatter.parse(fechal);// Convertimos el string a tipo dato con el formato que pusimos
             
@@ -44,14 +47,14 @@ public class Fechas {
             calendar.add(Calendar.YEAR, -Integer.parseInt(annio)); //HAcemso una resta de años para luego poder calcular a la categoria a la que pertenece el 
             
             
-            categoria = calendar.getWeekYear()*-1;//La multiplicamos por menos 1 para que quede positiva y este valor es el que devolvemos
+            Categoria = calendar.getWeekYear()*-1;//La multiplicamos por menos 1 para que quede positiva y este valor es el que devolvemos
             
-            JOptionPane.showMessageDialog(null,"La categoria es"+ categoria);
+            JOptionPane.showMessageDialog(null,"La categoria es"+ Categoria);
             
         } catch (Exception e) {
             System.out.println(e);
         }
-            return categoria;
+            return Categoria;
             
     }
 }

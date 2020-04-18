@@ -44,6 +44,8 @@ public class Conectar {
 
     public static InputStream img;
 
+    public static String codigo = "";
+
     public static Fechas fecha = new Fechas();
 
     public static Random rm = new Random();
@@ -208,11 +210,11 @@ public class Conectar {
         return h;
     }
     //------------------------------------------------//
-    
-    public int Ver_estudiante(String Id_estudiante){
-        int i =0 ;
-        
-         try {
+
+    public int Ver_estudiante(String Id_estudiante) {
+        int i = 0;
+
+        try {
 
             Connection cn = conexion();
 
@@ -236,7 +238,6 @@ public class Conectar {
         return i;
     }
 
-    
     //------------------------------------------------//
     //Pruba para insertar imagenes
     public void InsertarImagen() throws FileNotFoundException {
@@ -396,7 +397,7 @@ public class Conectar {
 
         //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
         int vect[] = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        String codigo = "";
+
         for (int i = 0; i < 5; i++) {
             codigo += rm.nextInt(10);
         }
@@ -475,7 +476,7 @@ public class Conectar {
 
     public String[] deportes() {
 
-        String Deportes[] = new String[8];
+        String Deportes[] = new String[cuantosDeportes()];
         try {
 
             Connection cn = conexion();
@@ -530,6 +531,64 @@ public class Conectar {
 
         }
         return count;
+    }
+
+    public int Numero_estudiantes() {
+        int count = 0;
+
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT count(*)"
+                    + " FROM estudiante ");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                count = (res.getInt("count(*)"));
+
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return count;
+    }
+
+    public String[][] Estudiante() {
+        String datos[][] = new String[Numero_estudiantes()][4];
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.id, estudiante.nombre, matricula.codigo,"
+                    + "deporte.descripcion from estudiante "
+                    + "INNER JOIN matricula ON estudiante.id = matricula.estudiante_id "
+                    + "INNER JOIN matricula_deporte on matricula.codigo = matricula_deporte.matricula_codigo "
+                    + "INNER JOIN deporte on matricula_deporte.deporte_codigo=deporte.codigo");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            int i = 0;
+            while (res.next()) {
+                datos[i][0] = (res.getString("id"));
+                datos[i][1] = (res.getString("nombre"));
+                datos[i][2] = (res.getString("codigo"));
+                datos[i][3] = (res.getString("descripcion"));
+                i++;
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return datos;
     }
 
     /**

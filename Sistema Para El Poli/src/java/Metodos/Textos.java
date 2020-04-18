@@ -1,6 +1,7 @@
 package Metodos;
 
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import conexion.Conectar;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -137,12 +138,13 @@ public class Textos {
     }
     
     public void Concatenar_matricula(String Nombre_estudiante,String Deporte,String Fecha_nacimiento,String Horario){
-        Fechas categoria = new Fechas();
-        categoria.calcularCategoria(Fecha_nacimiento);
+        Fechas ct = new Fechas();
+        Conectar con = new Conectar();
         String temp = this.Leer_registro_estudiante(Nombre_estudiante);
         String texto = "\nMatrícula: "
+                    + "\n Codigo Matricula : " + con.codigo 
                     + "\n Deporte : " + Deporte 
-                    + "\n Categoria : " + categoria 
+                    + "\n Categoria : " + ct.Categoria
                     + "\n Hora : " + Horario 
                     + "\n";
         temp = temp + texto;

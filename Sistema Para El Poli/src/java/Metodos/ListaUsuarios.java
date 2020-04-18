@@ -12,8 +12,12 @@ package Metodos;
 public class ListaUsuarios {
 
     class Nodo {
-
+        
         float info;
+        String Identificacion;
+        String Nombre;
+        String Apellido;
+        String Fecha_nacciminto;
         Nodo sig;
     }
 

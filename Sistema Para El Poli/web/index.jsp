@@ -13,7 +13,7 @@
         <link rel="icon"    href="imagenes/escudo.jpg">
         <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
         <script src="js/jquery.easing.1.3.js"></script>
-        
+
         <!--[if lt IE 9]>
         <script src="js/html5.js"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
@@ -54,7 +54,24 @@
     </section>
     <!--==============================footer=================================-->
     <footer>
-        <p>© 2020 DiamondStalker<br>
+        <center>
+            <a href="http://www.politecnicojic.edu.co/">http://www.politecnicojic.edu.co/</a>
+            <br>
+            <br>
+            <a>Politécnico Colombiano Jaime Isaza Cadavid</a>
+            <br>
+            <a>Coordinación de Admisiones y Programación Académica</a>
+            <br>
+            <a>Dirección: Carrera 48 No. 7-151</a>
+           <br>
+           <a>Línea de atención al cliente: 018000417654</a>
+            <br>
+            <a>Conmutador: (574) 3197900 - 4447654</a>
+            <br>
+            <a>Medellín - Colombia</a>
+            <br>
+        </center>
     </footer>
+    <!--==============================footer=================================-->
 </body>
 </html>
