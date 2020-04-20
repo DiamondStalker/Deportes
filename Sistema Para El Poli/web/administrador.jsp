@@ -219,6 +219,18 @@
             <br>
             <input type="submit" id="submit" value="Matricular">
         </form>
+        <br>
+        <br>
+        <!--==============================Alerta================================-->
+        <div id="Alerta" class="icono fas fa-exclamation">
+
+            <strong id="Informacion">Informacion</strong> <br>
+            Si el estudiante ya tiene una matricula<br>
+            previa solo se necesita llenar la informacion <br>
+            Identificacion, Deporte y la hora<br>
+        </div>
+        <!--==============================Alerta================================-->
+
     </div>
 
     <%-- Fin de codigo para insertar estudiante--%>
@@ -267,79 +279,78 @@
             })(document);
     </script>
 
+    <center>
     <div id="tablaestudiantes" style="display: none;">
         <center>
             <h1>Estudiantes</h1>
             <div class="derecha" id="buscar">Buscar <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filtro"></div>
-        
 
-        <div class="datagrid">
-            <table class="order-table table" id="customers">
+
+            <div class="datagrid">
+                <table class="order-table table" id="customers">
                     <thead>
-				<tr class="titulo"> 
-					<th>    Identificaion  </th>
-					<th>    Nombre  </th>
-					<th>    Codigo de matricula </th>
-					<th>    Deporte </th>
-				</tr>
-			</thead>
-                <tbody>
-                    <%
-                 String Estudiante[][] = con.Estudiante();
-                        for (int i = 0; i < con.Numero_estudiantes(); i++) {
-                    %>
-                    <tr>    
-                        <td align="center"><a><%= Estudiante[i][0]%></a></td>
-                        <td align="center"><a><%= Estudiante[i][1]%></a></td>
-                        <td align="center"><a><%= Estudiante[i][2]%></a></td>
-                        <td align="center"><a><%= Estudiante[i][3]%></a></td>
-                        <td align="center"> <img style="" src="imagenes/escudo.jpg" width="30" height="30" onclick="getId(this)"></td>
-                    </tr>
-                    <%
-                        }
-                    %>
-                </tbody>
-            </table>
-        </div>
-                </center>
+                        <tr class="titulo"> 
+                            <th>    Identificaion  </th>
+                            <th>    Nombre  </th>
+                            <th>    Codigo de matricula </th>
+                            <th>    Deporte </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            String Estudiante[][] = con.Estudiante();
+                            for (int i = 0; i < con.Numero_estudiantes(); i++) {
+                        %>
+                        <tr>    
+                            <td align="center"><a><%= Estudiante[i][0]%></a></td>
+                            <td align="center"><a><%= Estudiante[i][1]%></a></td>
+                            <td align="center"><a><%= Estudiante[i][2]%></a></td>
+                            <td align="center"><a><%= Estudiante[i][3]%></a></td>
+                            <td align="center"> 
+                                <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getId(this,'ver')">
+                                <img style="" src="imagenes/editar.png" width="30" height="30" onclick="getId(this,'editar')">
+                                <img style="" src="imagenes/basura.png" width="30" height="30" onclick="getId(this,'eliminar')">
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </tbody>
+                </table>
+            </div>
+        </center>
     </div>
-
-        <script>
-                function  getId(element) {
-                    /*alert("row" + element.parentNode.parentNode.rowIndex +
-                     " - column" + element.parentNode.cellIndex);*/
-                    var x = document.getElementById("customers").rows[element.parentNode.parentNode.rowIndex].cells[0].innerText;
-
-                    location.href = 'verestudiante?id=' + x;
-
-                }
-
-        </script>
-
-    </div>
-    <!--==============================Fin codigo tabla de usuarios================================-->
-
-
-    
-    <!--==============================Alerta================================-->
-    <div id="Alerta" class="icono fas fa-exclamation">
-        <strong id="Informacion">Informacion</strong> Si el estudiante ya tiene una matricula previa solo se necesita llenar la informacion Identificacion y la nueva matricula
-    </div>
-    <!--==============================Alerta================================-->
-    </body>
-
+    </center>
 
     <script>
-            function myFunction(valor) {
-                alert("Input field lost focus." + valor);
-                var fecha = valor;
-                console.log(fecha);
-                var n = fecha.toString();
+            function  getId(element,direccionweb) {
+                /*alert("row" + element.parentNode.parentNode.rowIndex +
+                 " - column" + element.parentNode.cellIndex);*/
+                var x = document.getElementById("customers").rows[element.parentNode.parentNode.rowIndex].cells[0].innerText;
+
+                location.href = direccionweb+'estudiante.jsp?id=' + x;
+
             }
+
     </script>
-    
-     <footer>
-        <p>© 2020 DiamondStalker<br>
-    </footer>
+
+</div>
+<!--==============================Fin codigo tabla de usuarios================================-->
+
+
+
+
+</body>
+
+
+<script>
+        function myFunction(valor) {
+            alert("Input field lost focus." + valor);
+            var fecha = valor;
+            console.log(fecha);
+            var n = fecha.toString();
+        }
+</script>
+
 
 </html>

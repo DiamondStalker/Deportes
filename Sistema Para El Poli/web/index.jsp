@@ -30,13 +30,13 @@
     <body>
     </head>
     <section >
-        <!--==============================FORM=================================-->
+        
         <center>
             <a onclick="javascript:window.location.reload();"> <img src="imagenes/refresh.gif" alt=""></a>
         </center> 
         <br>
         <br>
-
+<!--==============================FORM=================================-->
         <form action="Loggin" id="loggin" method="post" >
             <h2 id="TituloLoggin">Login</h2>
             <label>User name</label><input id="User"autocomplete="on" placeholder="ejemplo@dominio.com" type="email" name="Correo" onclick="valueOf('')" required="">

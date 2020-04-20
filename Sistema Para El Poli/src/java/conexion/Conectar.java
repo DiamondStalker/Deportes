@@ -624,6 +624,141 @@ public class Conectar {
         return Count;
     }
 
+    public String Nombre_estudiante(String id) {
+        String Nombre = "";
+
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT nombre "
+                    + " FROM estudiante  "
+                    + " WHERE id = '" + id + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                Nombre = (res.getString("nombre"));
+
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return Nombre;
+    }
+
+    public int Numero_tutores(String id) {
+        int Numero = 0;
+
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*) "
+                    + " FROM estudiante_tutor  "
+                    + " WHERE estudiante_tutor.estudiante_id = '" + id + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                Numero = (res.getInt("COUNT(*)"));
+
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return Numero;
+    }
+    /*
+     *SELECT estudiante.*,persoan.id AS Identificaciont,persoan.nombre AS Nombret,persoan.apellido AS apellidoT,tutor.direccion,tutor.parentesco FROM `estudiante` INNER JOIN estudiante_tutor ON estudiante.id=estudiante_tutor.estudiante_id INNER JOIN tutor ON estudiante_tutor.tutor_id=tutor.id INNER JOIN persoan ON tutor.id=persoan.id where estudiante.id=
+     */
+    public String[][] Datos_estudiante(String id) {
+        int Numero = Numero_tutores(id);
+        String Datos[][] = new String[11][Numero];
+
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.*,"
+                    + "persoan.id AS Identificaciont,persoan.nombre AS Nombret,persoan.apellido AS ApellidoT,persoan.telefono,persoan.celular,"
+                    + "tutor.direccion,tutor.parentesco "
+                    + "FROM `estudiante` "
+                    + "INNER JOIN estudiante_tutor ON estudiante.id = estudiante_tutor.estudiante_id "
+                    + "INNER JOIN tutor ON estudiante_tutor.tutor_id = tutor.id "
+                    + "INNER JOIN persoan ON tutor.id = persoan.id "
+                    + "WHERE estudiante.id ='" + id + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            int i = 0;
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+
+                /* Datos del Estudiante */
+                Datos[0][i] = res.getString("id");
+                Datos[1][i] = res.getString("nombre");
+                Datos[2][i] = res.getString("apellido");
+                Datos[3][i] = res.getString("fecha_nacimiento");
+                /* Datos del del tutor */
+                Datos[4][i] = res.getString("Identificaciont");
+                Datos[5][i] = res.getString("Nombret");
+                Datos[6][i] = res.getString("ApellidoT");
+                Datos[7][i] = res.getString("telefono");
+                Datos[8][i] = res.getString("celular");
+                Datos[9][i] = res.getString("direccion");
+                Datos[10][i] = res.getString("parentesco");
+
+                i++;
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return Datos;
+    }
+    
+    public int Numero_matriculas(String id) {
+        int Numero = 0;
+
+        try {
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*) "
+                    + " FROM matricula  "
+                    + " WHERE estudiante_id = '" + id + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                Numero = (res.getInt("COUNT(*)"));
+
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return Numero;
+    }
+
     /*
      getters y setters
      */

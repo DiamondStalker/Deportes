@@ -136,7 +136,7 @@ public class InsertarUsuario extends HttpServlet {
                                         int estudiante_tutor2 = con.estudianteTutor(Ides, idacu12);
                                         int matricularcurso = con.matricularCurso(Fechan, Sdeporte, Ides);
 
-                                        if (matricula != 0 && persona != 0 && tutor != 0
+                                        if (matricula != 0 && tutor != 0
                                                 && estudiante_tutor != 0 && tutor2 != 0 && estudiante_tutor2 != 0) {
                                             out.println(msg.Correcto);
 

@@ -11,7 +11,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Upload</title>
     </head>
-    <body>
-        <h2>${requestScope.message}</h2>
+    <body onload="myFunction()">
+        
+        <h2 onload="myFunction()">${requestScope.message}</h2>
+        
+
+
+        <script>
+            function myFunction() {
+                alert("${requestScope.message}"+"----------");
+            }
+        </script>
     </body>
 </html>
