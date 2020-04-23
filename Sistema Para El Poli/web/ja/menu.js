@@ -39,8 +39,6 @@ $(document).ready(function () {
         closest_ul.find("ul").slideUp(function () {
             if (++count === closest_ul.find("ul").length)
                 parallel_active_links.removeClass("active");
-            if ($('#contenido').is(':visible')) oculta("contenido");
-            if ($('#tablaestudiantes').is(':visible')) oculta("tablaestudiantes");
         });
 
         if (!link_status)

@@ -1,0 +1,9 @@
+Informacion del usuario: 
+ Identificaion del estudiante : 11113411111
+ Nombre del estudiante : 654645
+ Apellido del estudiante : 654645
+ Fecha de nacimiento del estudiante : 111111-04-08
+
+ Informacion de la creacion del registro
+ 22/3/2020
+13:31:3

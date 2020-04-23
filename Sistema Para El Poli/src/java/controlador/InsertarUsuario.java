@@ -10,18 +10,11 @@ import Metodos.MensajesErrores;
 import Metodos.Textos;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
-import static net.ucanaccess.converters.Functions.date;
 
 /**
  *
@@ -45,17 +38,16 @@ public class InsertarUsuario extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
-            MensajesErrores msg = new MensajesErrores();
             String appPath = request.getServletContext().getRealPath("");
 
             String Sdeporte = request.getParameter("Sdeporte");
             String horario = request.getParameter("horario");
 
             Textos txt = new Textos();
-            txt.Direccion_archivo = appPath;
+            Textos.Direccion_archivo = appPath;
 
             if (Sdeporte.equalsIgnoreCase("Seleccione un deporte") || horario.equalsIgnoreCase("Seleccione un horario")) {
-                out.println(msg.ErrorDeporte_Horario);
+                out.println(MensajesErrores.ErrorDeporte_Horario);
             } else {
 
                 String Ides = request.getParameter("ides");
@@ -66,14 +58,15 @@ public class InsertarUsuario extends HttpServlet {
 
                 /**
                  * Capturamos el Id_estudiate para preguntar si ya esta
-                 * previamente matriculado en el caso que la consulta devuelva
-                 * un si es por ya esta previamente patriculado y solo le
+                 * previamente matriculado; en el caso que la consulta devuelva
+                 * un si es por ya esta previamente matriculado y solo le
                  * pediremos los datos de matricula en caso contrario validamos
                  * de que haya ingresado todos los campos
                  *
                  */
                 if (i == 1) {
-                    int matricularcurso = con.matricularCurso(Fechan, Sdeporte, Ides);
+                    con.matricularCurso(Fechan, Sdeporte, Ides);
+                    out.println(MensajesErrores.Correcto);
                 } else {
 
                     /**
@@ -82,7 +75,7 @@ public class InsertarUsuario extends HttpServlet {
                      */
                     String Seleccione_parentesco = request.getParameter("Seleccione_parentesco");
                     if (Seleccione_parentesco.equalsIgnoreCase("Seleccione parentesco")) {
-                        out.println(msg.ErrorParenteso);
+                        out.println(MensajesErrores.ErrorParenteso);
                     } else {
 
                         String ingresarac2 = request.getParameter("pregunta");
@@ -103,7 +96,7 @@ public class InsertarUsuario extends HttpServlet {
                          */
                         if (Nes.isEmpty() || Aes.isEmpty() || idacu1.isEmpty() || NAcudiente.isEmpty() || AAcudiente.isEmpty() || Telefono.isEmpty() || celular.isEmpty() || Direccion.isEmpty()) {
 
-                            out.println(msg.FaltanDatos_por_llenar);
+                            out.println(MensajesErrores.FaltanDatos_por_llenar);
 
                         } else {
                             /*
@@ -114,7 +107,7 @@ public class InsertarUsuario extends HttpServlet {
                                 String Seleccione_parentesco2 = request.getParameter("Seleccione_parentesco2");
 
                                 if (Seleccione_parentesco2.equalsIgnoreCase("Seleccione parentesco")) {
-                                    out.println(msg.ErrorParenteso2);
+                                    out.println(MensajesErrores.ErrorParenteso2);
                                 } else {//////Llamamiento para insetart con segundo acudiente
                                     String Telefono2 = request.getParameter("Telefono2");
                                     String Direccion2 = request.getParameter("Direccion2");
@@ -134,11 +127,11 @@ public class InsertarUsuario extends HttpServlet {
                                         int persona2 = con.persona(idacu12, NAcudiente2, aAcudiente2, Telefono2, celular2);
                                         int tutor2 = con.tutor(Seleccione_parentesco2, idacu12, Direccion2);
                                         int estudiante_tutor2 = con.estudianteTutor(Ides, idacu12);
-                                        int matricularcurso = con.matricularCurso(Fechan, Sdeporte, Ides);
+                                        con.matricularCurso(Fechan, Sdeporte, Ides);
 
                                         if (matricula != 0 && tutor != 0
                                                 && estudiante_tutor != 0 && tutor2 != 0 && estudiante_tutor2 != 0) {
-                                            out.println(msg.Correcto);
+                                            out.println(MensajesErrores.Correcto);
 
                                             txt.Crear_registro_estudiante(Ides, Nes, Aes, Fechan);
                                             txt.Concatenar_acudiente(Nes, idacu1, NAcudiente, AAcudiente, Seleccione_parentesco, Telefono, celular, Direccion);
@@ -146,11 +139,11 @@ public class InsertarUsuario extends HttpServlet {
                                             txt.Concatenar_matricula(Nes, Sdeporte, Fechan, horario);
 
                                         } else {
-                                            out.println(msg.ErrorInsertar);
+                                            out.println(MensajesErrores.ErrorInsertar);
                                         }
 
                                     } else {
-                                        out.println(msg.FaltanDatos);
+                                        out.println(MensajesErrores.FaltanDatos);
                                     }
 
                                 }
@@ -162,17 +155,17 @@ public class InsertarUsuario extends HttpServlet {
                                 int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                                 int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
                                 int estudiante_tutor = con.estudianteTutor(Ides, idacu1);
-                                int matricularcurso = con.matricularCurso(Fechan, Sdeporte, Ides);
+                                con.matricularCurso(Fechan, Sdeporte, Ides);
 
                                 if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
-                                    out.println(msg.Correcto);
+                                    out.println(MensajesErrores.Correcto);
 
                                     txt.Crear_registro_estudiante(Ides, Nes, Aes, Fechan);
                                     txt.Concatenar_acudiente(Nes, idacu1, NAcudiente, AAcudiente, Seleccione_parentesco, Telefono, celular, Direccion);
                                     txt.Concatenar_matricula(Nes, Sdeporte, Fechan, horario);
 
                                 } else {
-                                    out.println(msg.ErrorInsertar);
+                                    out.println(MensajesErrores.ErrorInsertar);
                                 }
                             }
 

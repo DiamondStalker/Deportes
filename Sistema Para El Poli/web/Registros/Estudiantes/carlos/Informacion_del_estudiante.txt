@@ -1,0 +1,53 @@
+
+ 
+ 
+ Informacion del usuario: 
+ Identificaion del estudiante : 1017256539
+ Nombre del estudiante : carlos
+ Apellido del estudiante : moreno
+ Fecha de nacimiento del estudiante : 1998-03-03
+
+ Informacion de la creacion del registro
+ 21/3/2020
+19:33:38
+
+Informacion del acudiente : 
+ Identificaion del acudiente : 5533365453
+ Nombre : 543524424234
+ Apellido : 23423423
+ Apellido : 23423423
+ Parentesco : Madre
+ Telefono  : 23423423
+ Celular  : 23423423
+ Direccion  : 23423423
+
+ Se añadio un acudiente
+ 21/3/2020
+ 19:33:41
+ 
+
+Matrícula: 
+ Codigo Matricula : 766870030380180086179410574644497155479411732
+ Deporte : Futbol
+ Categoria : 22
+ Hora : Sabados 6-8
+
+ Se añadio un acudiente
+ 21/3/2020
+ 19:33:42
+ 
+
+Informacion del acudiente : 
+ Identificaion del acudiente : 00998877665
+ Nombre : Diamond
+ Apellido : Stalker
+ Apellido : Stalker
+ Parentesco : Padre
+ Telefono  : Stalker
+ Celular  : Stalker
+ Direccion  : Stalker
+
+ Se añadio un acudiente
+ 21/3/2020
+ 21:46:0
+ 

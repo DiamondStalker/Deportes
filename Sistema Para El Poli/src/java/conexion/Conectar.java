@@ -26,8 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
 
 /**
@@ -211,6 +209,10 @@ public class Conectar {
     }
     //------------------------------------------------//
 
+    /*
+     * Metodo que nos permite ver si el estudiante esta matriculado en cualquier deporte
+     * este metodo tambien nos permite ver si existe el estudiante
+     */
     public int Ver_estudiante(String Id_estudiante) {
         int i = 0;
 
@@ -395,13 +397,12 @@ public class Conectar {
 
         int controlador = 0;
 
-        //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
-        int vect[] = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
+        // Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
+        // Reiniciamos el codigo
+        codigo = "";
         for (int i = 0; i < 5; i++) {
             codigo += rm.nextInt(10);
         }
-        //Creamos un codigo totalmente aleatorio el cual va a quedar como codigo de matricula
 
         try {
 
@@ -533,7 +534,7 @@ public class Conectar {
         return count;
     }
 
-    public int Numero_estudiantes() {
+    public int Numero_de_matriculas_totales() {
         int count = 0;
 
         try {
@@ -541,7 +542,7 @@ public class Conectar {
             Connection cn = conexion();
 
             PreparedStatement pstm = cn.prepareStatement(" SELECT count(*)"
-                    + " FROM estudiante ");
+                    + " FROM matricula ");
             //Se crea un objeto donde se almacena el resultado
             //Y con el comando executeQuery se ejecuta la consulta en la base de datos
             ResultSet res = pstm.executeQuery();
@@ -560,9 +561,12 @@ public class Conectar {
         }
         return count;
     }
+    /*
+     * Devuelve una matriz tipo String con la informacion captura 
+     */
 
     public String[][] Estudiante() {
-        String datos[][] = new String[Numero_estudiantes()][4];
+        String datos[][] = new String[4][Numero_de_matriculas_totales()];
         try {
 
             Connection cn = conexion();
@@ -578,10 +582,10 @@ public class Conectar {
             //Recorre el resultado para mostrarlo en los jtf
             int i = 0;
             while (res.next()) {
-                datos[i][0] = (res.getString("id"));
-                datos[i][1] = (res.getString("nombre"));
-                datos[i][2] = (res.getString("codigo"));
-                datos[i][3] = (res.getString("descripcion"));
+                datos[0][i] = (res.getString("id"));
+                datos[1][i] = (res.getString("nombre"));
+                datos[2][i] = (res.getString("codigo"));
+                datos[3][i] = (res.getString("descripcion"));
                 i++;
             }
             res.close();
@@ -594,6 +598,7 @@ public class Conectar {
     /**
      * Metodo que permite saber si el estudiante ya esta matriculado
      *
+     * @param id
      * @return int cantidad de matriculas
      */
     public int Estudiante_prematriculado(String id) {
@@ -606,17 +611,18 @@ public class Conectar {
             PreparedStatement pstm = cn.prepareStatement(" SELECT Count(*) "
                     + " FROM matricula  "
                     + " WHERE estudiante_id = '" + id + "'");
-            //Se crea un objeto donde se almacena el resultado
-            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
-            ResultSet res = pstm.executeQuery();
             //Recorre el resultado para mostrarlo en los jtf
-            while (res.next()) {
-                //jTF_identificacion.setText(res.getString( "id_persona" ));
-                Count = (res.getInt("Count(*)"));
+            try ( //Se crea un objeto donde se almacena el resultado
+                    //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+                    ResultSet res = pstm.executeQuery()) {
+                //Recorre el resultado para mostrarlo en los jtf
+                while (res.next()) {
+                    //jTF_identificacion.setText(res.getString( "id_persona" ));
+                    Count = (res.getInt("Count(*)"));
 
-            }
+                }
 //            JOptionPane.showMessageDialog(null, count);
-            res.close();
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
 
@@ -624,6 +630,9 @@ public class Conectar {
         return Count;
     }
 
+    /*
+     * Metodo que regresa el nombre del estudiantes
+     */
     public String Nombre_estudiante(String id) {
         String Nombre = "";
 
@@ -682,6 +691,7 @@ public class Conectar {
     /*
      *SELECT estudiante.*,persoan.id AS Identificaciont,persoan.nombre AS Nombret,persoan.apellido AS apellidoT,tutor.direccion,tutor.parentesco FROM `estudiante` INNER JOIN estudiante_tutor ON estudiante.id=estudiante_tutor.estudiante_id INNER JOIN tutor ON estudiante_tutor.tutor_id=tutor.id INNER JOIN persoan ON tutor.id=persoan.id where estudiante.id=
      */
+
     public String[][] Datos_estudiante(String id) {
         int Numero = Numero_tutores(id);
         String Datos[][] = new String[11][Numero];
@@ -731,7 +741,10 @@ public class Conectar {
         }
         return Datos;
     }
-    
+
+    /*
+     *   Retorna la cantidad de matriculas que posee un estudiante
+     */
     public int Numero_matriculas(String id) {
         int Numero = 0;
 
@@ -760,6 +773,90 @@ public class Conectar {
     }
 
     /*
+     * Inicio
+     * bloque de sentencias para eliminar cuando hubo un error
+     * El orden para eliminar los datos es:
+     * 1.matricula_deportes
+     * 2.matricula
+     * 3.estudiante_tutor
+     * 4.tutor
+     * 5.persoan
+     * 6.estudiante
+     * DELETE matricula_deporte,matricula FROM matricula_deporte
+     * INNER JOIN matricula ON matricula_deporte.matricula_codigo=matricula.codigo 
+     * WHERE matricula_deporte.matricula_codigo="764922081804812";
+     * Antes de eliminar al tutor hay que preguntar si tiene mas de un estudiante asociado
+     * en el caso de ser verdad solo borraremos los datos del estudiante y estudiante_tutor
+     * en caso de que el acudiente solo este asociado a un solo estudainte 
+     * se procede a borrar tanto al estudiante como al tutor(persona)
+     * 
+     */
+    public void Eliminar(String Identificacion_estudiante, int codigo) {
+
+    }
+
+    /*
+     * Fin
+     * bloque de sentencias para eliminar cuando hubo un error
+     */
+    /*
+     * Preguntamos si el tutor existe
+     */
+    public int Existe_tutor(String Identificaion_tutor) {
+        int Count = 0;
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*) "
+                    + " FROM estudiante_tutor  "
+                    + " WHERE estudiante_tutor.tutor_id = '" + Identificaion_tutor + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                Count = (res.getInt("COUNT(*)"));
+
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return Count;
+    }
+
+    public int Existe_deporte(String Nombre_deporte) {
+        int Count = 0;
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*) "
+                    + " FROM deporte  "
+                    + " WHERE deporte.descripcion = '" + Nombre_deporte + "'");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+                Count = (res.getInt("COUNT(*)"));
+
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return Count;
+    }
+
+    /*
      getters y setters
      */
     public static String getCorreoF() {
@@ -768,6 +865,269 @@ public class Conectar {
 
     public static void setCorreoF(String aCorreoF) {
         correoF = aCorreoF;
+    }
+
+    public void Insertar_deporte(String Codigo, String Nombre_deportes) {
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO deporte"
+                    + "(codigo,descripcion)"
+                    + "VALUES (?,?)");
+
+            rs.setString(1, Codigo);
+            rs.setString(2, Nombre_deportes);
+
+            rs.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    public String[][] Ver_deportes() {
+        String deportes[][] = new String[2][cuantosDeportes()];
+
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT *"
+                    + "FROM deporte");
+            //Se crea un objeto donde se almacena el resultado
+            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+            ResultSet res = pstm.executeQuery();
+            //Recorre el resultado para mostrarlo en los jtf
+            int i = 0;
+            while (res.next()) {
+                //jTF_identificacion.setText(res.getString( "id_persona" ));
+
+                /* Datos del Estudiante */
+                deportes[0][i] = res.getString("codigo");
+                deportes[1][i] = res.getString("descripcion");
+
+                i++;
+            }
+//            JOptionPane.showMessageDialog(null, count);
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return deportes;
+    }
+
+    public String[] Ver_categorias() {
+        String deportes[] = new String[Cuantas_categorais()];
+
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT descripcion"
+                    + " FROM categoria");
+            ResultSet res = pstm.executeQuery();
+            int i = 0;
+            while (res.next()) {
+                deportes[i] = res.getString("descripcion");
+                i++;
+            }
+            res.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return deportes;
+    }
+
+    public int Cuantas_categorais() {
+        int cuantas = 0;
+
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*)"
+                    + "FROM categoria");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                cuantas = res.getInt("COUNT(*)");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return cuantas;
+    }
+
+    public String[] Ver_horarios() {
+        String deportes[] = new String[Cuantos_horarios()];
+
+        try {
+
+            Connection cn = conexion();
+
+            PreparedStatement pstm = cn.prepareStatement(" SELECT descripcion"
+                    + " FROM horario");
+            ResultSet res = pstm.executeQuery();
+            int i = 0;
+            while (res.next()) {
+                deportes[i] = res.getString("descripcion");
+                i++;
+            }
+            res.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return deportes;
+    }
+
+    public int Cuantos_horarios() {
+        int cuantas = 0;
+
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*)"
+                    + "FROM horario");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                cuantas = res.getInt("COUNT(*)");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return cuantas;
+    }
+
+    public String Codigo_deporte(String deporte) {
+        String cuantas = "";
+
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT codigo"
+                    + " FROM deporte"
+                    + " WHERE descripcion='"+ deporte+"'");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                cuantas = res.getString("codigo");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return cuantas;
+    }
+
+    public String Codigo_horario(String horario) {
+        String cuantas = "";
+
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT codigo"
+                    + " FROM horario"
+                    + " WHERE descripcion='"+ horario+"'");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                cuantas = res.getString("codigo");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return cuantas;
+    }
+
+    public String Codigo_categoria(String categoria) {
+        String cuantas = "";
+
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT codigo"
+                    + " FROM categoria"
+                    + " WHERE descripcion='"+ categoria+"'");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                cuantas = res.getString("codigo");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return cuantas;
+    }
+    
+    public int Deporte_categoria(String Codigo_deporte,String Codigo_categoria) {
+        int cuantas = 0;
+
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*)"
+                    + " FROM deporte_categoria"
+                    + " WHERE deporte_codigo='"+ Codigo_deporte+"' AND categoria_codigo='"+ Codigo_categoria +"'");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                cuantas = res.getInt("COUNT(*)");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return cuantas;
+    }
+
+    public int Insertar_deporte_categoria(String Codigo_deporte, String Codigo_categoria) {
+         int bien = 0;
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO deporte_categoria"
+                    + "(deporte_codigo,categoria_codigo)"
+                    + "VALUES (?,?)");
+
+            rs.setString(1, Codigo_deporte);
+            rs.setString(2, Codigo_categoria);
+
+            rs.executeUpdate();
+            bien = 1;
+        } catch (Exception e) {
+            bien = 0;
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return bien;
+    }
+
+    public int Insertar_categoria_horario(String Codigo_categoria, String Codigo_horario) {
+         int bien = 0;
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO categoria_horario"
+                    + "(categoria_codigo,horario_codigo)"
+                    + "VALUES (?,?)");
+
+            rs.setString(1, Codigo_categoria);
+            rs.setString(2, Codigo_horario);
+
+            rs.executeUpdate();
+            bien = 1;
+        } catch (Exception e) {
+            bien = 0;
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return bien;
     }
 
 }

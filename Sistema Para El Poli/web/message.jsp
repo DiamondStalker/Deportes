@@ -12,15 +12,11 @@
         <title>Upload</title>
     </head>
     <body onload="myFunction()">
-        
-        <h2 onload="myFunction()">${requestScope.message}</h2>
-        
-
-
-        <script>
+    </body>
+     <script>
             function myFunction() {
-                alert("${requestScope.message}"+"----------");
+                alert("${requestScope.message});
+                window.close();
             }
         </script>
-    </body>
 </html>

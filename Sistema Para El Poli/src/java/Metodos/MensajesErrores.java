@@ -10,6 +10,38 @@ package Metodos;
  * @author user
  */
 public class MensajesErrores {
+    
+    public static String Eldeporteexiste = "</html> "
+            + "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('El deporte ya existe')\n"
+            + "    window.location.href = 'administrador.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n";
+    
+    public static String Nuevo_deporte = "</html> "
+            + "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('Se inserto un nuevo deporte')\n"
+            + "    window.location.href = 'administrador.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n";
 
     public static String ErrorDeporte_Horario = "</html> "
             + "<!DOCTYPE html>\n"
@@ -67,6 +99,38 @@ public class MensajesErrores {
             + "<script>\n"
             + "function mensaje() {\n"
             + "    alert('Se inserto todo correctamente')\n"
+            + "    window.location.href = 'administrador.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n"
+            + "</html> ";
+    
+    public static String Asignacion_correcta = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('Se asigno correctamente')\n"
+            + "    window.location.href = 'administrador.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n"
+            + "</html> ";
+    
+    public static String Asignacion_fallida = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('Ya se encuentra una asignacion')\n"
             + "    window.location.href = 'administrador.jsp';  \n"
             + "}\n"
             + "</script>\n"
@@ -180,4 +244,20 @@ public class MensajesErrores {
                                     + "<body onload=\"location.href='usuariousuario.jsp'\">"
                                     + "</body>\n"
                                     + "</html> ";
+    
+     public static String Estudiante_no_existe = "</html> "
+            + "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('No existe el estudiante')\n"
+            + "    window.location.href = 'administrador.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n";
 }

@@ -19,10 +19,14 @@ public class Textos {
     */
 
     public static String Direccion_archivo = "";
+    
+    /*
+    * Creacion, lectura y concatenacion de archivos txt para los estudaintes
+    */
 
     public void Crear_registro_estudiante(String Id_estudiante, String Nombre_estudiante, String Apellido_estudiante, String Fecha_nacimiento) {
         
-        String crear = Direccion_archivo + "\\Registros\\Estudiantes\\" + Nombre_estudiante;
+        String crear = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\" + Nombre_estudiante;
         File c = new File(crear);
         c.mkdirs();
         File f;
@@ -60,7 +64,7 @@ public class Textos {
 
     public void añadir_acudiente(String Nombre_estudiante, String Texto_añadir) {
 
-        String crear = Direccion_archivo + "\\Registros\\Estudiantes\\" + Nombre_estudiante;
+        String crear = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\" + Nombre_estudiante;
         File c = new File(crear);
         c.mkdirs();
         File f;
@@ -99,7 +103,7 @@ public class Textos {
         File f;
         FileReader lectorArchivo;
         try {
-            f = new File(Direccion_archivo + "\\Registros\\Estudiantes\\" + nombre + "\\Informacion_del_estudiante.txt");
+            f = new File("C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\"  + nombre + "\\Informacion_del_estudiante.txt");
             lectorArchivo = new FileReader(f);
             BufferedReader br = new BufferedReader(lectorArchivo);
             String l = "";
@@ -150,4 +154,51 @@ public class Textos {
         temp = temp + texto;
         this.añadir_acudiente(Nombre_estudiante, temp);
     }
+    
+    
+    /*
+     * Creacion, lectrura y concatenacion para los registros de los Deporte_categoria_hora  
+     */
+    
+    public void Crear_carpeta_deporte(String Nombre_deportes) {
+         String crear = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes;
+        File c = new File(crear);
+        c.mkdirs();
+        File f;
+        FileWriter escritorArchivo;
+        
+        try {
+             f = new File(crear);
+            escritorArchivo = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(escritorArchivo);
+            PrintWriter salida = new PrintWriter(bw);
+             salida.close();
+            bw.close();
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    public void Crear_carpeta_deporte_categoria(String Nombre_deportes,String categoria,String hora) {
+         String crear = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes +"\\"+categoria;
+        File c = new File(crear);
+        c.mkdirs();
+        File f;
+        FileWriter escritorArchivo;
+        
+        try {
+             f = new File(crear+"\\Informacion.txt");
+            escritorArchivo = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(escritorArchivo);
+            PrintWriter salida = new PrintWriter(bw);
+            
+            salida.write(hora);
+            
+             salida.close();
+            bw.close();
+            
+        } catch (Exception e) {
+        }
+    }
+    
 }

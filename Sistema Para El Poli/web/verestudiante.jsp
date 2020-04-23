@@ -20,6 +20,16 @@
         </a>
     </center>
     
+    <script>
+           fetch('Registros/Estudiantes/carlos/Informacion_del_estudiante.txt')
+  .then(res => res.text())
+  .then(content => {
+    let lines = content.split(/\n/); 
+    lines.forEach(line => console.log(line));
+  });
+
+    </script>
+
     <div>
         <center>
             <a href="javascript:history.back()"><img src="imagenes/regreso.png" alt="Atras"></a>
@@ -55,7 +65,7 @@
         <section id="sectio-tutor"> 
             <center>
                 <img src="imagenes/usuario.png">
-                <h1>Tutor <%=i%></h1>
+                <h1>Tutor <%=i + 1%></h1>
                 <br>
                 <h1> Identificacion:</h1>
                 <h2> <%= Datos_estudiante[4][j]%></h2>
@@ -84,37 +94,11 @@
             j++;
         }
     %>
-    <div id="matricula">
-        <%
-            int count = Con.Numero_matriculas(Identificaion);
-            for(int i=0;i<count;i++){
-        %>
-            <br>
-                <h1> Identificacion:</h1>
-                <h2> <%= Datos_estudiante[4][j]%></h2>
-                <br>
-                <h1>  Nombre: </h1>
-                <h2><%= Datos_estudiante[5][j]%></h2>
-                <br>
-                <h1> Apellido: </h1> 
-                <h2> <%= Datos_estudiante[6][j]%></h2>
-                <br>
-                <h1> telefono: </h1>
-                <h2> <%= Datos_estudiante[7][j]%></h2>
-                <br>
-                <h1> Celular: </h1>
-                <h2> <%= Datos_estudiante[8][j]%></h2>
-                <br>
-                <h1> Direccion: </h1>
-                <h2> <%= Datos_estudiante[9][j]%></h2>
-                <br>
-                <h1> Parentesco: </h1>
-                <h2> <%= Datos_estudiante[10][j]%></h2>
-        <%
-            }
-        %>
-            
-    </div>
+
+    <%
+        int count = Con.Numero_matriculas(Identificaion);//Numero de matriculas realizadas para mostrar
+%>
+
 
 </body>
 </html>

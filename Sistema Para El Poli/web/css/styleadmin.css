@@ -94,9 +94,22 @@ body{
     color: #77B2D0;
     float: right;
     position: absolute; right: 250px; top: 425px;;
-    // background-image:url(../imagenes/escudo.jpg);
 }
+
 #Alerta strong {
+    font-size: 16px;
+}
+#Alerta2 {
+    border-radius: 25px;
+    background-color: #D9EDF7;
+    border:2px solid #77B2D0;
+    padding: 20px;
+    color: #77B2D0;
+    float: right;
+    position: absolute; right: 250px; top: 425px;;
+}
+
+#Alerta2 strong {
     font-size: 16px;
 }
 

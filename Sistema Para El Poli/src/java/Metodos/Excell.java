@@ -12,10 +12,8 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
-import java.util.Calendar;
 import java.util.Locale;
 import javax.swing.JOptionPane;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -27,9 +25,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class Excell {
 
     @SuppressWarnings("empty-statement")
-    public void Exportar(String Nombrea) throws Exception {
-
+    public String Exportar(String Nombrea) throws Exception {
+        String datos = "";
         try {
+
+            Textos txt = new Textos();
             //Creamos una instancia tipo calendario-- esto es para obtener el mes delaño presente para 
             //Cuando se lea el archivo excel, lea  la hoja del mes actual
             // Obtenemos el mes actual
@@ -79,41 +79,57 @@ public class Excell {
 
                 Conectar Con = new Conectar();
 
-                int Matricula = Con.matricular(Identificacion_estudiante, Nombre, Apellido, Fecha_nacimiento);
-                int Persona = Con.persona(Id_tutuor, Nombre_tutor, Apellido_tutor, Telefono_tutor, Celular_tutor);
-                int Tutor = Con.tutor(Parentesco, Id_tutuor, Direccion_tutor);
-                int Estudiante_tutor = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor);
-                int Matricularcurso = Con.matricularCurso(Fecha_nacimiento, Deporte, Identificacion_estudiante);
+                int i = Con.Ver_estudiante(Identificacion_estudiante);
+                if (i == 1) { //Preguntamos si el estudiane ya tiene una matricula previa, en caso de ser afirmativa esta pregunta, procederemos sola mente a ingresar la matricula
+                    Con.matricularCurso(Fecha_nacimiento, Deporte, Identificacion_estudiante);
+                } else {
 
-                Textos txt = new Textos();
-
-                txt.Crear_registro_estudiante(Identificacion_estudiante, Nombre, Apellido, Fecha_nacimiento);
-                txt.Concatenar_acudiente(Nombre, Id_tutuor, Nombre_tutor, Apellido_tutor, Parentesco, Telefono_tutor, Celular_tutor, Direccion_tutor);
-                txt.Concatenar_matricula(Nombre, Deporte, Fecha_nacimiento, "");
-
-                if (Pregunta_tutor_2.equalsIgnoreCase("Si")) {
-                    String Id_tutuor_2 = fila.getCell(13).toString();
-                    String Parentesco_2 = fila.getCell(14).toString();
-                    String Nombre_tutor_2 = fila.getCell(15).toString();
-                    String Apellido_tutor_2 = fila.getCell(16).toString();
-                    String Telefono_tutor_2 = fila.getCell(17).toString();
-                    String Celular_tutor_2 = fila.getCell(18).toString();
-                    String Direccion_tutor_2 = fila.getCell(19).toString();
-
-                    int Persona_2 = Con.persona(Id_tutuor_2, Nombre_tutor_2, Apellido_tutor_2, Telefono_tutor_2, Celular_tutor_2);
-                    int Tutor_2 = Con.tutor(Parentesco_2, Id_tutuor_2, Direccion_tutor_2);
-                    int Estudiante_tutor_2 = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor_2);
+                    int Matricula = Con.matricular(Identificacion_estudiante, Nombre, Apellido, Fecha_nacimiento);
+                    int Persona = Con.persona(Id_tutuor, Nombre_tutor, Apellido_tutor, Telefono_tutor, Celular_tutor);
+                    int Tutor = Con.tutor(Parentesco, Id_tutuor, Direccion_tutor);
+                    int Estudiante_tutor = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor);
+                    int Matricularcurso = Con.matricularCurso(Fecha_nacimiento, Deporte, Identificacion_estudiante);
                     
-                     txt.Concatenar_acudiente(Nombre, Id_tutuor_2, Nombre_tutor_2, Apellido_tutor_2, Parentesco_2, Telefono_tutor_2, Celular_tutor_2, Direccion_tutor_2);
+
+                    /*
+                     * Antes de crear los registro debemos preguntar si hubo un error en alguna inserción
+                     * en caso de ser verdad procederemos a capturar la identificacion y el nombre de la persona que no se pudo insertar
+                     * y procederemos a eliminar los datos que si alcazaron a insertarse para que no haya incongruencias en la base de datos
+                     * 0 --> significa que hubo un error al insertar
+                     */
+                    if (Matricula == 0 || Persona == 0 || Tutor == 0 || Estudiante_tutor == 0 || Matricularcurso == 0) {
+                        datos += Identificacion_estudiante + " " + Nombre ;
+                    } else {
+
+                        txt.Crear_registro_estudiante(Identificacion_estudiante, Nombre, Apellido, Fecha_nacimiento);
+                        txt.Concatenar_acudiente(Nombre, Id_tutuor, Nombre_tutor, Apellido_tutor, Parentesco, Telefono_tutor, Celular_tutor, Direccion_tutor);
+                        txt.Concatenar_matricula(Nombre, Deporte, Fecha_nacimiento, "");
+                    }
+
+                    if (Pregunta_tutor_2.equalsIgnoreCase("Si")) {
+                        String Id_tutuor_2 = fila.getCell(13).toString();
+                        String Parentesco_2 = fila.getCell(14).toString();
+                        String Nombre_tutor_2 = fila.getCell(15).toString();
+                        String Apellido_tutor_2 = fila.getCell(16).toString();
+                        String Telefono_tutor_2 = fila.getCell(17).toString();
+                        String Celular_tutor_2 = fila.getCell(18).toString();
+                        String Direccion_tutor_2 = fila.getCell(19).toString();
+
+                        int Persona_2 = Con.persona(Id_tutuor_2, Nombre_tutor_2, Apellido_tutor_2, Telefono_tutor_2, Celular_tutor_2);
+                        int Tutor_2 = Con.tutor(Parentesco_2, Id_tutuor_2, Direccion_tutor_2);
+                        int Estudiante_tutor_2 = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor_2);
+
+                        txt.Concatenar_acudiente(Nombre, Id_tutuor_2, Nombre_tutor_2, Apellido_tutor_2, Parentesco_2, Telefono_tutor_2, Celular_tutor_2, Direccion_tutor_2);
+
+                    }
+                    System.out.println("");
 
                 }
-                System.out.println("");
-
             }
 
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
         }
-
+        return datos;
     }
 }
