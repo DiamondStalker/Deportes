@@ -36,11 +36,11 @@ public class asignarhorario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             String deporte = request.getParameter("deportes");
             String categoria = request.getParameter("categoria");
             String horario = request.getParameter("horario");
-            
+
             /*
              * Antes de realizar la respectiva asginacion de datos
              * tenemos que verificar que este no exista
@@ -51,28 +51,46 @@ public class asignarhorario extends HttpServlet {
              * primero debemos conocer el codigo "pk" de cada dato
              * obtenido del formulario "administrador.jsp --> div Asignar-hora "
              */
-            
             Conectar Con = new Conectar();
             String Codigo_deporte = Con.Codigo_deporte(deporte);
             String Codigo_horario = Con.Codigo_horario(horario);
             String Codigo_categoria = Con.Codigo_categoria(categoria);
-            
+
             //Primero preguntamos si esa categoria tiene asignada un deporte
-            if(Con.Deporte_categoria(Codigo_deporte, Codigo_categoria) == 0){// En el caso de que este sea igual a 0 significa que no existe la categoria asignada a ese deporte
-                Con.Insertar_deporte_categoria(Codigo_deporte,Codigo_categoria);
-                Con.Insertar_categoria_horario(Codigo_categoria,Codigo_horario);
+            if (Con.Deporte_categoria(Codigo_deporte, Codigo_categoria,Codigo_horario) == 0) {// En el caso de que este sea igual a 0 significa que no existe la categoria asignada a ese deporte
+                
+                
+                Con.Insertar_deporte_categoria_horario(Codigo_deporte, Codigo_categoria,Codigo_horario);
+                
+                
                 out.print(MensajesErrores.Asignacion_correcta);
                 /*
                  * Procedemos a entrar a la carpeta del deporte y creamos dentro
                  * otra carpeta con la categoria
                  * y dentro de este creamos un txt con la hora de asignacion
-                */
+                 */
                 Textos Txt = new Textos();
-                Txt.Crear_carpeta_deporte_categoria(deporte, categoria, horario);
                 
                 
-            }
-            
+                /*
+                 * Antes de crear el archvo tenemos que preguntar al db si ya existe una relacion entre el deporte y la categoria
+                 * en el caso de que no existe dicha relacion procederemos acreear el primer archivo
+                 * en el caso de que ya existe dicha relacion procederon a concatener; lo que hace es leer el archivo previo para poder crear un nuevo archivo con la informacion anterior mas la nueva
+                 */
+                
+                int Existe_archivo = Con.Existe_deporte_categoria(Codigo_deporte, Codigo_categoria);
+                
+                if(Existe_archivo == 1){//Caso de ser cero se crea el archivo 
+                    Txt.Crear_carpeta_deporte_categoria(deporte, categoria, horario);
+                }  
+                else {//Caso != 0 se concatena el archivo
+                    Txt.Concatener_informacion_horario(deporte, categoria, horario);
+                } 
+                
+            } else {
+                // Como ya existe una relacion mostramos alerta de que ya existe una relacion
+                out.print(MensajesErrores.Asignacion_fallida);
+            } 
         }
     }
 

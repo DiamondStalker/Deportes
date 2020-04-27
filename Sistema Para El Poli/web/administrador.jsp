@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Random"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="conexion.Conectar"%>
@@ -46,19 +47,19 @@
             oculta('contenido');
                     oculta('tablaestudiantes');
             }
-            
+
             //Preguntas del menu deporte
             if (id == "tabladeportes") {
-                oculta('Deportes-insertar');
-                oculta('asignar-hora');
+            oculta('Deportes-insertar');
+                    oculta('asignar-hora');
             }
             if (id == "Deportes-insertar") {
-                oculta('asignar-hora');
-                oculta('tabladeportes');
+            oculta('asignar-hora');
+                    oculta('tabladeportes');
             }
             if (id == "asignar-hora") {
-                oculta('Deportes-insertar');
-                oculta('tabladeportes');
+            oculta('Deportes-insertar');
+                    oculta('tabladeportes');
             }
 
 
@@ -96,22 +97,21 @@
                     closest_ul.find("ul").slideUp(function () {
             if (++count === closest_ul.find("ul").length)
                     parallel_active_links.removeClass("active");
-                //Preguntas para el submenu estudiante
-                //Cierrar el contenido mostrado al cambiar de menu
+                    //Preguntas para el submenu estudiante
+                    //Cierrar el contenido mostrado al cambiar de menu
                     if ($('#contenido').is(':visible'))
                     oculta("contenido");
                     if ($('#tablaestudiantes').is(':visible'))
                     oculta("tablaestudiantes");
                     if ($('#Acudiente').is(':visible'))
                     oculta("Acudiente");
-                //Preguntas para el submenu deportes
-                if ($('#Deportes-insertar').is(':visible'))
+                    //Preguntas para el submenu deportes
+                    if ($('#Deportes-insertar').is(':visible'))
                     oculta("Deportes-insertar");
-                if ($('#tabladeportes').is(':visible'))
+                    if ($('#tabladeportes').is(':visible'))
                     oculta("tabladeportes");
-                if ($('#asignar-hora').is(':visible'))
+                    if ($('#asignar-hora').is(':visible'))
                     oculta("asignar-hora");
-                
             });
                     if (!link_status)
             {
@@ -209,7 +209,15 @@
             <label>Apellido del estudiante: </label><input id="AEstudiante" type="text" name="ApellidoEstudiante" onclick="valueOf('')"  placeholder="Escriba sus dos apellidos">   
             <br>
             <br>
-            <label>Fecha de nacimiento: </label> <input id="Fechan" type="date" name="Fechan"required="">   
+            <%-- 
+                   Llamamos a LocalDate para capturar el año acual y le restamos 3 y al otro 12, para que nos 
+                   devuelva el año de la categoria permitida
+                   suponiendo que la categoria minima para practicar es sub 3
+                   y la categoria maxima es sub 12
+                   el año maximo --> categoria minima
+                   el año minimo --> categoira maxima
+            --%>
+            <label>Fecha de nacimiento: </label> <input id="Fechan" type="date" name="Fechan" required="" value="<%=LocalDate.now().getYear() - 12%>-01-01" max="<%=LocalDate.now().getYear() - 3%>-12-31" min="<%=LocalDate.now().getYear() - 12%>-01-01">   
             <br>
             <br>
             Deporte:
@@ -433,13 +441,13 @@
                 var x = document.getElementById("customers").rows[element.parentNode.parentNode.rowIndex].cells[0].innerText;
                         location.href = direccionweb + 'estudiante.jsp?id=' + x;
                 }
-                
-                function  getIdDeportes(element, direccionweb) {
-                /*alert("row" + element.parentNode.parentNode.rowIndex +
-                 " - column" + element.parentNode.cellIndex);*/
-                var x = document.getElementById("deportes").rows[element.parentNode.parentNode.rowIndex].cells[0].innerText;
-                        location.href = direccionweb + 'deporte.jsp?id=' + x;
-                }
+
+        function  getIdDeportes(element, direccionweb) {
+        /*alert("row" + element.parentNode.parentNode.rowIndex +
+         " - column" + element.parentNode.cellIndex);*/
+        var x = document.getElementById("Deportes").rows[element.parentNode.parentNode.rowIndex].cells[1].innerText;
+                location.href = direccionweb + 'deporte.jsp?deporte=' + x;
+        }
 
     </script>
 
@@ -523,74 +531,104 @@
 
 <!--==============================Inicio del codigo ver deportes================================-->
 <center>
-        <div id="tabladeportes" style="display: none;">
-            <center>
-                <h1>Deportes</h1>
-                <div class="derecha" id="buscar">Buscar <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filtro"></div>
+    <style>
 
 
-                <div class="datagrid">
-                    <table class="order-table table" id="deportes">
-                        <thead>
-                            <tr class="titulo"> 
-                                <th>    Codigo deporte  </th>
-                                <th>    Nombre  </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                String Deportes[][] =  con.Ver_deportes();
-                                 for(int j = 0; j <  cuantos; j++){
-                            %>
-                            <tr>    
-                                <td align="center"><a><%= Deportes[0][j]%></a></td>
-                                <td align="center"><a><%= Deportes[1][j]%></a></td>
-                                <td align="center"> 
-                                    <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getIdDeportes(this, 'ver')">
-                                    <img style="" src="imagenes/editar.png" width="30" height="30" onclick="getIdDeportes(this, 'editar')">
-                                    <img style="" src="imagenes/basura.png" width="30" height="30" onclick="getIdDeportes(this, 'eliminar')">
-                                </td>
-                            </tr>
-                            <%
-                                }
-                            %>
-                        </tbody>
-                    </table>
-                </div>
-            </center>
-        </div>
-    </center>
+        #Deportes td,#Deportes th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #Deportes tr:nth-child(even){background-color: #f2f2f2;}
+
+        #Deportes tr:hover {background-color: #ddd;}
+
+        #Deportes th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #009231;
+            color: white;
+        }
+
+        #buscar{
+            width: 300px;
+            font-size: 22px;
+            color: #fff;
+            background: #009231 ;
+            padding-left: 20px ;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            margin:10px; 
+        }
+    </style>
+    <div id="tabladeportes" style="display: none;">
+        <center>
+            <h1>Deportes</h1>
+            <div class="derecha" id="buscar">Buscar <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filtro"></div>
+            <div class="datagrid">
+                <table class="order-table table" id="Deportes">
+                    <thead>
+                        <tr class="titulo"> 
+                            <th>    Codigo deporte  </th>
+                            <th>    Nombre  </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            String Deportes[][] = con.Ver_deportes();
+                            for (int j = 0; j < cuantos; j++) {
+                        %>
+                        <tr>    
+                            <td align="center"><a><%= Deportes[0][j]%></a></td>
+                            <td align="center"><a><%= Deportes[1][j]%></a></td>
+                            <td align="center"> 
+                                <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getIdDeportes(this, 'ver')">
+                                <img style="" src="imagenes/editar.png" width="30" height="30" onclick="getIdDeportes(this, 'editar')">
+                                <img style="" src="imagenes/basura.png" width="30" height="30" onclick="getIdDeportes(this, 'eliminar')">
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </tbody>
+                </table>
+            </div>
+        </center>
+    </div>
+</center>
 <!--==============================Fin del codigo ver deportes================================-->
 
 <!--==============================Inicio del codigo para asignar horario================================-->
 <div id="asignar-hora" style="display: none;">
     <center>
         <form id="estudiante" action="asignarhorario" method="post">
-        <h1>Asignacion de horarios</h1><br><br>
-        <label>Seleccione un deporte:</label><br><br>
-        <select id="deportes" name="deportes">
+            <h1>Asignacion de horarios</h1><br><br>
+            <label>Seleccione un deporte:</label><br><br>
+            <select id="deportes" name="deportes">
                 <% for (int i = 0; i < cuantos; i++) {%>
                 <option> <%=DD[i]%></option>
                 <% }%>
-        </select><br><br>
-        <label>Seleccione una categoria:</label><br><br>
-        <select id="categoria" name="categoria">
-                <% 
-                String categoria[] = con.Ver_categorias();
-                for (int i = 0; i < categoria.length; i++) {%>
+            </select><br><br>
+            <label>Seleccione una categoria:</label><br><br>
+            <select id="categoria" name="categoria">
+                <%
+                    String categoria[] = con.Ver_categorias();
+                    for (int i = 0; i < categoria.length; i++) {%>
                 <option> <%=categoria[i]%></option>
                 <% }%>
-        </select><br><br>
-        <label>Seleccione un horario:</label><br><br>
-        <select id="horario" name="horario">
-                <% String horario [] = con.Ver_horarios();
-                for (int i = 0; i < horario.length; i++) {%>
+            </select><br><br>
+            <label>Seleccione un horario:</label><br><br>
+            <select id="horario" name="horario">
+                <% String horario[] = con.Ver_horarios();
+                    for (int i = 0; i < horario.length; i++) {%>
                 <option> <%=horario[i]%></option>
                 <% }%>
-        </select><br><br>
-        <input type="submit" value="Asignar" id="submit">
-        
-    </form>
+            </select><br><br>
+            <input type="submit" value="Asignar" id="submit">
+
+        </form>
     </center>
 </div>
 <!--==============================Inicio del codigo para asignar horario================================-->
@@ -606,44 +644,43 @@
              * si no hay un valor asociado con estos terminos
              * "No devolvera nada"
              */
-            function myFunction(Deporte, Fehca) {
-            alert("Input field lost focus." + Deporte + Fehca);
-                    var edad = getEdad(Fehca);
-                    console.log(edad);
-                    fetch('Registros/Deportes/' + Deporte + '/categoria_sub_' + edad + '/Informacion.txt')
-                    .then(res => res.text())
-                    .then(content => {
-                    let lines = content.split(/\n/);
-                            let tamaño = content.split(/\n/).length;
-                            console.log(tamaño);
-                            console.log(content.split(/\n/)[0]);
-                            lines.forEach(line => console.log(line));
-                            var campo_dia = document.getElementById('Horario');
-                            for (var j = 0; j < tamaño; j++){
-                    campo_dia.options[j] = new Option(content.split(/\n/)[j]); // texto-valor
+                    function myFunction(Deporte, Fehca) {
+                    alert("Input field lost focus." + Deporte + Fehca);
+                            var edad = getEdad(Fehca);
+                            console.log(edad);
+                            fetch('Registros/Deportes/' + Deporte + '/Sub' + edad + '/Informacion.txt')
+                            .then(res => res.text())
+                            .then(content => {
+                            let lines = content.split(/\n/);
+                                    let tamaño = content.split(/\n/).length;
+                                    console.log(tamaño);
+                                    console.log(content.split(/\n/)[0]);
+                                    lines.forEach(line => console.log(line));
+                                    var campo_dia = document.getElementById('Horario');
+                                    for (var j = 0; j < tamaño; j++){
+                            campo_dia.options[j] = new Option(content.split(/\n/)[j]); // texto-valor
+                            }
+                            });
                     }
-                    });
+            /*
+             * Con esta funcion calculamos la edad(categoria)
+             * recibe la fecha de nacimiento del estudiante
+             * y creamos una variable fehca hoy; lo que devuelve la fecha actual
+             * y se procede a realizar una resta de fechas
+             */
+            function getEdad(dateString) {
+            var hoy = new Date()
+                    var fechaNacimiento = new Date(dateString)
+                    var edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+                    var diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+                    if (
+                            diferenciaMeses < 0 ||
+                            (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+                            ) {
+            edad--
             }
-/*
- * Con esta funcion calculamos la edad(categoria)
- * recibe la fecha de nacimiento del estudiante
- * y creamos una variable fehca hoy; lo que devuelve la fecha actual
- * y se procede a realizar una resta de fechas
- */
-    function getEdad(dateString) {
-    var hoy = new Date()
-            var fechaNacimiento = new Date(dateString)
-            var edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
-            var diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
-            if (
-                    diferenciaMeses < 0 ||
-                    (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
-                    ) {
-    edad--
-    }
-    return edad+1
-    }
-
+            return edad + 1
+            }
 
 </script>
 

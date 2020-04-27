@@ -130,7 +130,7 @@ public class MensajesErrores {
             + "\n"
             + "<script>\n"
             + "function mensaje() {\n"
-            + "    alert('Ya se encuentra una asignacion')\n"
+            + "    alert('Ya se encuentra asignada')\n"
             + "    window.location.href = 'administrador.jsp';  \n"
             + "}\n"
             + "</script>\n"

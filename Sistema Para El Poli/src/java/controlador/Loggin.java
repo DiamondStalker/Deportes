@@ -48,32 +48,31 @@ public class Loggin extends HttpServlet {
             
             Conectar con = new Conectar();
 
-            MensajesErrores msg = new MensajesErrores();
             
             if (con.checkEmail(correo)) {
                 if (con.validar(correo)) {
                     if (con.contrasena(correo, clave)) {
 //////-------------------------------------------------------------------------------------------------////// 
-                        con.setCorreoF(correo);
+                        Conectar.setCorreoF(correo);
                         
                         if (con.tipou(correo) == 0) {//Administrador 
                             
-                            out.println(msg.administrador);
+                            out.println(MensajesErrores.administrador);
                         } else {//Usuario
-                             out.println(msg.usuario);
+                             out.println(MensajesErrores.usuario);
                             
                         }
 //////-------------------------------------------------------------------------------------------------//////
                     } else {//La contrasena es incorrecta
-                        out.println(msg.ErrorUsuarioClave);
+                        out.println(MensajesErrores.ErrorUsuarioClave);
                     }
 //////-------------------------------------------------------------------------------------------------//////
                 } else {//El correo no existe
-                    out.println(msg.CorreoNExiste);
+                    out.println(MensajesErrores.CorreoNExiste);
                 }
 //////-------------------------------------------------------------------------------------------------//////
             } else {//El correo no es valido
-                out.println(msg.ErrorCorreo);
+                out.println(MensajesErrores.ErrorCorreo);
             }
         } finally {
             out.close();

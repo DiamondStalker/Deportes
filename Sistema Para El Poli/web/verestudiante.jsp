@@ -11,7 +11,8 @@
             String Datos_estudiante[][] = Con.Datos_estudiante(Identificaion);
         %>
         <title> <%= Nombre_estudiante%></title>
-        <link rel="stylesheet" type="text/css" media="screen" href="css/verestudiantes.css">
+                <link rel="stylesheet" type="text/css" media="screen" href="css/Tabla_usuarios.css">
+
     </head>
     <body>
     <center>
@@ -97,7 +98,7 @@
 
     <%
         int count = Con.Numero_matriculas(Identificaion);//Numero de matriculas realizadas para mostrar
-%>
+    %>
 
 
 </body>

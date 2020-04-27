@@ -27,10 +27,10 @@
         window.setInterval("reFresh()", 300000);
 // -->
         </script>
-    <body>
+    
     </head>
+    <body>
     <section >
-        
         <center>
             <a onclick="javascript:window.location.reload();"> <img src="imagenes/refresh.gif" alt=""></a>
         </center> 
@@ -39,7 +39,7 @@
 <!--==============================FORM=================================-->
         <form action="Loggin" id="loggin" method="post" >
             <h2 id="TituloLoggin">Login</h2>
-            <label>User name</label><input id="User"autocomplete="on" placeholder="ejemplo@dominio.com" type="email" name="Correo" onclick="valueOf('')" required="">
+            <label>User name</label><input id="User" autocomplete="on  placeholder="ejemplo@dominio.com" type="email" name="Correo" onclick="valueOf('')" required="">
             <br>
             <br>
             <label>Password</label><input id="Password" autocomplete="on"  placeholder="********" type="password" name="Contrasena" required="">
