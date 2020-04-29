@@ -55,7 +55,7 @@ public class Loggin extends HttpServlet {
 //////-------------------------------------------------------------------------------------------------////// 
                         Conectar.setCorreoF(correo);
                         
-                        if (con.tipou(correo) == 0) {//Administrador 
+                        if (con.tipou(correo) == 1) {//Administrador 
                             
                             out.println(MensajesErrores.administrador);
                         } else {//Usuario

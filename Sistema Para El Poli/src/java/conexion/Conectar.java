@@ -187,7 +187,7 @@ public class Conectar {
             Connection cn = conexion();
 
             PreparedStatement pstm = cn.prepareStatement(" SELECT tipo_usuario"
-                    + " FROM usuarioa "
+                    + " FROM usuario "
                     + " WHERE e_mail = '" + correo + "'");
             //Se crea un objeto donde se almacena el resultado
             //Y con el comando executeQuery se ejecuta la consulta en la base de datos
