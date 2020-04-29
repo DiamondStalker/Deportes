@@ -205,7 +205,7 @@ public class Textos {
         FileWriter escritorArchivo;
 
         try {
-            f = new File(crear + "\\Categorias.txt");
+            f = new File(crear + "\\categorias.txt");
             escritorArchivo = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(escritorArchivo);
             PrintWriter salida = new PrintWriter(bw);
@@ -254,11 +254,11 @@ public class Textos {
         }
     }
     
-    public void Concatener_categorias(String Deporte, String Categoria) {
+    public void Concatenar_categorias(String Deporte, String Categoria) {
         File f;
         FileReader lectorArchivo;
         try {
-            f = new File("C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "Categorias.txt");
+            f = new File("C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "categorias.txt");
             lectorArchivo = new FileReader(f);
             BufferedReader br = new BufferedReader(lectorArchivo);
             String l = "";
@@ -271,7 +271,7 @@ public class Textos {
                     break;
                 }
             }
-            String Direccion = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "Categorias.txt";
+            String Direccion = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "categorias.txt";
             FileWriter escritorArchivo;
             escritorArchivo = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(escritorArchivo);

@@ -87,7 +87,7 @@ public class asignarhorario extends HttpServlet {
                     Txt.Concatener_informacion_horario(deporte, categoria, horario);
                 } 
                 
-                Txt.Concatenar_categorias();
+                Txt.Concatenar_categorias(deporte,categoria);
                 
             } else {
                 // Como ya existe una relacion mostramos alerta de que ya existe una relacion
