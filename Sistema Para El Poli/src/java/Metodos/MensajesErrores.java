@@ -272,7 +272,7 @@ public class MensajesErrores {
     
     public static String usuario="<!DOCTYPE html>\n"
                                     + "<html>\n"
-                                    + "<body onload=\"location.href='usuariousuario.jsp'\">"
+                                    + "<body onload=\"location.href='docente.jsp?\">"
                                     + "</body>\n"
                                     + "</html> ";
     
@@ -291,4 +291,14 @@ public class MensajesErrores {
             + "</script>\n"
             + "\n"
             + "</body>\n";
+     
+     private static String Docente;
+
+    public static String getDecente() {
+        return Docente;
+    }
+
+    public static void setDecente(String Decente) {
+        MensajesErrores.Docente = Docente;
+    }
 }
