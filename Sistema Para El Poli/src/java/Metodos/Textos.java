@@ -210,7 +210,6 @@ public class Textos {
             BufferedWriter bw = new BufferedWriter(escritorArchivo);
             PrintWriter salida = new PrintWriter(bw);
 
-            salida.write("");
 
             salida.close();
             bw.close();
