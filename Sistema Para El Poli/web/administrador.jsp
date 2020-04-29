@@ -22,6 +22,9 @@
                             oculta('Deportes-insertar');
                             oculta('tabladeportes');
                             oculta('asignar-hora');
+                            oculta('profesor_deporte-contend');
+                            oculta('Ver_Docente');
+                            oculta('Insertardocente');
                     }
 
 
@@ -60,6 +63,20 @@
             if (id == "asignar-hora") {
             oculta('Deportes-insertar');
                     oculta('tabladeportes');
+            }
+            
+            //Preguntas para docente
+            if (id == "Ver_Docente") {
+            oculta('profesor_deporte-contend');
+            oculta('Insertardocente');
+            }
+            if (id == "profesor_deporte-contend") {
+            oculta('Ver_Docente');
+            oculta('Insertardocente');
+            }
+            if (id == "Insertardocente") {
+            oculta('Ver_Docente');
+            oculta('profesor_deporte-contend');
             }
 
 
@@ -112,6 +129,12 @@
                     oculta("tabladeportes");
                     if ($('#asignar-hora').is(':visible'))
                     oculta("asignar-hora");
+                    if ($('#profesor_deporte-contend').is(':visible'))
+                    oculta("profesor_deporte-contend");
+                    if ($('#Ver_Docente').is(':visible'))
+                    oculta("Ver_Docente");
+                    if ($('#Insertardocente').is(':visible'))
+                    oculta("Insertardocente");
             });
                     if (!link_status)
             {
@@ -170,8 +193,9 @@
             <li class="">
                 <h3><a href="#"><span class="icon-tasks"></span>Profesor</a></h3>
                 <ul style="display: none;">
-                    <li><a href="#">Registrar profesor</a></li>
-                    <li><a href="#">Ver</a></li>
+                    <li><a href="#" onclick="muestra_oculta('Insertardocente')">Registrar profesor</a></li>
+                    <li><a href="#" onclick="muestra_oculta('profesor_deporte-contend')">Asignarl deporte</a></li>
+                    <li><a href="#" onclick="muestra_oculta('Ver_Docente')">Ver</a></li>
                 </ul>
             </li>
             <%-- Menu Deportes --%>
@@ -203,10 +227,10 @@
             <label>Identificacion: </label><input id="ides" type="text" name="ides" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" minlength="10" maxlength="11" placeholder="Tarjeta de identidad">   
             <br>
             <br>
-            <label id="Textonombre">Nombre del estudiante: </label><input id="NEstudiante" type="text" name="NombreEstudiante" onclick="valueOf('')" placeholder="Escriba sus dos nombres">   
+            <label id="Textonombre">Nombre del estudiante: </label><input id="NEstudiante" type="text" name="NombreEstudiante" onclick="valueOf('')" placeholder="Escriba sus dos nombres" maxlength="30">   
             <br>
             <br>
-            <label>Apellido del estudiante: </label><input id="AEstudiante" type="text" name="ApellidoEstudiante" onclick="valueOf('')"  placeholder="Escriba sus dos apellidos">   
+            <label>Apellido del estudiante: </label><input id="AEstudiante" type="text" name="ApellidoEstudiante" onclick="valueOf('')"  placeholder="Escriba sus dos apellidos" maxlength="30">   
             <br>
             <br>
             <%-- 
@@ -241,19 +265,19 @@
             <label>Identificacion acudiente: </label><input id="idacu1" type="text" name="idacu1" onclick="valueOf('')"  onkeypress="return SoloN(event)" minlength="10" maxlength=11 placeholder="Cc">   
             <br>
             <br>
-            <label>Nombre acudiente: </label><input id="NAcudiente" type="text" name="NAcudiente" onclick="valueOf('')">   
+            <label>Nombre acudiente: </label><input id="NAcudiente" type="text" name="NAcudiente" onclick="valueOf('')" maxlength="30">   
             <br>
             <br>
-            <label>Apellido acudiente: </label><input id="AAcudiente" type="text" name="aAcudiente" onclick="valueOf('')" >   
+            <label>Apellido acudiente: </label><input id="AAcudiente" type="text" name="aAcudiente" onclick="valueOf('')"  maxlength="30">   
             <br>
             <br>
-            <label>Telefono: </label><input id="Telefono" type="text" name="Telefono" onclick="valueOf('')"  onkeypress="return SoloN(event)" maxlength="7">   
+            <label>Telefono: </label><input id="Telefono" type="text" name="Telefono" onclick="valueOf('')"  onkeypress="return SoloN(event)" maxlength="10">   
             <br>
             <br>
-            <label>Celular: </label><input id="celular" type="text" name="celular" onclick="valueOf('')"  maxlength="10"  onkeypress="return SoloN(event)">   
+            <label>Celular: </label><input id="celular" type="text" name="celular" onclick="valueOf('')"  maxlength="11"  onkeypress="return SoloN(event)">   
             <br>
             <br>
-            <label>Direccion: </label><input id="Direccion" type="text" name="Direccion" onclick="valueOf('')" >   
+            <label>Direccion: </label><input id="Direccion" type="text" name="Direccion" onclick="valueOf('')"  maxlength="30">   
             <br>
             <br>
             Parentesco: 
@@ -284,10 +308,10 @@
                 <label>Identificacion acudiente: </label><input id="idacu1" type="text" name="idacu12" onclick="valueOf('')" onkeypress="return SoloN(event)" minlength="10" maxlength=11 placeholder="Cc">   
                 <br>
                 <br>
-                <label>Nombre acudiente: </label><input id="NAcudiente" type="text" name="NAcudiente2" onclick="valueOf('')" placeholder="Nombres">   
+                <label>Nombre acudiente: </label><input id="NAcudiente" type="text" name="NAcudiente2" onclick="valueOf('')" placeholder="Nombres" maxlength="30">   
                 <br>
                 <br>
-                <label>Apellido acudiente: </label><input id="AAcudiente" type="text" name="aAcudiente2" onclick="valueOf('')" placeholder="Apellidos">   
+                <label>Apellido acudiente: </label><input id="AAcudiente" type="text" name="aAcudiente2" onclick="valueOf('')" placeholder="Apellidos" maxlength="30">   
                 <br>
                 <br>
                 Parentesco: 
@@ -304,13 +328,13 @@
                 </select>
                 <br>
                 <br>
-                <label>Telefono: </label><input id="Telefono" type="text" name="Telefono2" onclick="valueOf('')"  onkeypress="return SoloN(event)" maxlength="7">   
+                <label>Telefono: </label><input id="Telefono" type="text" name="Telefono2" onclick="valueOf('')"  onkeypress="return SoloN(event)" maxlength="10">   
                 <br>
                 <br>
-                <label>Celular: </label><input id="celular" type="text" name="celular2" onclick="valueOf('')"  maxlength="10"  onkeypress="return SoloN(event)">   
+                <label>Celular: </label><input id="celular" type="text" name="celular2" onclick="valueOf('')"  maxlength="11"  onkeypress="return SoloN(event)">   
                 <br>
                 <br>
-                <label>Direccion: </label><input id="Direccion" type="text" name="Direccion2" onclick="valueOf('')">   
+                <label>Direccion: </label><input id="Direccion" type="text" name="Direccion2" onclick="valueOf('')" maxlength="30">   
                 <br>
                 <br>
             </div>
@@ -420,8 +444,6 @@
                                 <td align="center"><a><%= Estudiante[3][i]%></a></td>
                                 <td align="center"> 
                                     <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getId(this, 'ver')">
-                                    <img style="" src="imagenes/editar.png" width="30" height="30" onclick="getId(this, 'editar')">
-                                    <img style="" src="imagenes/basura.png" width="30" height="30" onclick="getId(this, 'eliminar')">
                                 </td>
                             </tr>
                             <%
@@ -683,6 +705,175 @@
             }
 
 </script>
+
+
+
+
+<!------------------------------- Codigo html para el menu profesor -->
+
+<%--Asignar deporte y horario a un profesor--%>
+           
+            <div id="profesor_deporte-contend" style="display: none;">
+                   
+        <form id="estudiante" action="profesordeporte" method="post">
+            <center>
+            <h1>Asignar deporte a profesor</h1>
+            <label>Id Entrenador: </label><input id="entrenador_id" type="text" name="entrenador_id" onclick="valueOf('')" required="" onkeypress="return SoloN(event)" minlength="10" maxlength="11" placeholder="entrenador_id">   
+            <br>
+            <br>
+            <label>Deporte: </label>
+            <select id="Sdeporte" name="Sdeporte" onblur="vercategorias(this.value)">
+                <%-- Creamos un objeto conexion para que nos devuelva cuantos deportes hya y cuales son--%>
+                <% for (int i = 0; i < cuantos; i++) {%>
+                <option> <%=DD[i]%></option>
+                <% }%>
+            </select>
+            <br>
+            <br>
+            
+            <label>Categoria</label>
+            <select id="Categorias" name="Categorias" onblur="verhorarios(Sdeporte.value,this.value)">
+                <option>Primero seleccione un deporte</option>
+            </select>
+            <br>
+            <br>
+            
+            <label>Categoria</label>
+            <select id="hora" name="hora">
+                <option>Seleccione primero un deporte y una categoria</option>
+            </select>
+            <br>
+            <br>
+            <input type="submit" id="submit" value="Asignar">
+        </form>
+        
+        </center>
+        <br>
+        <br>
+    </div>
+            
+            <script>
+            
+                    function vercategorias(Deporte) {
+                    alert("Input field lost focus." + Deporte);
+                            fetch('Registros/Deportes/' + Deporte + '/categorias.txt')
+                            .then(res => res.text())
+                            .then(content => {
+                            let lines = content.split(/\n/);
+                                    let tamaño = content.split(/\n/).length;
+                                    console.log(content.split(/\n/)[0]);
+                                    lines.forEach(line => console.log(line));
+                                    var campo_dia = document.getElementById('Categorias');
+                                    for (var j = 0; j < tamaño; j++){
+                            campo_dia.options[j] = new Option(content.split(/\n/)[j]); // texto-valor
+                            }
+                            });
+                    }
+                    function verhorarios(Deporte,categoria) {
+                    alert("Input field lost focus." + Deporte+categoria);
+                            fetch('Registros/Deportes/' + Deporte +'/' +categoria+'/Informacion.txt')
+                            .then(res => res.text())
+                            .then(content => {
+                            let lines = content.split(/\n/);
+                                    let tamaño = content.split(/\n/).length;
+                                    console.log(tamaño);
+                                    console.log(content.split(/\n/)[0]);
+                                    lines.forEach(line => console.log(line));
+                                    var campo_horarios = document.getElementById('hora');
+                                    for (var j = 0; j < tamaño; j++){
+                            campo_horarios.options[j] = new Option(content.split(/\n/)[j]); // texto-valor
+                            }
+                            });
+                    }
+
+</script>
+<%-- ver docentes--%>
+<center>
+        <div id="Ver_Docente" style="display: none;">
+            <center>
+                <h1>Ver profesor</h1>
+                <div class="derecha" id="buscar">Buscar <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filtro"></div>
+
+
+                <div class="datagrid">
+                    <table class="order-table table" id="customers">
+                        <thead>
+                            <tr class="titulo"> 
+                                <th>    Identificacion  </th>
+                                <th>    Nombre </th>
+                                <th>    Apellido </th>
+                                <th>    Telefono </th>
+                                <th>    Celular </th>
+                               <!--  <th>    Codigo de matricula </th>
+                                <th>    Deporte </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                String profesor[][] = con.Profesores();
+                                for (int i = 0; i < con.Cuantos_profesores(); i++) {
+                            %>
+                            <tr>    
+                                <td align="center"><a><%= profesor[0][i]%></a></td>
+                                <td align="center"><a><%= profesor[1][i]%></a></td>
+                                <td align="center"><a><%= profesor[2][i]%></a></td>
+                                <td align="center"><a><%= profesor[3][i]%></a></td>
+                                <td align="center"><a><%= profesor[4][i]%></a></td>
+                             
+                                <td align="center"> 
+                                    <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getId(this, 'ver')">
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>
+
+                                <br>
+                                <br>
+                              
+                                <br>
+                                <br>
+                        </tbody>
+                    </table>
+                </div>
+            </center>
+        </div>
+    </center>
+                            
+                            
+                            <center>
+                                <div id="Insertardocente" style="display: none">
+                                    <form id="estudiante" action="insertardocente" method="post">
+                                        <center>
+                                            <h1>Insertar nuevo docente</h1>
+                                            <br>
+                                            <br>
+                                            <label>Identificacion: </label> 
+                                            <input id="Id-docente" type="text" name="Id-docente" onclick="valueOf('')" onkeypress="return SoloN(event)" minlength="10" maxlength=11 placeholder="Tarjeta de identidad" required="">  
+                                            <br>
+                                            <br>
+                                            <label>Nombre: </label><input id="Nombre" type="text" name="Nombre" onclick="valueOf('')"  placeholder="Nombres">   
+                                            <br>
+                                            <br>
+                                            <label>Apellido: </label><input id="Apellido" type="text" name="Apellido" onclick="valueOf('')" placeholder="Apellidos">   
+                                            <br>
+                                            <br>
+                                            <label>Telefono: </label><input id="Telefono" type="text" name="Telefono" onclick="valueOf('')"  onkeypress="return SoloN(event)" maxlength="7" placeholder="Telefono de la residencia">   
+                                            <br>
+                                            <br>
+                                            <label>Celular: </label><input id="celular" type="text" name="Celular" onclick="valueOf('')"  maxlength="10"  onkeypress="return SoloN(event)" >   
+                                            <br>
+                                            <br>
+                                            <label>Correro electronico:</label><input id="email" type="email" name="email">
+                                            <br>
+                                            <br>
+                                            <input type="submit" id="submit" value="Registrar">
+                                        </center>
+                                    </form>
+                                </div>
+                            </center>
+            
+<!--  finde codigo para docentes -->
 
 
 </html>

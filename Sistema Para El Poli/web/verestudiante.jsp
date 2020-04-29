@@ -11,7 +11,7 @@
             String Datos_estudiante[][] = Con.Datos_estudiante(Identificaion);
         %>
         <title> <%= Nombre_estudiante%></title>
-                <link rel="stylesheet" type="text/css" media="screen" href="css/Tabla_usuarios.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/verestudiantes.css">
 
     </head>
     <body>
@@ -21,16 +21,6 @@
         </a>
     </center>
     
-    <script>
-           fetch('Registros/Estudiantes/carlos/Informacion_del_estudiante.txt')
-  .then(res => res.text())
-  .then(content => {
-    let lines = content.split(/\n/); 
-    lines.forEach(line => console.log(line));
-  });
-
-    </script>
-
     <div>
         <center>
             <a href="javascript:history.back()"><img src="imagenes/regreso.png" alt="Atras"></a>
@@ -94,10 +84,6 @@
     <%
             j++;
         }
-    %>
-
-    <%
-        int count = Con.Numero_matriculas(Identificaion);//Numero de matriculas realizadas para mostrar
     %>
 
 

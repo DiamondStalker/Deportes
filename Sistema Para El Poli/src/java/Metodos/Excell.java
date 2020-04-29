@@ -14,6 +14,7 @@ import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -62,33 +63,39 @@ public class Excell {
             for (int a = 1; a <= numFilas; a++) {//Extraemos las filas
                 //Capturamos la fila
                 Row fila = sheet.getRow(a);
+                Cell celda = fila.getCell(21);
 
                 String Identificacion_estudiante = fila.getCell(0).toString();
                 String Nombre = fila.getCell(1).toString();
                 String Apellido = fila.getCell(2).toString();
                 String Fecha_nacimiento = fila.getCell(3).toString();
                 String Deporte = fila.getCell(4).toString();
-                String Id_tutuor = fila.getCell(5).toString();
-                String Parentesco = fila.getCell(6).toString();
-                String Nombre_tutor = fila.getCell(7).toString();
-                String Apellido_tutor = fila.getCell(8).toString();
-                String Telefono_tutor = fila.getCell(9).toString();
-                String Celular_tutor = fila.getCell(10).toString();
-                String Direccion_tutor = fila.getCell(11).toString();
-                String Pregunta_tutor_2 = fila.getCell(12).toString();
-
+                String Horario=fila.getCell(5).toString();
+                String Id_tutuor = fila.getCell(6).toString();
+                String Parentesco = fila.getCell(7).toString();
+                String Nombre_tutor = fila.getCell(8).toString();
+                String Apellido_tutor = fila.getCell(9).toString();
+                String Telefono_tutor = fila.getCell(10).toString();
+                String Celular_tutor = fila.getCell(11).toString();
+                String Direccion_tutor = fila.getCell(12).toString();
+                String Pregunta_tutor_2 = fila.getCell(13).toString();
+                String Categoria = String.valueOf(celda.getNumericCellValue());
+                
+                String[] arrOfStr = Categoria.split("[.]+");  //Creamos un split, de cuando encuentre uno de esos caracteres los separe
+                System.out.println(arrOfStr[0]); 
+                
                 Conectar Con = new Conectar();
 
                 int i = Con.Ver_estudiante(Identificacion_estudiante);
                 if (i == 1) { //Preguntamos si el estudiane ya tiene una matricula previa, en caso de ser afirmativa esta pregunta, procederemos sola mente a ingresar la matricula
-                    Con.matricularCurso(Fecha_nacimiento, Deporte, Identificacion_estudiante);
+                    Con.matricularCurso(arrOfStr[0], Deporte, Identificacion_estudiante,Horario);
                 } else {
 
                     int Matricula = Con.matricular(Identificacion_estudiante, Nombre, Apellido, Fecha_nacimiento);
                     int Persona = Con.persona(Id_tutuor, Nombre_tutor, Apellido_tutor, Telefono_tutor, Celular_tutor);
                     int Tutor = Con.tutor(Parentesco, Id_tutuor, Direccion_tutor);
                     int Estudiante_tutor = Con.estudianteTutor(Identificacion_estudiante, Id_tutuor);
-                    int Matricularcurso = Con.matricularCurso(Fecha_nacimiento, Deporte, Identificacion_estudiante);
+                    int Matricularcurso = Con.matricularCurso(arrOfStr[0], Deporte, Identificacion_estudiante,Horario);//estudiante-deporte-horario-categoria
                     
 
                     /*
@@ -107,13 +114,13 @@ public class Excell {
                     }
 
                     if (Pregunta_tutor_2.equalsIgnoreCase("Si")) {
-                        String Id_tutuor_2 = fila.getCell(13).toString();
-                        String Parentesco_2 = fila.getCell(14).toString();
-                        String Nombre_tutor_2 = fila.getCell(15).toString();
-                        String Apellido_tutor_2 = fila.getCell(16).toString();
-                        String Telefono_tutor_2 = fila.getCell(17).toString();
-                        String Celular_tutor_2 = fila.getCell(18).toString();
-                        String Direccion_tutor_2 = fila.getCell(19).toString();
+                        String Id_tutuor_2 = fila.getCell(14).toString();
+                        String Parentesco_2 = fila.getCell(15).toString();
+                        String Nombre_tutor_2 = fila.getCell(16).toString();
+                        String Apellido_tutor_2 = fila.getCell(17).toString();
+                        String Telefono_tutor_2 = fila.getCell(18).toString();
+                        String Celular_tutor_2 = fila.getCell(19).toString();
+                        String Direccion_tutor_2 = fila.getCell(20).toString();
 
                         int Persona_2 = Con.persona(Id_tutuor_2, Nombre_tutor_2, Apellido_tutor_2, Telefono_tutor_2, Celular_tutor_2);
                         int Tutor_2 = Con.tutor(Parentesco_2, Id_tutuor_2, Direccion_tutor_2);

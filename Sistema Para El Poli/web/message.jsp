@@ -15,8 +15,9 @@
     </body>
      <script>
             function myFunction() {
-                alert("${requestScope.message});
-                window.close();
+               alert("${requestScope.message}");
+            window.opener.location.reload();//Actualizamos la pagina que abrio una nueva venta "Esta"
+            window.close();//Cerrarmos la venta que se abrio "Esta"
             }
         </script>
 </html>

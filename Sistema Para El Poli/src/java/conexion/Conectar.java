@@ -370,7 +370,7 @@ public class Conectar {
         try {
 
             Connection cn = conexion();
-            PreparedStatement rs = cn.prepareStatement("INSERT INTO persoan"
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO persona"
                     + "(id,nombre,apellido,telefono,celular)"
                     + "VALUES (?,?,?,?,?)");
 
@@ -570,21 +570,20 @@ public class Conectar {
 
             Connection cn = conexion();
 
-            PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.id, estudiante.nombre, matricula.codigo_matricula,deporte.nombre "
+            PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.id, estudiante.nombre, "
+                    + "matricula.codigo_matricula,"
+                    + "deporte.nombre as Nombre_deporte "
                     + "from estudiante "
                     + "INNER JOIN matricula ON estudiante.id = matricula.id "
-                    + "INNER JOIN deporte_categoria_horario ON matricula.codigo_relacion = deporte_categoria_horario.codigo_relacion"
-                    + "INNER JOIN deporte on deporte_categoria_horario.codigo_deporte1=deporte.codigo_deporte");
-            //Se crea un objeto donde se almacena el resultado
-            //Y con el comando executeQuery se ejecuta la consulta en la base de datos
+                    + "INNER JOIN deporte_categoria_horario ON matricula.codigo_relacion = deporte_categoria_horario.codigo_relacion "
+                    + "INNER JOIN deporte on deporte_categoria_horario.codigo_deporte=deporte.codigo_deporte");
             ResultSet res = pstm.executeQuery();
-            //Recorre el resultado para mostrarlo en los jtf
             int i = 0;
             while (res.next()) {
-                datos[0][i] = (res.getString("id"));
-                datos[1][i] = (res.getString("nombre"));
-                datos[2][i] = (res.getString("codigo_matricula"));
-                datos[3][i] = (res.getString("nombre"));
+                datos[0][i] = res.getString("id");
+                datos[1][i] = res.getString("nombre");
+                datos[2][i] = res.getString("codigo_matricula");
+                datos[3][i] = res.getString("Nombre_deporte");
                 i++;
             }
             res.close();
@@ -700,12 +699,12 @@ public class Conectar {
             Connection cn = conexion();
 
             PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.*,"
-                    + "persoan.id AS Identificaciont,persoan.nombre AS Nombret,persoan.apellido AS ApellidoT,persoan.telefono,persoan.celular,"
+                    + "persona.id AS Identificaciont,persona.nombre AS Nombret,persona.apellido AS ApellidoT,persona.telefono,persona.celular,"
                     + "tutor.direccion,tutor.parentesco "
                     + "FROM `estudiante` "
                     + "INNER JOIN estudiante_tutor ON estudiante.id = estudiante_tutor.estudiante_id "
                     + "INNER JOIN tutor ON estudiante_tutor.tutor_id = tutor.id "
-                    + "INNER JOIN persoan ON tutor.id = persoan.id "
+                    + "INNER JOIN persona ON tutor.id = persona.id "
                     + "WHERE estudiante.id ='" + id + "'");
             //Se crea un objeto donde se almacena el resultado
             //Y con el comando executeQuery se ejecuta la consulta en la base de datos
@@ -1227,5 +1226,189 @@ public class Conectar {
         }
         return Count;
     }
+    
+    public int matricularCurso(String Fecha_nacimiento, String Deporte, String Identificacion_estudiante, String Horario) {
+        int bueno = 0;
+        String Codigo = "";
+        Random rm = new Random();
+        for (int i = 0; i < 5; i++) {
+            Codigo += rm.nextInt(10);
+        }
 
+        String Codigo_relacion = Codigo_relacion(Fecha_nacimiento, Deporte, Horario);
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO matricula"
+                    + "(codigo_matricula,id,codigo_relacion)"
+                    + "VALUES (?,?,?)");
+
+            rs.setString(1, Codigo);
+            rs.setString(2, Identificacion_estudiante);
+            rs.setString(3, Codigo_relacion);
+
+            rs.executeUpdate();
+            bueno = 1;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return bueno;
+    }
+
+    public String Codigo_relacion(String Fecha, String Deporte, String Horario) {
+        String Codigo_relacion = "";
+        int categoria = 0;
+
+        int valor = 0;
+        try {
+            Integer.parseInt(Fecha);
+        } catch (Exception e) {
+            valor = 1;
+        }
+
+        if (valor == 1) {//No es un numero entonces procedemos a  calcular la edad
+            Fechas f = new Fechas();
+            categoria = f.calcularCategoria(Fecha);
+        } else {
+            categoria = Integer.parseInt(Fecha);
+        }
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT codigo_relacion"
+                    + " FROM deporte_categoria_horario"
+                    + " WHERE codigo_categoria='c" + categoria + "' AND codigo_horario='" + Codigo_horario(Horario) + "' AND codigo_deporte='" + Codigo_deporte(Deporte) + "'");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                Codigo_relacion = res.getString("descripcion_horario");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return Codigo_relacion;
+    }
+
+    public int Existe_entrenador(String Identtificaion_profesor) {
+        int Count = 0;
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*)"
+                    + " FROM entrenador"
+                    + " WHERE id= ' " + Identtificaion_profesor + "'");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                Count = res.getInt("COUNT(*)");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return Count;
+    }
+
+    public void Insertar_clase(String Identtificaion_profesor, String Codigo_relacion) {
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO clase"
+                    + "(codigo_relacion,id)"
+                    + "VALUES (?,?)");
+
+            rs.setString(1, Codigo_relacion);
+            rs.setString(2, Identtificaion_profesor);
+
+            rs.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public int Cuantos_profesores() {
+        int Count = 0;
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*)"
+                    + " FROM entrenador");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                Count = res.getInt("COUNT(*)");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return Count;
+    }
+
+    public String[][] Profesores() {
+        String datos[][] = new String[5][Cuantos_profesores()];
+
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT persona.id,persona.nombre,persona.apellido,persona.telefono,persona.celular "
+                    + "FROM persona "
+                    + "INNER JOIN entrenador on entrenador.id = persona.id");
+            ResultSet res = pstm.executeQuery();
+            int i = 0;
+            while (res.next()) {
+                datos[0][i] = res.getString("id");
+                datos[1][i] = res.getString("nombre");
+                datos[2][i] = res.getString("apellido");
+                datos[3][i] = res.getString("telefono");
+                datos[4][i] = res.getString("celular");
+                i++;
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        return datos;
+    }
+    
+    public boolean Insertar_docente(String Identificaion){
+         try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO entrenador"
+                    + "(id)"
+                    + "VALUES (?)");
+
+            rs.setString(1, Identificaion);
+
+            rs.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return false;
+        }
+    }
+    
+    public boolean Insertar_usuario(String Email, String clave){
+         try {
+
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO usuario"
+                    + "(e_mail,clave,tipo_usuario)"
+                    + "VALUES (?,?,?)");
+
+            rs.setString(1, Email);
+            rs.setString(2, clave);
+            rs.setInt(3, 0);//cero para los docentes
+
+            rs.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return false;
+        }
+    }
 }
