@@ -59,7 +59,7 @@ public class Loggin extends HttpServlet {
                             
                             out.println(MensajesErrores.administrador);
                         } else {//Usuario
-                            MensajesErrores.setDecente(correo);
+                            MensajesErrores.setDocente(correo);
                              out.println(MensajesErrores.usuario);
                             
                         }

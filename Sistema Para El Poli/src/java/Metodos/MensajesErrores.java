@@ -11,16 +11,6 @@ package Metodos;
  */
 public class MensajesErrores {
     
-      public static String Docente="";
-
-    public static String getDecente() {
-        return Docente;
-    }
-
-    public static void setDecente(String Decente) {
-        MensajesErrores.Docente = Docente;
-    }
-    
     public static String Eldeporteexiste = "</html> "
             + "<!DOCTYPE html>\n"
             + "<html>\n"
@@ -280,7 +270,11 @@ public class MensajesErrores {
                                     + "</body>\n"
                                     + "</html> ";
     
-    public static String usuario="<!DOCTYPE html>\n <html>\n <body onload=\"location.href='docente.jsp?correo='"+getDecente()+"\"></body>\n </html> ";
+    public static String usuario="<!DOCTYPE html>\n"
+                                    + "<html>\n"
+                                    + "<body onload=\"location.href='docente.jsp'\">"
+                                    + "</body>\n"
+                                    + "</html> ";
     
      public static String Estudiante_no_existe = "</html> "
             + "<!DOCTYPE html>\n"
@@ -297,4 +291,14 @@ public class MensajesErrores {
             + "</script>\n"
             + "\n"
             + "</body>\n";
+     
+     private static String Docente;
+
+    public static String getDocente() {
+        return Docente;
+    }
+
+    public static void setDocente(String Docente) {
+        MensajesErrores.Docente = Docente;
+    }
 }
