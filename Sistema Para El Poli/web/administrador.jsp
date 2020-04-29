@@ -607,8 +607,6 @@
                             <td align="center"><a><%= Deportes[1][j]%></a></td>
                             <td align="center"> 
                                 <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getIdDeportes(this, 'ver')">
-                                <img style="" src="imagenes/editar.png" width="30" height="30" onclick="getIdDeportes(this, 'editar')">
-                                <img style="" src="imagenes/basura.png" width="30" height="30" onclick="getIdDeportes(this, 'eliminar')">
                             </td>
                         </tr>
                         <%

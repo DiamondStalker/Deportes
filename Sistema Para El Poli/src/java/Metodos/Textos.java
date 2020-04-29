@@ -235,7 +235,6 @@ public class Textos {
                     break;
                 }
             }
-            String Direccion = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "\\" + Categoria;
             FileWriter escritorArchivo;
             escritorArchivo = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(escritorArchivo);
@@ -257,7 +256,7 @@ public class Textos {
         File f;
         FileReader lectorArchivo;
         try {
-            f = new File("C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "categorias.txt");
+            f = new File("C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "\\categorias.txt");
             lectorArchivo = new FileReader(f);
             BufferedReader br = new BufferedReader(lectorArchivo);
             String l = "";
@@ -270,7 +269,6 @@ public class Textos {
                     break;
                 }
             }
-            String Direccion = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "categorias.txt";
             FileWriter escritorArchivo;
             escritorArchivo = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(escritorArchivo);

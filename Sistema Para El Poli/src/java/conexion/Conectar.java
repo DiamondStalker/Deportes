@@ -1420,12 +1420,13 @@ public class Conectar {
 
             Connection cn = conexion();
             PreparedStatement rs = cn.prepareStatement("INSERT INTO usuario"
-                    + "(e_mail,clave,tipo_usuario)"
-                    + "VALUES (?,?,?)");
+                    + "(e_mail,clave,tipo_usuario,cambio_contraseña)"
+                    + "VALUES (?,?,?,?)");
 
             rs.setString(1, Email);
             rs.setString(2, clave);
             rs.setInt(3, 0);//cero para los docentes
+            rs.setInt(4, 1);
 
             rs.executeUpdate();
             return true;
