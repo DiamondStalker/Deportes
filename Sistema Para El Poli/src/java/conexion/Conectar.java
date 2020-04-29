@@ -219,7 +219,7 @@ public class Conectar {
 
             Connection cn = conexion();
 
-            PreparedStatement pstm = cn.prepareStatement(" SELECT count(*)"
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*)"
                     + " FROM estudiante"
                     + " WHERE id = '" + Id_estudiante + "'");
             //Se crea un objeto donde se almacena el resultado
@@ -228,7 +228,7 @@ public class Conectar {
             //Recorre el resultado para mostrarlo en los jtf
             while (res.next()) {
                 //jTF_identificacion.setText(res.getString( "id_persona" ));
-                i = (res.getInt("count(*)"));
+                i = (res.getInt("COUNT(*)"));
             }
             res.close();
 
@@ -407,7 +407,7 @@ public class Conectar {
 
             Connection cn = conexion();
             PreparedStatement rs = cn.prepareStatement("INSERT INTO matricula"
-                    + "(codigo,estudiante_id)"
+                    + "(codigo_matricula,estudiante_id)"
                     + "VALUES (?,?)");
 
             rs.setString(1, codigo);
@@ -606,9 +606,9 @@ public class Conectar {
 
             Connection cn = conexion();
 
-            PreparedStatement pstm = cn.prepareStatement(" SELECT Count(*) "
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*) "
                     + " FROM matricula  "
-                    + " WHERE estudiante_id = '" + id + "'");
+                    + " WHERE id = '" + id + "'");
             //Recorre el resultado para mostrarlo en los jtf
             try ( //Se crea un objeto donde se almacena el resultado
                     //Y con el comando executeQuery se ejecuta la consulta en la base de datos
@@ -616,7 +616,7 @@ public class Conectar {
                 //Recorre el resultado para mostrarlo en los jtf
                 while (res.next()) {
                     //jTF_identificacion.setText(res.getString( "id_persona" ));
-                    Count = (res.getInt("Count(*)"));
+                    Count = (res.getInt("COUNT(*)"));
 
                 }
 //            JOptionPane.showMessageDialog(null, count);
@@ -1234,7 +1234,7 @@ public class Conectar {
         for (int i = 0; i < 5; i++) {
             Codigo += rm.nextInt(10);
         }
-
+        
         String Codigo_relacion = Codigo_relacion(Fecha_nacimiento, Deporte, Horario);
         try {
 
@@ -1272,15 +1272,16 @@ public class Conectar {
         } else {
             categoria = Integer.parseInt(Fecha);
         }
+        
         try {
 
             Connection cn = conexion();
             PreparedStatement pstm = cn.prepareStatement(" SELECT codigo_relacion"
                     + " FROM deporte_categoria_horario"
-                    + " WHERE codigo_categoria='c" + categoria + "' AND codigo_horario='" + Codigo_horario(Horario) + "' AND codigo_deporte='" + Codigo_deporte(Deporte) + "'");
+                    + " WHERE codigo_categoria='" + Codigo_categoria("Sub"+categoria) + "' AND codigo_horario='" + Codigo_horario(Horario) + "' AND codigo_deporte='" + Codigo_deporte(Deporte) + "'");
             ResultSet res = pstm.executeQuery();
             while (res.next()) {
-                Codigo_relacion = res.getString("descripcion_horario");
+                Codigo_relacion = res.getString("codigo_relacion");
             }
             res.close();
 
@@ -1289,15 +1290,37 @@ public class Conectar {
         }
         return Codigo_relacion;
     }
+    public String Codigo_relacion2(String categoria, String Deporte, String Horario) {
+        String Codigo_relacion = "";
+
+        
+        try {
+
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT codigo_relacion"
+                    + " FROM deporte_categoria_horario"
+                    + " WHERE codigo_categoria='" + Codigo_categoria(categoria) + "' AND codigo_horario='" + Codigo_horario(Horario) + "' AND codigo_deporte='" + Codigo_deporte(Deporte) + "'");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                Codigo_relacion = res.getString("codigo_relacion");
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return Codigo_relacion;
+    }
+    
 
     public int Existe_entrenador(String Identtificaion_profesor) {
         int Count = 0;
         try {
 
             Connection cn = conexion();
-            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*)"
-                    + " FROM entrenador"
-                    + " WHERE id= ' " + Identtificaion_profesor + "'");
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*) "
+                    + "FROM `entrenador`"
+                    + " WHERE id='"+Identtificaion_profesor+"'");
             ResultSet res = pstm.executeQuery();
             while (res.next()) {
                 Count = res.getInt("COUNT(*)");

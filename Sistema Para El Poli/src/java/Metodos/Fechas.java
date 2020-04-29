@@ -47,7 +47,8 @@ public class Fechas {
             calendar.add(Calendar.YEAR, -Integer.parseInt(annio)); //HAcemso una resta de años para luego poder calcular a la categoria a la que pertenece el 
             
             
-            Categoria = calendar.getWeekYear()*-1;//La multiplicamos por menos 1 para que quede positiva y este valor es el que devolvemos
+            Categoria = (calendar.getWeekYear()*-1)+1;//La multiplicamos por menos 1 para que quede positiva y este valor es el que devolvemos
+            
             
             JOptionPane.showMessageDialog(null,"La categoria es"+ Categoria);
             

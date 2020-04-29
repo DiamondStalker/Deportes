@@ -24,7 +24,7 @@ public class Textos {
      */
     public void Crear_registro_estudiante(String Id_estudiante, String Nombre_estudiante, String Apellido_estudiante, String Fecha_nacimiento) {
 
-        String crear = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\" + Nombre_estudiante;
+        String crear = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\" + Nombre_estudiante;
         File c = new File(crear);
         c.mkdirs();
         File f;
@@ -62,7 +62,7 @@ public class Textos {
 
     public void añadir_acudiente(String Nombre_estudiante, String Texto_añadir) {
 
-        String crear = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\" + Nombre_estudiante;
+        String crear = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\" + Nombre_estudiante;
         File c = new File(crear);
         c.mkdirs();
         File f;
@@ -101,7 +101,7 @@ public class Textos {
         File f;
         FileReader lectorArchivo;
         try {
-            f = new File("C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\" + nombre + "\\Informacion_del_estudiante.txt");
+            f = new File("C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Estudiantes\\" + nombre + "\\Informacion_del_estudiante.txt");
             lectorArchivo = new FileReader(f);
             BufferedReader br = new BufferedReader(lectorArchivo);
             String l = "";
@@ -157,7 +157,7 @@ public class Textos {
      * Creacion, lectrura y concatenacion para los registros de los Deporte_categoria_hora  
      */
     public void Crear_carpeta_deporte(String Nombre_deportes) {
-        String crear = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes;
+        String crear = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes;
         File c = new File(crear);
         c.mkdirs();
         File f;
@@ -176,7 +176,7 @@ public class Textos {
     }
 
     public void Crear_carpeta_deporte_categoria(String Nombre_deportes, String categoria, String hora) {
-        String crear = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes + "\\" + categoria;
+        String crear = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes + "\\" + categoria;
         File c = new File(crear);
         c.mkdirs();
         File f;
@@ -196,12 +196,34 @@ public class Textos {
         } catch (Exception e) {
         }
     }
+    
+    public void Crear_archivo_categorias(String Nombre_deportes) {
+        String crear = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes;
+        File c = new File(crear);
+        c.mkdirs();
+        File f;
+        FileWriter escritorArchivo;
+
+        try {
+            f = new File(crear + "\\Categorias.txt");
+            escritorArchivo = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(escritorArchivo);
+            PrintWriter salida = new PrintWriter(bw);
+
+            salida.write("");
+
+            salida.close();
+            bw.close();
+
+        } catch (Exception e) {
+        }
+    }
 
     public void Concatener_informacion_horario(String Deporte, String Categoria, String Horario) {
         File f;
         FileReader lectorArchivo;
         try {
-            f = new File("C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "\\" + Categoria + "\\Informacion.txt");
+            f = new File("C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "\\" + Categoria + "\\Informacion.txt");
             lectorArchivo = new FileReader(f);
             BufferedReader br = new BufferedReader(lectorArchivo);
             String l = "";
@@ -214,13 +236,48 @@ public class Textos {
                     break;
                 }
             }
-            String Direccion = "C:\\Users\\user\\Desktop\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "\\" + Categoria;
+            String Direccion = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "\\" + Categoria;
             FileWriter escritorArchivo;
             escritorArchivo = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(escritorArchivo);
             PrintWriter salida = new PrintWriter(bw);
 
             salida.write(l+Horario);
+
+            salida.close();
+            bw.close();
+            
+            br.close();
+            lectorArchivo.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
+    public void Concatener_categorias(String Deporte, String Categoria) {
+        File f;
+        FileReader lectorArchivo;
+        try {
+            f = new File("C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "Categorias.txt");
+            lectorArchivo = new FileReader(f);
+            BufferedReader br = new BufferedReader(lectorArchivo);
+            String l = "";
+            String aux = "";
+            while (true) {
+                aux = br.readLine();
+                if (aux != null) {
+                    l = l + aux + "\n";
+                } else {
+                    break;
+                }
+            }
+            String Direccion = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "Categorias.txt";
+            FileWriter escritorArchivo;
+            escritorArchivo = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(escritorArchivo);
+            PrintWriter salida = new PrintWriter(bw);
+
+            salida.write(l+Categoria);
 
             salida.close();
             bw.close();

@@ -56,6 +56,7 @@ public class deporte extends HttpServlet {
                 Con.Insertar_deporte(Codigo,Nombre_deportes);
                 Textos txt = new Textos();
                 txt.Crear_carpeta_deporte(Nombre_deportes);//Creamos la carpeta del nuevo deporte
+                txt.Crear_archivo_categorias(Nombre_deportes);
                 out.println(MensajesErrores.Nuevo_deporte);
             }else{
                 out.println(MensajesErrores.Eldeporteexiste);

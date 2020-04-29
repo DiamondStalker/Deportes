@@ -43,16 +43,16 @@ public class profesordeporte extends HttpServlet {
         
         Conectar Con = new Conectar();
         int Existe =Con.Existe_entrenador(Identtificaion_profesor);
-        if( Existe!= 0){
+        if( Existe == 0){
+            out.println(MensajesErrores.Noexisteentrenador);
+        }else{//El entrenador no existe
             String Deporte = request.getParameter("Sdeporte");
             String Categoria = request.getParameter("Categorias");
             String Horario = request.getParameter("hora");
             
-            String Codigo_relacion = Con.Codigo_relacion(Horario, Deporte, Categoria);
+            String Codigo_relacion= Con.Codigo_relacion2(Categoria, Deporte, Horario);
             Con.Insertar_clase(Identtificaion_profesor,Codigo_relacion);
             out.println(MensajesErrores.Correcto);
-        }else{//El entrenador no existe
-            out.println(MensajesErrores.Noexisteentrenador);
         }
         }
     }

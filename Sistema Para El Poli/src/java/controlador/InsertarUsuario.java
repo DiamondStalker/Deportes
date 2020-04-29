@@ -41,7 +41,7 @@ public class InsertarUsuario extends HttpServlet {
             String appPath = request.getServletContext().getRealPath("");
 
             String Sdeporte = request.getParameter("Sdeporte");
-            String horario = request.getParameter("horario");
+            String horario = request.getParameter("Horario");
 
             Textos txt = new Textos();
             Textos.Direccion_archivo = appPath;
@@ -65,7 +65,7 @@ public class InsertarUsuario extends HttpServlet {
                  *
                  */
                 if (i == 1) {
-                    con.matricularCurso(Fechan, Sdeporte, Ides);
+                    con.matricularCurso(Fechan, Sdeporte, Ides,horario);
                     out.println(MensajesErrores.Correcto);
                 } else {
 
@@ -127,7 +127,7 @@ public class InsertarUsuario extends HttpServlet {
                                         int persona2 = con.persona(idacu12, NAcudiente2, aAcudiente2, Telefono2, celular2);
                                         int tutor2 = con.tutor(Seleccione_parentesco2, idacu12, Direccion2);
                                         int estudiante_tutor2 = con.estudianteTutor(Ides, idacu12);
-                                        con.matricularCurso(Fechan, Sdeporte, Ides);
+                                        con.matricularCurso(Fechan, Sdeporte, AAcudiente, horario);
 
                                         if (matricula != 0 && tutor != 0
                                                 && estudiante_tutor != 0 && tutor2 != 0 && estudiante_tutor2 != 0) {
@@ -149,13 +149,12 @@ public class InsertarUsuario extends HttpServlet {
                                 }
                             } else {// No se escojio la opcion De segundo acudiente
 
-                                con.Estudiante_prematriculado(Ides);
 
                                 int matricula = con.matricular(Ides, Nes, Aes, Fechan);
                                 int persona = con.persona(idacu1, NAcudiente, AAcudiente, Telefono, celular);
                                 int tutor = con.tutor(Seleccione_parentesco, idacu1, Direccion);
                                 int estudiante_tutor = con.estudianteTutor(Ides, idacu1);
-                                con.matricularCurso(Fechan, Sdeporte, Ides);
+                                con.matricularCurso(Fechan, Sdeporte, Ides, horario);
 
                                 if (matricula != 0 && persona != 0 && tutor != 0 && estudiante_tutor != 0) {
                                     out.println(MensajesErrores.Correcto);
