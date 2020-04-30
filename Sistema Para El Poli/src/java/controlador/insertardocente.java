@@ -63,7 +63,7 @@ public class insertardocente extends HttpServlet {
                     Codigo += rm.nextInt(10);
                 }
                 msg.mandarVerificacion(Codigo,Correo );
-                Con.Insertar_usuario(Correo,Codigo);
+                Con.Insertar_usuario(Correo,Codigo,Id_docente);
                 out.println(MensajesErrores.Correcto);
             }
 
