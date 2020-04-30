@@ -151,7 +151,7 @@
                         <tbody>
                             <%
                                 String horario[][] = Con.Horarios_docente(Identificaion_docente);
-                                for (int i = 0; i < Con.Cuantos_horarios_docente(Identificaion_docente); i++) {
+                                for (int i = 0; i < Con.Cuantos_horarios_docente(Identificaion_docente);i++) {
                             %>
                             <tr>    
                                 <td align="center"><a><%= horario[0][i]%></a></td>
