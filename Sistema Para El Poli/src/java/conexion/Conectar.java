@@ -39,7 +39,17 @@ public class Conectar {
     Connection Conect = null;
 
     private static String correoF = "";
+    
+    private static String Codigo_relacion="";
 
+    public static String getCodigo_relacion() {
+        return Codigo_relacion;
+    }
+
+    public static void setCodigo_relacion(String Codigo_relacion) {
+        Conectar.Codigo_relacion = Codigo_relacion;
+    }
+    
     public static InputStream img;
 
     public static String codigo = "";
@@ -1474,11 +1484,7 @@ public class Conectar {
         }
         return  Nombre;
     }
-    /*SELECT deporte.nombre,categoria.descripcion_categoria,horario.descripcion_horario FROM  clase  INNER JOIN deporte_categoria_horario on clase.codigo_relacion = deporte_categoria_horario.codigo_relacion
-INNER JOIN categoria on deporte_categoria_horario.codigo_categoria = categoria.codigo_categoria
-INNER JOIN deporte on deporte_categoria_horario.codigo_deporte=deporte.codigo_deporte
-inner JOIN horario on deporte_categoria_horario.codigo_horario=horario.codigo_horario
-WHERE clase.id='33333333412'*/
+    
     public String[][] Horarios_docente(String Identificacion_docente){
         String datos[][] = new String[4][Cuantos_horarios_docente(Identificacion_docente)];
         
@@ -1523,5 +1529,115 @@ WHERE clase.id='33333333412'*/
         } catch (Exception e) {
         }
         return Count;
+    }
+    
+    public String[][] Clase_estudiante(String Codigo_relacion){
+        String datos[][] = new String[3][Cuantos_en_la_clase(Codigo_relacion)];
+        
+        try {
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.id, estudiante.nombre,estudiante.apellido "
+                    + "FROM estudiante "
+                    + "INNER JOIN matricula ON matricula.id=estudiante.id "
+                    + "WHERE matricula.codigo_relacion='" + Codigo_relacion + "'");
+            ResultSet res = pstm.executeQuery();
+            int i=0;
+            while(res.next()){
+                datos[0][i]=res.getString("id");
+                datos[1][i]=res.getString("nombre");
+                datos[2][i]=res.getString("apellido");
+                i++;
+            }
+        } catch (Exception e) {
+        }
+        
+        return datos;
+    }
+    
+    public int Cuantos_en_la_clase(String Codigo_relacion){
+        int Count = 0;
+        try {
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT COUNT(*) "
+                    + "FROM matricula "
+                    + "WHERE codigo_relacion='" + Codigo_relacion + "'");
+            ResultSet res = pstm.executeQuery();
+            while(res.next()){
+                Count = res.getInt("COUNT(*)");
+            }
+        } catch (Exception e) {
+        }
+        return Count;
+    }
+    
+    public boolean Insertar_seguimiento(String Id_estudiante,String Codigor,String Cumplimiento,String Descripcion){
+        String Coidgo_matricula = Codigo_matricula(Id_estudiante,Codigor);
+        String Codigo = "";
+        Random rm = new Random();
+        for (int i = 0; i < 5; i++) {
+            Codigo += rm.nextInt(10);
+        }
+        try {
+             Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("INSERT INTO seguimiento"
+                    + "(codigo,cumplimiento,descripcion,codigo_matricula)"
+                    + "VALUES (?,?,?,?)");
+
+            rs.setString(1, Codigo);
+            rs.setString(2, Cumplimiento);
+            rs.setString(3, Descripcion);
+            rs.setString(4, Codigor);
+
+            rs.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public String Codigo_matricula(String Id_estudiante,String Codigor){
+        String matricula="";
+         try {
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT codigo_matricula "
+                    + "FROM matricula "
+                    + "WHERE id='" + Id_estudiante + "' AND codigo_relacion='"+Codigor+"'");
+            ResultSet res = pstm.executeQuery();
+            while(res.next()){
+                matricula = res.getString("codigo_matricula");
+            }
+        } catch (Exception e) {
+        }
+        return matricula;
+    }
+    
+    public int Cambio_clave(String Id_docente){//Preguntamos si ya cambio una vez la clave
+        int i=0;
+         try {
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT cambio_contraseña "
+                    + "FROM usuario "
+                    + "WHERE id='" + Id_docente +"'");
+            ResultSet res = pstm.executeQuery();
+            while(res.next()){
+                i = res.getInt("cambio_contraseña");
+            }
+        } catch (Exception e) {
+        }
+        return i;
+    }
+    
+    public boolean Cambiar_clave(String Nueva_clave,String Id){
+        try {
+            Connection cn = conexion();
+            PreparedStatement rs = cn.prepareStatement("UPDATE INTO usuario"
+                    + " cambio_contraseña=0,clave='"+Nueva_clave+"'"
+                    + "WHERE id='"+Id+"'");
+
+            rs.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

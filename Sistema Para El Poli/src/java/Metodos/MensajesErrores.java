@@ -11,6 +11,70 @@ package Metodos;
  */
 public class MensajesErrores {
     
+    public static String Secambioc = "</html> "
+            + "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('Se cambio la clave')\n"
+            + "    window.location.href = 'docente?id=.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n";
+    public static String Nosecambioc = "</html> "
+            + "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('No se cambio la clave')\n"
+            + "    window.location.href = 'docente?id=.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n";
+    
+    public static String Claves_diferentes = "</html> "
+            + "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('Las claves no coinciden')\n"
+            + "    window.location.href = 'docente?id=.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n";
+    
+    
+    public static String Cumplimiento = "</html> "
+            + "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('Los campo Seguimiento y/o Cumplimiento no estan llenos')\n"
+            + "    window.location.href = 'docente?id=.jsp';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n";
+    
     public static String Eldeporteexiste = "</html> "
             + "<!DOCTYPE html>\n"
             + "<html>\n"
@@ -272,7 +336,7 @@ public class MensajesErrores {
     
     public static String usuario="<!DOCTYPE html>\n"
                                     + "<html>\n"
-                                    + "<body onload=\"location.href='docente.jsp'\">"
+                                    + "<body onload=\"location.href='docente.jsp?id='\">"
                                     + "</body>\n"
                                     + "</html> ";
     
