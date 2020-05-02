@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2020 at 05:12 AM
+-- Generation Time: May 02, 2020 at 02:17 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -52,6 +52,24 @@ INSERT INTO `categoria` (`codigo_categoria`, `descripcion_categoria`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `clase`
+--
+
+CREATE TABLE `clase` (
+  `codigo_relacion` varchar(11) NOT NULL,
+  `id` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clase`
+--
+
+INSERT INTO `clase` (`codigo_relacion`, `id`) VALUES
+('89462', '33333333412');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `deporte`
 --
 
@@ -65,7 +83,11 @@ CREATE TABLE `deporte` (
 --
 
 INSERT INTO `deporte` (`codigo_deporte`, `nombre`) VALUES
-('46357', 'Futbol');
+('30405', 'Judo'),
+('32207', 'Beisbol'),
+('46357', 'Futbol'),
+('46800', 'Natacion'),
+('59719', 'Tenis');
 
 -- --------------------------------------------------------
 
@@ -85,8 +107,17 @@ CREATE TABLE `deporte_categoria_horario` (
 --
 
 INSERT INTO `deporte_categoria_horario` (`codigo_relacion`, `codigo_categoria`, `codigo_horario`, `codigo_deporte`) VALUES
+('22419', 'c8', 'cls24', '30405'),
+('25398', 'c8', 'cls68', '32207'),
+('27821', 'c10', 'cls68', '30405'),
 ('44370', 'c10', 'cls1012', '46357'),
 ('45275', 'c10', 'cls68', '46357'),
+('50263', 'c3', 'cls68', '46357'),
+('50452', 'c7', 'cls122', '59719'),
+('52582', 'c4', 'cls1012', '30405'),
+('83922', 'c7', 'cls24', '30405'),
+('88579', 'c3', 'cls68', '32207'),
+('88994', 'c3', 'cls24', '46357'),
 ('89462', 'c9', 'cls1012', '46357'),
 ('99618', 'c10', 'cls122', '46357');
 
@@ -99,6 +130,13 @@ INSERT INTO `deporte_categoria_horario` (`codigo_relacion`, `codigo_categoria`, 
 CREATE TABLE `entrenador` (
   `id` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `entrenador`
+--
+
+INSERT INTO `entrenador` (`id`) VALUES
+('33333333412');
 
 -- --------------------------------------------------------
 
@@ -121,8 +159,34 @@ CREATE TABLE `estudiante` (
   `id` varchar(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `apellido` varchar(30) NOT NULL,
-  `fecha_nacimiento` varchar(10) NOT NULL
+  `fecha_nacimiento` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `estudiante`
+--
+
+INSERT INTO `estudiante` (`id`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
+('001122', 'Diamond', 'Stalker', '12-abr-2010'),
+('1', 'nombre1', '1.0', '12-abr-2010'),
+('11', '11.0', '11.0', '12-abr-2010'),
+('12323235432', '312312123', '123231213', '2010-06-28'),
+('13', '13.0', '13.0', '12-abr-2010'),
+('15', '15.0', '15.0', '20-oct-2010'),
+('15554333333', '543333333333333333333333333333', '333333333333333333333333333', '2010-06-23'),
+('17', '17.0', '17.0', '12-abr-2010'),
+('19938438756', '321123671328697', '26347892387946', '2010-06-16'),
+('3', '3.0', '3.0', '20-oct-2010'),
+('31236654645', 'CASCASDC', 'DASDASDASD', '2010-10-14'),
+('33245523423', 'diamos', 'sad', '2010-05-14'),
+('42342342341', 'eqweqwe', 'wqeqwe', '2010-07-27'),
+('42755523423', 'EWQQQQQQQQQ', 'QQQQQQQQQQQQQQQ', '2010-06-29'),
+('434323', 'Carlos', 'Moreno', '12-abr-2010'),
+('6', '6.0', '6.0', '20-oct-2010'),
+('65555555574', 'QWEQ', 'EWQ', '2010-06-17'),
+('666261', 'das', 'da', '12-abr-2010'),
+('8', '8.0', '8.0', '20-oct-2010'),
+('89200348432', '2346782364789', '437894358706', '2010-06-21');
 
 -- --------------------------------------------------------
 
@@ -134,6 +198,21 @@ CREATE TABLE `estudiante_tutor` (
   `estudiante_id` varchar(11) NOT NULL,
   `tutor_id` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `estudiante_tutor`
+--
+
+INSERT INTO `estudiante_tutor` (`estudiante_id`, `tutor_id`) VALUES
+('12323235432', '23444444432'),
+('15554333333', '12312454653'),
+('19938438756', '45456456456'),
+('31236654645', '45452342344'),
+('33245523423', '34413667345'),
+('42342342341', '31223123121'),
+('42755523423', '56434444444'),
+('65555555574', '35445343543'),
+('89200348432', '34343434343');
 
 -- --------------------------------------------------------
 
@@ -169,6 +248,14 @@ CREATE TABLE `matricula` (
   `codigo_relacion` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `matricula`
+--
+
+INSERT INTO `matricula` (`codigo_matricula`, `id`, `codigo_relacion`) VALUES
+('78729', '19938438756', '99618'),
+('78732', '19938438756', '89462');
+
 -- --------------------------------------------------------
 
 --
@@ -182,6 +269,22 @@ CREATE TABLE `persona` (
   `telefono` varchar(10) DEFAULT NULL,
   `celular` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `persona`
+--
+
+INSERT INTO `persona` (`id`, `nombre`, `apellido`, `telefono`, `celular`) VALUES
+('12312454653', '666666666666', '66666666666666', '6666666666', '435345'),
+('23444444432', '444444444444444', '4444444444', '4444444444', '4444444444'),
+('31223123121', '123231', '213231321', '2132345345', '5345345435'),
+('33333333412', 'Duiamond', 'Stalker', '3211111', '1111111111'),
+('34343434343', '34343434343434343434', '3434343434343434343434', '3434343434', '34343434343'),
+('34413667345', 'dasdasd', 'asdasd', '4234234234', '4432342'),
+('35445343543', '435435', '3243243', '324342', '342342'),
+('45452342344', '32423', '32423423', '4324', '24'),
+('45456456456', '456546456', '645654546', '54546546', '564546'),
+('56434444444', '4322222', '22222222222', '2222222222', '22222222222');
 
 -- --------------------------------------------------------
 
@@ -208,6 +311,21 @@ CREATE TABLE `tutor` (
   `direccion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tutor`
+--
+
+INSERT INTO `tutor` (`id`, `parentesco`, `direccion`) VALUES
+('12312454653', 'Vecino', '34253454345'),
+('23444444432', 'Vecina', '4444444444444444444'),
+('31223123121', 'Vecina', '34234'),
+('34343434343', 'Vecino', '343434343434343434343434343434'),
+('34413667345', 'Vecino', '342324324324'),
+('35445343543', 'Vecino', '432342342'),
+('45452342344', 'Vecino', '2432434243243242343243'),
+('45456456456', 'Vecino', '564564654546'),
+('56434444444', 'Vecina', '2222222222222');
+
 -- --------------------------------------------------------
 
 --
@@ -217,15 +335,18 @@ CREATE TABLE `tutor` (
 CREATE TABLE `usuario` (
   `e_mail` varchar(40) NOT NULL,
   `clave` varchar(30) NOT NULL,
-  `tipo_usuario` decimal(10,0) NOT NULL
+  `tipo_usuario` int(1) NOT NULL,
+  `cambio_contraseña` int(1) NOT NULL,
+  `id` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `usuario`
 --
 
-INSERT INTO `usuario` (`e_mail`, `clave`, `tipo_usuario`) VALUES
-('carlos_moreno82151@elpoli.edu.co', '12344', '1');
+INSERT INTO `usuario` (`e_mail`, `clave`, `tipo_usuario`, `cambio_contraseña`, `id`) VALUES
+('carlos_moreno82151@elpoli.edu.co', '12344', 1, 0, ''),
+('cmoreno981@gmail.com', '12344', 0, 1, '33333333412');
 
 --
 -- Indexes for dumped tables
@@ -236,6 +357,13 @@ INSERT INTO `usuario` (`e_mail`, `clave`, `tipo_usuario`) VALUES
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`codigo_categoria`);
+
+--
+-- Indexes for table `clase`
+--
+ALTER TABLE `clase`
+  ADD KEY `codigo_relacion` (`codigo_relacion`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `deporte`
@@ -320,6 +448,13 @@ ALTER TABLE `usuario`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `clase`
+--
+ALTER TABLE `clase`
+  ADD CONSTRAINT `clase_ibfk_1` FOREIGN KEY (`codigo_relacion`) REFERENCES `deporte_categoria_horario` (`codigo_relacion`),
+  ADD CONSTRAINT `clase_ibfk_2` FOREIGN KEY (`id`) REFERENCES `entrenador` (`id`);
 
 --
 -- Constraints for table `deporte_categoria_horario`
