@@ -11,6 +11,23 @@ package Metodos;
  */
 public class MensajesErrores {
     
+    
+    public static String Seguimiento_correcto = "</html> "
+            + "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<body onload=\"mensaje()\">\n"
+            + "\n"
+            + "<p id=\"demo\"></p>\n"
+            + "\n"
+            + "<script>\n"
+            + "function mensaje() {\n"
+            + "    alert('Se inserto correctamente el seguimiento del estudiante')\n"
+            + "    window.location.href = 'docente.jsp?id=';  \n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body>\n";
+    
     public static String Secambioc = "</html> "
             + "<!DOCTYPE html>\n"
             + "<html>\n"
@@ -26,6 +43,7 @@ public class MensajesErrores {
             + "</script>\n"
             + "\n"
             + "</body>\n";
+    
     public static String Nosecambioc = "</html> "
             + "<!DOCTYPE html>\n"
             + "<html>\n"

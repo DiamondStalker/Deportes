@@ -1585,7 +1585,7 @@ public class Conectar {
             rs.setString(1, Codigo);
             rs.setString(2, Cumplimiento);
             rs.setString(3, Descripcion);
-            rs.setString(4, Codigor);
+            rs.setString(4, Coidgo_matricula);
 
             rs.executeUpdate();
             return true;

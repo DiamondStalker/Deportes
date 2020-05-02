@@ -158,20 +158,23 @@ public class Textos {
      */
     public void Crear_carpeta_deporte(String Nombre_deportes) {
         String crear = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes;
-        File c = new File(crear);
-        c.mkdirs();
-        File f;
-        FileWriter escritorArchivo;
+        for(int i=0;i<11;i++){
+            File c = new File(crear+"\\Sub"+(i+3));
+            c.mkdirs();
+            File f;
+            FileWriter escritorArchivo;
 
-        try {
-            f = new File(crear);
-            escritorArchivo = new FileWriter(f);
-            BufferedWriter bw = new BufferedWriter(escritorArchivo);
-            PrintWriter salida = new PrintWriter(bw);
-            salida.close();
-            bw.close();
+            try {
+                f = new File(crear+"\\Informacion.txt");
+                escritorArchivo = new FileWriter(f);
+                BufferedWriter bw = new BufferedWriter(escritorArchivo);
+                PrintWriter salida = new PrintWriter(bw);
+                salida.write("");
+                salida.close();
+                bw.close();
 
-        } catch (Exception e) {
+            } catch (Exception e) {
+            }
         }
     }
 

@@ -44,6 +44,7 @@ public class seguimiento extends HttpServlet {
             if(!Cumplimiento.isEmpty() && ! Seguimiento.isEmpty()){
                 Conectar Con = new Conectar();
                 Con.Insertar_seguimiento(Id_estudiante,Codigo_relacio,Cumplimiento,Seguimiento);
+                out.println(MensajesErrores.Seguimiento_correcto);
             }else{
                 out.println(MensajesErrores.Cumplimiento);
             }
