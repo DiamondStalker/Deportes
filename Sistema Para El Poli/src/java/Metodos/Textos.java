@@ -158,23 +158,58 @@ public class Textos {
      */
     public void Crear_carpeta_deporte(String Nombre_deportes) {
         String crear = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Nombre_deportes;
-        for(int i=0;i<11;i++){
-            File c = new File(crear+"\\Sub"+(i+3));
-            c.mkdirs();
-            File f;
-            FileWriter escritorArchivo;
+            for(int i=0;i<10;i++){
+                File c = new File(crear+"\\Sub"+(i+3));
+                c.mkdirs();
+                File f;
+                FileWriter escritorArchivo;
 
-            try {
-                f = new File(crear+"\\Informacion.txt");
-                escritorArchivo = new FileWriter(f);
-                BufferedWriter bw = new BufferedWriter(escritorArchivo);
-                PrintWriter salida = new PrintWriter(bw);
-                salida.write("");
-                salida.close();
-                bw.close();
+                try {
+                    f = new File(crear+"\\Sub"+(i+3)+"\\Informacion.txt");
+                    escritorArchivo = new FileWriter(f);
+                    BufferedWriter bw = new BufferedWriter(escritorArchivo);
+                    PrintWriter salida = new PrintWriter(bw);
+                    salida.write(" ");
+                    salida.close();
+                    bw.close();
+                    Rectificar_archivo(Nombre_deportes, "sub"+(i+3));
 
-            } catch (Exception e) {
+                } catch (Exception e) {
+                }
             }
+    }
+    
+    public void Rectificar_archivo(String Deporte, String Categoria){
+        File f;
+        FileReader lectorArchivo;
+        try {
+            f = new File("C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Deportes\\" + Deporte + "\\" + Categoria + "\\Informacion.txt");
+            lectorArchivo = new FileReader(f);
+            BufferedReader br = new BufferedReader(lectorArchivo);
+            String l = "";
+            String aux = "";
+            while (true) {
+                aux = br.readLine();
+                if (aux != null) {
+                    l = l + aux + "\n";
+                } else {
+                    break;
+                }
+            }
+            FileWriter escritorArchivo;
+            escritorArchivo = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(escritorArchivo);
+            PrintWriter salida = new PrintWriter(bw);
+
+            salida.write(" ");
+
+            salida.close();
+            bw.close();
+            
+            br.close();
+            lectorArchivo.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 

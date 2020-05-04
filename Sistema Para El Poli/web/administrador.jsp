@@ -665,7 +665,6 @@
              * "No devolvera nada"
              */
                     function myFunction(Deporte, Fehca) {
-                    alert("Input field lost focus." + Deporte + Fehca);
                             var edad = getEdad(Fehca);
                             console.log(edad);
                             fetch('Registros/Deportes/' + Deporte + '/Sub' + edad + '/Informacion.txt')
@@ -699,7 +698,7 @@
                             ) {
             edad--
             }
-            return edad + 1
+            return edad+1;
             }
 
 </script>
