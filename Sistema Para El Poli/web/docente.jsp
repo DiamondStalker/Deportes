@@ -26,7 +26,7 @@
         <div class="container section">
 
             <a href="#" class="sidenav-trigger btn-floating pulse green" data-target="menu-side">
-                <i class="material-icons">menu</i>
+                <i class="material-icons">menu</i><a class=" pulse green" style="color: white;background-color: transparent;">  Menu</a>
             </a>
 
             <ul class="sidenav" id="menu-side">
@@ -70,16 +70,6 @@
         </div>
 
 
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-        </div>
-
 
         <div class="container section">
             <div class="row">
@@ -120,13 +110,19 @@
 
                 </div>
             </div>
-
             <!-- Ver sus estudiante -->
             <%
                 if (!request.getParameter("id").isEmpty()) {
                     int id = Con.Ver_estudiante(request.getParameter("id"));
-                    switch (id) {
-                        case 0://cuando es un codigo de relacion (tabla con deporte-horario-codigo)%>
+            %>
+            <div>
+                <center>
+                    <a href="javascript:history.back()"><img src="imagenes/regreso.png" alt="Atras"></a>
+                </center>
+            </div>
+            <%
+                        switch (id) {
+                            case 0://cuando es un codigo de relacion (tabla con deporte-horario-codigo)%>
             <center>
                 <div id="estudiantes">
                     <center>
@@ -211,13 +207,18 @@
                                     <center>
                                         <br>
                                         <span class="black-text">
-                                            <h1>Identificacion:</h1>
+                                            <b>Identificacion:</b>
+                                            <br>
                                             <%= Datos_estudiante[0][0]%>
                                             <br>
-                                            <h1>Nombre:</h1>
+                                            <br>
+                                            <b>Nombre:</b>
+                                            <br>
                                             <%= Datos_estudiante[1][0]%>
                                             <br>
-                                            <h1>Apellido:  </h1>
+                                            <br>
+                                            <b>Apellido:</b>
+                                            <br>
                                             <%= Datos_estudiante[2][0]%>
                                         </span>
                                     </center>
@@ -250,25 +251,32 @@
                                                 <center>
                                                     Tutor <%=i + 1%>
                                                     <br>
-                                                    Identificacion:
+                                                    <br>
+                                                    <b>Identificacion:  </b>
                                                     <%= Datos_estudiante[4][j]%>
                                                     <br>
-                                                    Nombre:
+                                                    <br>
+                                                    <b>Nombre:  </b>
                                                     <%= Datos_estudiante[5][j]%>
                                                     <br>
-                                                    Apellido:
+                                                    <br>
+                                                    <b>Apellido:  </b>
                                                     <%= Datos_estudiante[6][j]%>
                                                     <br>
-                                                    telefono:
+                                                    <br>
+                                                    <b>telefono:  </b>
                                                     <%= Datos_estudiante[7][j]%>
                                                     <br>
-                                                    Celular:
+                                                    <br>
+                                                    <b>Celular:  </b>
                                                     <%= Datos_estudiante[8][j]%>
                                                     <br>
-                                                    Direccion:
+                                                    <br>
+                                                    <b>Direccion:  </b>
                                                     <%= Datos_estudiante[9][j]%>
                                                     <br>
-                                                    Parentesco:
+                                                    <br>
+                                                    <b>Parentesco:  </b>
                                                     <%= Datos_estudiante[10][j]%>
                                                 </center>
                                             </span>
@@ -366,8 +374,8 @@
                                     <label for="password">Password</label>
                                 </div>
                                 <button class="btn waves-effect waves-light" type="submit" name="action">Cambiar
-                                        <i class="material-icons right">send</i>
-                                    </button
+                                    <i class="material-icons right">send</i>
+                                </button
                             </form>
                         </center>
                     </div>

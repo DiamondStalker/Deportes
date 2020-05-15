@@ -1,18 +1,18 @@
-#customers {
+#docentes {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
 }
 
-#customers td,#customers th {
+#docentes td,#docentes th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+#docentes tr:nth-child(even){background-color: #f2f2f2;}
 
-#customers tr:hover {background-color: #ddd;}
+#docentes tr:hover {background-color: #ddd;}
 
-#customers th {
+#docentes th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -31,3 +31,4 @@
 	padding: 10px;
 	margin:10px; 
 }
+

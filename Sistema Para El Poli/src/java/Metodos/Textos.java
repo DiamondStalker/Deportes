@@ -53,7 +53,6 @@ public class Textos {
 
             salida.close();
             bw.close();
-            JOptionPane.showMessageDialog(null, "Se creo el archivo en la ruta " + f);
 
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
@@ -88,7 +87,6 @@ public class Textos {
 
             salida.close();
             bw.close();
-            JOptionPane.showMessageDialog(null, "Se creo el archivo en la ruta " + f);
 
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
@@ -173,7 +171,6 @@ public class Textos {
                     salida.close();
                     bw.close();
                     Rectificar_archivo(Nombre_deportes, "sub"+(i+3));
-
                 } catch (Exception e) {
                 }
             }

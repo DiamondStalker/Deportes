@@ -44,7 +44,6 @@
                             <tr class="titulo"> 
                                 <th>    Categoria  </th>
                                 <th>    Horario  </th>
-                                <th>    Opciones  </th>
                             </tr>
                         </thead>
                         
@@ -55,11 +54,6 @@
                             <tr>    
                                 <td align="center"><a><%=Con.Descripcion_categoria(Categorias_deporte[0][i])%></a></td> 
                                 <td align="center"><a><%= Con.Descripcion_horario(Categorias_deporte[1][i])%></a></td>
-                                <td align="center"> 
-                                    <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getId(this, 'ver')">
-                                    <img style="" src="imagenes/editar.png" width="30" height="30" onclick="getId(this, 'editar')">
-                                    <img style="" src="imagenes/basura.png" width="30" height="30" onclick="getId(this, 'eliminar')">
-                                </td>
                             </tr>
                             <%
                                 }

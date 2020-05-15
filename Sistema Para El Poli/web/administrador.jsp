@@ -11,6 +11,7 @@
         <link rel="icon"    href="imagenes/escudo.jpg">
         <link rel="stylesheet" type="text/css" media="screen" href="css/styleadmin.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/Tabla_usuarios.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/tabladocentes.css">
         <script  src = "http://code.jquery.com/jquery-1.11.0.min.js"></script> 
         <script src="https://kit.fontawesome.com/ed45eaf214.js" crossorigin="anonymous"></script>
         <%-- Scrip para hacer menu desplejable--%>
@@ -206,6 +207,9 @@
                     <li><a href="#" onclick="muestra_oculta('tabladeportes')">Ver</a></li>
                     <li><a href="#" onclick="muestra_oculta('asignar-hora')">Asignar horario a deporte</a></li>
                 </ul>
+            </li>
+            <li>
+                <h3><a href="#" onclick="cerrar()"><span>Cerrar sesion</span></a></h3>
             </li>
         </ul>
     </div>
@@ -462,6 +466,13 @@
                  " - column" + element.parentNode.cellIndex);*/
                 var x = document.getElementById("customers").rows[element.parentNode.parentNode.rowIndex].cells[0].innerText;
                         location.href = direccionweb + 'estudiante.jsp?id=' + x;
+                }
+                
+                function  getDocente(element, direccionweb) {
+                /*alert("row" + element.parentNode.parentNode.rowIndex +
+                 " - column" + element.parentNode.cellIndex);*/
+                var x = document.getElementById("docentes").rows[element.parentNode.parentNode.rowIndex].cells[0].innerText;
+                        location.href = direccionweb + 'informaciondocente.jsp?id=' + x;
                 }
 
         function  getIdDeportes(element, direccionweb) {
@@ -782,6 +793,10 @@
                             }
                             });
                     }
+                    
+                    function cerrar() {
+                    window.location.replace('index.jsp');
+                }
 
 </script>
 <%-- ver docentes--%>
@@ -793,7 +808,7 @@
 
 
                 <div class="datagrid">
-                    <table class="order-table table" id="customers">
+                    <table class="order-table table" id="docentes">
                         <thead>
                             <tr class="titulo"> 
                                 <th>    Identificacion  </th>
@@ -818,7 +833,7 @@
                                 <td align="center"><a><%= profesor[4][i]%></a></td>
                              
                                 <td align="center"> 
-                                    <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getId(this, 'ver')">
+                                    <img style="" src="imagenes/ojo.png" width="30" height="30" onclick="getDocente(this, 'ver')">
                                 </td>
                             </tr>
                             <%
