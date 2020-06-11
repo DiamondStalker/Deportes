@@ -208,6 +208,19 @@
                     <li><a href="#" onclick="muestra_oculta('asignar-hora')">Asignar horario a deporte</a></li>
                 </ul>
             </li>
+            <%-- Menu Reportes --%>
+            <li>
+                <h3> <a href="#"> Reportes</a></h3>
+                <ul>
+                    <li><a href="#">Certificado de matricula</a></li>
+                    <li><a href="#">Lista estudiantes</a></li>
+                    <li><a href="#">Lista por deporte</a></li>
+                    <li><a href="#">Lista profesores</a></li>
+                    <li><a href="#">Mejores estudiantse</a></li>
+                    <li><a href="#">Estudiantes que ganan</a></li>
+                    <li><a href="#">Estudiantes que pierden</a></li>
+                </ul>
+            </li>
             <li>
                 <h3><a href="#" onclick="cerrar()"><span>Cerrar sesion</span></a></h3>
             </li>
@@ -887,5 +900,42 @@
             
 <!--  finde codigo para docentes -->
 
+<%-- Comienzo de registros--%>
+    <center>
+        <!--  Certificados -->
+        <div>
 
+        </div>
+        
+        <!--  Lista de estudiantes -->
+        <div>
+
+        </div>
+        
+        <!--  Lista de estudiantes por deporte -->
+        <div>
+
+        </div>
+        
+        <!--  Certificados -->
+        <div>
+
+        </div>
+        
+        <!--  Certificados -->
+        <div>
+
+        </div>
+        
+        <!--  Certificados -->
+        <div>
+
+        </div>
+        
+        <!--  Certificados -->
+        <div>
+
+        </div>
+    </center>
+<%-- Fin de registros egistros--%>
 </html>
