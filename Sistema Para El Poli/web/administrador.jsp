@@ -213,7 +213,7 @@
                 <h3> <a href="#"> Reportes</a></h3>
                 <ul>
                     <li><a href="#">Certificado de matricula</a></li>
-                    <li><a href="#">Lista estudiantes</a></li>
+                    <li><a href="ListaEstudiantes">Lista estudiantes</a></li>
                     <li><a href="#">Lista por deporte</a></li>
                     <li><a href="#">Lista profesores</a></li>
                     <li><a href="#">Mejores estudiantse</a></li>

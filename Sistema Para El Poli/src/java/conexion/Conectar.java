@@ -57,6 +57,13 @@ public class Conectar {
     public static Fechas fecha = new Fechas();
 
     public static Random rm = new Random();
+    
+    
+    private final String base = "deporte";
+    private final String user = "root";
+    private final String password = "";
+    private final String url = "jdbc:mysql://localhost/" + base;
+    private com.mysql.jdbc.Connection con = null;
 
     public Connection conexion() {
 
@@ -77,6 +84,22 @@ public class Conectar {
         }
 
         return Conect;
+    }
+    
+   public com.mysql.jdbc.Connection getConexion()
+    {
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con = (com.mysql.jdbc.Connection) DriverManager.getConnection(this.url, this.user, this.password);
+            
+        } catch(SQLException e)
+        {
+            System.err.println(e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      return con;  
     }
 
     //------------------------------------------ Inicio metodo para el inicio de seccion ------------------------------------------//
