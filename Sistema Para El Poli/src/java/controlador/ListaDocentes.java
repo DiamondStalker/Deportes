@@ -5,7 +5,6 @@
  */
 package controlador;
 
-import reportes.Windows;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,12 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import reportes.Reportes;
+
 /**
  *
  * @author user
  */
-@WebServlet(name = "ListaEstudiantes", urlPatterns = {"/ListaEstudiantes"})
-public class ListaEstudiantes extends HttpServlet {
+@WebServlet(name = "ListaDocentes", urlPatterns = {"/ListaDocentes"})
+public class ListaDocentes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,20 +36,23 @@ public class ListaEstudiantes extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
+            String Deporte = request.getParameter("Sdeporte");
+            
+            
             Reportes reporte = new Reportes();
             
-            for (int i = 0; i < 2; i++) {
-                reporte.Lista_estudiantes();
+            for (int i = 0; i < 3; i++) {
+                reporte.Lista_docentes(Deporte);
             }
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>ListaEstudiantes</title>");            
+            out.println("<title>ListaDocentes</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<div>");
-            out.println("<embed height='1000px' width='100%' src='Registros\\Reportes\\ListaEstudiantes.pdf' type=\"application/pdf\">");
+            out.println("<embed height='1000px' width='100%' src='Registros\\Reportes\\ListaDocentes"+Deporte+".pdf' type=\"application/pdf\">");
             out.println("</div>");
             out.println("</body>");
             out.println("</html>");

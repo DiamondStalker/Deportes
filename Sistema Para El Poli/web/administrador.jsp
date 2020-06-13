@@ -26,6 +26,7 @@
                             oculta('profesor_deporte-contend');
                             oculta('Ver_Docente');
                             oculta('Insertardocente');
+                            oculta('Reporte_Docentes');
                     }
 
 
@@ -136,6 +137,8 @@
                     oculta("Ver_Docente");
                     if ($('#Insertardocente').is(':visible'))
                     oculta("Insertardocente");
+                    if ($('#Reporte_Docentes').is(':visible'))
+                    oculta("Reporte_Docentes");
             });
                     if (!link_status)
             {
@@ -214,8 +217,7 @@
                 <ul>
                     <li><a href="#">Certificado de matricula</a></li>
                     <li><a href="ListaEstudiantes">Lista estudiantes</a></li>
-                    <li><a href="#">Lista por deporte</a></li>
-                    <li><a href="#">Lista profesores</a></li>
+                    <li><a href="#" onclick="muestra_oculta('Reporte_Docentes')">Lista profesores </a></li>
                     <li><a href="#">Mejores estudiantse</a></li>
                     <li><a href="#">Estudiantes que ganan</a></li>
                     <li><a href="#">Estudiantes que pierden</a></li>
@@ -902,9 +904,20 @@
 
 <%-- Comienzo de registros--%>
     <center>
-        <!--  Certificados -->
-        <div>
-
+        <!--  Lista docentse -->
+        <div id="Reporte_Docentes" style="display: none;">
+            <form id="estudiante" action="ListaDocentes" method="post">
+                <h1> Generar lista de docentes del deporte:</h1>
+                <select id="Sdeporte" name="Sdeporte">
+                <%-- Creamos un objeto conexion para que nos devuelva cuantos deportes hya y cuales son--%>
+                <% for (int i = 0; i < cuantos; i++) {%>
+                <option> <%=DD[i]%></option>
+                <% }%>
+            </select>
+            <br>
+            <br>
+            <input type="submit" id="submit" value="Crear registro">
+            </form>
         </div>
         
         <!--  Lista de estudiantes -->
