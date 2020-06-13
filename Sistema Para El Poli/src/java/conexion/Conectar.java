@@ -57,8 +57,7 @@ public class Conectar {
     public static Fechas fecha = new Fechas();
 
     public static Random rm = new Random();
-    
-    
+
     private final String base = "deporte";
     private final String user = "root";
     private final String password = "";
@@ -85,21 +84,19 @@ public class Conectar {
 
         return Conect;
     }
-    
-   public com.mysql.jdbc.Connection getConexion()
-    {
-        
-        try{
+
+    public com.mysql.jdbc.Connection getConexion() {
+
+        try {
             Class.forName("com.mysql.jdbc.Driver");
             con = (com.mysql.jdbc.Connection) DriverManager.getConnection(this.url, this.user, this.password);
-            
-        } catch(SQLException e)
-        {
+
+        } catch (SQLException e) {
             System.err.println(e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
-      return con;  
+        return con;
     }
 
     //------------------------------------------ Inicio metodo para el inicio de seccion ------------------------------------------//
@@ -1665,5 +1662,34 @@ public class Conectar {
             JOptionPane.showMessageDialog(null, "Error al actualizar" + e);
             return false;
         }
+    }
+
+    public String[] Estudiantes_matriculados() {
+        String Estudiantes[] = new String[6];
+
+        return Estudiantes;
+    }
+
+    public int Numero_Estudiantes_matriculados() {
+        int Count = 0;
+
+        try {
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT\n"
+                    + "     COUNT(*),"
+                    + "     estudiante.`id` AS estudiante_id,\n"
+                    + "     estudiante.`nombre` AS estudiante_nombre\n"
+                    + "     FROM\n"
+                    + "     `deporte_categoria_horario` deporte_categoria_horario INNER JOIN `matricula` matricula ON deporte_categoria_horario.`codigo_relacion` = matricula.`codigo_relacion`\n"
+                    + "     INNER JOIN `estudiante` estudiante ON matricula.`id` = estudiante.`id`\n"
+                    + "     GROUP BY estudiante.id");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                Count = res.getInt("COUNT(*)");
+            }
+        } catch (Exception e) {
+        }
+
+        return Count;
     }
 }

@@ -83,7 +83,7 @@ WHERE estudiante.id = $P!{identificacion}]]>
 	<title>
 		<band height="108" splitType="Stretch">
 			<staticText>
-				<reportElement x="141" y="34" width="324" height="20" uuid="f28fca88-eeb3-4bc2-920e-23080bcd6df1"/>
+				<reportElement x="113" y="34" width="358" height="20" uuid="f28fca88-eeb3-4bc2-920e-23080bcd6df1"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
@@ -108,7 +108,7 @@ WHERE estudiante.id = $P!{identificacion}]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="60" splitType="Stretch">
+		<band height="48" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="555" height="25" uuid="3d5178a5-c936-4015-b96a-9bd1ffbfb71a"/>
 				<textElement textAlignment="Center">
@@ -121,43 +121,43 @@ WHERE estudiante.id = $P!{identificacion}]]>
 	<columnHeader>
 		<band height="79" splitType="Stretch">
 			<textField>
-				<reportElement x="-1" y="21" width="100" height="20" uuid="63653723-0ef2-488a-b6e6-9cc6e2c9cbf1"/>
-				<textElement>
+				<reportElement x="11" y="21" width="100" height="20" uuid="63653723-0ef2-488a-b6e6-9cc6e2c9cbf1"/>
+				<textElement verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{estudiante_nombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="21" uuid="4479f9d7-53b2-440e-b113-fd316fd2f747"/>
-				<textElement>
+				<reportElement x="12" y="0" width="533" height="21" uuid="4479f9d7-53b2-440e-b113-fd316fd2f747"/>
+				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[El POLITECNICO COLOMBIANO JAIME ISAZA CADAVIS certifica que el estudiante:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="199" y="21" width="135" height="20" uuid="368b6c55-dae2-46cb-8669-b48bbbffef83"/>
-				<textElement>
+				<reportElement x="211" y="21" width="135" height="20" uuid="368b6c55-dae2-46cb-8669-b48bbbffef83"/>
+				<textElement verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[ con la identificacion: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="99" y="21" width="100" height="20" uuid="0855a2cc-c517-4642-852f-6ab606787dfb"/>
-				<textElement>
+				<reportElement x="111" y="21" width="100" height="20" uuid="0855a2cc-c517-4642-852f-6ab606787dfb"/>
+				<textElement verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{estudiante_apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="334" y="21" width="100" height="20" uuid="b59649f4-5acc-4c44-8185-5ee42c1257f6"/>
+				<reportElement x="346" y="21" width="100" height="20" uuid="b59649f4-5acc-4c44-8185-5ee42c1257f6"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{estudiante_id}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-1" y="41" width="556" height="20" uuid="22920a7c-6df0-469f-85ae-27c2f35aacde"/>
-				<textElement>
+				<reportElement x="11" y="41" width="534" height="20" uuid="22920a7c-6df0-469f-85ae-27c2f35aacde"/>
+				<textElement verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[se encuentra matriculado en los deportes:]]></text>
