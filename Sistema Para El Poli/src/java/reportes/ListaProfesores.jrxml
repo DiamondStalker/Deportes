@@ -99,89 +99,89 @@ WHERE deporte.`nombre` = $P{Nombre_deporte}]]>
 	<columnHeader>
 		<band height="37" splitType="Stretch">
 			<staticText>
-				<reportElement x="-2" y="0" width="54" height="20" uuid="bfcbacfc-297c-43ff-a774-8ea652d94060"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="-2" y="0" width="108" height="20" uuid="bfcbacfc-297c-43ff-a774-8ea652d94060"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[persona_id]]></text>
+				<text><![CDATA[IDENTIFICACION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="71" y="0" width="87" height="20" uuid="37168027-0d34-41c8-b504-f1855687616d"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="106" y="0" width="87" height="20" uuid="37168027-0d34-41c8-b504-f1855687616d"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[persona_nombre]]></text>
+				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="171" y="0" width="82" height="20" uuid="2c667356-7635-48e2-b0eb-574f84de9067"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="193" y="0" width="82" height="20" uuid="2c667356-7635-48e2-b0eb-574f84de9067"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[persona_apellido]]></text>
+				<text><![CDATA[APELLIDO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="0" width="92" height="20" uuid="83cf81dc-cc37-46d7-88c7-5678eafc8b28"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="293" y="0" width="92" height="20" uuid="83cf81dc-cc37-46d7-88c7-5678eafc8b28"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[persona_telefono]]></text>
+				<text><![CDATA[TELEFONO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="371" y="0" width="80" height="20" uuid="4bc80f95-d5f8-45fe-997c-ba36f85fdf4e"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="393" y="0" width="80" height="20" uuid="4bc80f95-d5f8-45fe-997c-ba36f85fdf4e"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[persona_celular]]></text>
+				<text><![CDATA[CELULAR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="471" y="0" width="100" height="20" uuid="fd119e61-c157-4584-a4d2-b953ee9f85dd"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="484" y="0" width="100" height="20" uuid="fd119e61-c157-4584-a4d2-b953ee9f85dd"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[categoria_descripcion_categoria]]></text>
+				<text><![CDATA[CATEGORIA]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="35" splitType="Stretch">
+		<band height="37" splitType="Stretch">
 			<textField>
-				<reportElement x="-2" y="5" width="73" height="20" uuid="b655ea87-a29b-4fbe-b534-da2cd196b598"/>
-				<textElement>
+				<reportElement x="-2" y="5" width="108" height="20" uuid="b655ea87-a29b-4fbe-b534-da2cd196b598"/>
+				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{persona_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="71" y="5" width="100" height="20" uuid="defa00dd-4999-4b28-9294-6748e5297554"/>
-				<textElement>
+				<reportElement x="106" y="5" width="87" height="20" uuid="defa00dd-4999-4b28-9294-6748e5297554"/>
+				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{persona_nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="171" y="5" width="100" height="20" uuid="3ab593b5-5fae-4f53-9e98-b714ced1f243"/>
-				<textElement>
+				<reportElement x="193" y="5" width="100" height="20" uuid="3ab593b5-5fae-4f53-9e98-b714ced1f243"/>
+				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{persona_apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="271" y="5" width="100" height="20" uuid="e2f3eecd-d93b-416c-99d1-756391ca63a8"/>
-				<textElement>
+				<reportElement x="293" y="5" width="100" height="20" uuid="e2f3eecd-d93b-416c-99d1-756391ca63a8"/>
+				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{persona_telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="371" y="5" width="100" height="20" uuid="28a3ee4a-e859-40c8-ae6d-b66b383cc1c5"/>
-				<textElement>
+				<reportElement x="393" y="5" width="91" height="20" uuid="28a3ee4a-e859-40c8-ae6d-b66b383cc1c5"/>
+				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{persona_celular}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="471" y="5" width="100" height="20" uuid="eda20829-b028-4ec6-877c-8341bee0d09e"/>
-				<textElement>
+				<reportElement x="484" y="5" width="100" height="20" uuid="eda20829-b028-4ec6-877c-8341bee0d09e"/>
+				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{categoria_descripcion_categoria}]]></textFieldExpression>

@@ -20,8 +20,8 @@ import reportes.Reportes;
  *
  * @author user
  */
-@WebServlet(name = "ListaEstudiantes", urlPatterns = {"/ListaEstudiantes"})
-public class ListaEstudiantes extends HttpServlet {
+@WebServlet(name = "Certificado", urlPatterns = {"/Certificado"})
+public class Certificado extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,27 +37,27 @@ public class ListaEstudiantes extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            String Id = request.getParameter("Id");
 
             Reportes reporte = new Reportes();
 
             for (int i = 0; i < 2; i++) {
-                reporte.Lista_estudiantes();
-                Thread.sleep(1000);
+                reporte.Certificados(Id);
+                  Thread.sleep(2000);
             }
 
-            for (int i = 0; i < 3; i++) {
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>ListaEstudiantes</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<iframe src=\"Registros\\Reportes\\ListaEstudiantes.pdf\" "
-                        + "width=\"100%\" height=\"940px\"></iframe>\n"
-                        + "");
-                out.println("</body>");
-                out.println("</html>");
-            }
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>ListaEstudiantes</title>");
+            out.println("</head>");
+            out.println("<body>");
+            
+            out.println("<iframe src=\"Registros\\Reportes\\Certificado" + Id + ".pdf\" "
+                    + "width=\"100%\" height=\"940px\"></iframe>\n"
+                    + "");
+            out.println("</body>");
+            out.println("</html>");
 
         }
     }
@@ -77,7 +77,7 @@ public class ListaEstudiantes extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (InterruptedException ex) {
-            Logger.getLogger(ListaEstudiantes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Certificado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -95,7 +95,7 @@ public class ListaEstudiantes extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (InterruptedException ex) {
-            Logger.getLogger(ListaEstudiantes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Certificado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

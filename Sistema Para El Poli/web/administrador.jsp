@@ -1,3 +1,5 @@
+<%@page import="java.util.Vector"%>
+<%@page import="modelo.Conexion"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Random"%>
 <%@page import="javax.swing.JOptionPane"%>
@@ -27,6 +29,7 @@
                             oculta('Ver_Docente');
                             oculta('Insertardocente');
                             oculta('Reporte_Docentes');
+                            oculta('Certificado');
                     }
 
 
@@ -139,6 +142,8 @@
                     oculta("Insertardocente");
                     if ($('#Reporte_Docentes').is(':visible'))
                     oculta("Reporte_Docentes");
+                    if ($('#Certificado').is(':visible'))
+                    oculta("Certificado");
             });
                     if (!link_status)
             {
@@ -215,7 +220,7 @@
             <li>
                 <h3> <a href="#"> Reportes</a></h3>
                 <ul>
-                    <li><a href="#">Certificado de matricula</a></li>
+                    <li><a href="#" onclick="muestra_oculta('Certificado')">Certificado de matricula</a></li>
                     <li><a href="ListaEstudiantes">Lista estudiantes</a></li>
                     <li><a href="#" onclick="muestra_oculta('Reporte_Docentes')">Lista profesores </a></li>
                     <li><a href="#">Mejores estudiantse</a></li>
@@ -919,10 +924,23 @@
             <input type="submit" id="submit" value="Crear registro">
             </form>
         </div>
-        
-        <!--  Lista de estudiantes -->
+        <!--  Certificado de estudiante -->
         <div>
-
+            <div id="Certificado" style="display: none;">
+            <form id="estudiante" action="Certificado" method="post">
+                <h1> Generar certificado de estudio:</h1>
+                <select id="Id" name="Id">
+                <%-- Creamos un objeto conexion para que nos devuelva cuantos deportes hya y cuales son--%>
+                <% Vector Estudiantes_matriculados=con.Estudiantes_matriculados();%>
+                <% for (int i = 0; i < Estudiantes_matriculados.size(); i++) {%>
+                <option> <%= Estudiantes_matriculados.elementAt(i)%></option>
+                <% }%>
+            </select>
+            <br>
+            <br>
+            <input type="submit" id="submit" value="Crear registro">
+            </form>
+        </div>
         </div>
         
         <!--  Lista de estudiantes por deporte -->
@@ -930,25 +948,7 @@
 
         </div>
         
-        <!--  Certificados -->
-        <div>
-
-        </div>
         
-        <!--  Certificados -->
-        <div>
-
-        </div>
-        
-        <!--  Certificados -->
-        <div>
-
-        </div>
-        
-        <!--  Certificados -->
-        <div>
-
-        </div>
     </center>
 <%-- Fin de registros egistros--%>
 </html>

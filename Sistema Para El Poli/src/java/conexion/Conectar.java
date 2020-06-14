@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 import java.util.Random;
+import java.util.Vector;
 
 /**
  *
@@ -1664,32 +1665,22 @@ public class Conectar {
         }
     }
 
-    public String[] Estudiantes_matriculados() {
-        String Estudiantes[] = new String[6];
-
-        return Estudiantes;
-    }
-
-    public int Numero_Estudiantes_matriculados() {
-        int Count = 0;
-
+    public Vector Estudiantes_matriculados() {
+        Vector Estudiantes = new Vector();
+        
         try {
             Connection cn = conexion();
-            PreparedStatement pstm = cn.prepareStatement(" SELECT\n"
-                    + "     COUNT(*),"
-                    + "     estudiante.`id` AS estudiante_id,\n"
-                    + "     estudiante.`nombre` AS estudiante_nombre\n"
-                    + "     FROM\n"
-                    + "     `deporte_categoria_horario` deporte_categoria_horario INNER JOIN `matricula` matricula ON deporte_categoria_horario.`codigo_relacion` = matricula.`codigo_relacion`\n"
-                    + "     INNER JOIN `estudiante` estudiante ON matricula.`id` = estudiante.`id`\n"
-                    + "     GROUP BY estudiante.id");
+            PreparedStatement pstm = cn.prepareStatement(" SELECT DISTINCT matricula.id from matricula");
             ResultSet res = pstm.executeQuery();
             while (res.next()) {
-                Count = res.getInt("COUNT(*)");
+                Estudiantes.add(res.getString("id"));
+            }
+            for (int i = 0; i < Estudiantes.size(); i++) {
+                System.out.println(Estudiantes.elementAt(i));
             }
         } catch (Exception e) {
         }
 
-        return Count;
+        return Estudiantes;
     }
 }

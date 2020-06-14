@@ -70,4 +70,28 @@ public class Reportes {
         }
     }
     
+    public void Certificados(String Id){
+        JasperPrint jprint = null;
+        try {
+            Conexion con = new Conexion();
+            
+            Connection conn = con.getConexion();
+            
+            JasperReport reporte = null;
+            String path = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\src\\java\\reportes\\Certificado.jasper";
+            
+            Map parametro = new HashMap();
+            
+            parametro.put("identificacion",Id);
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+        
+            jprint = JasperFillManager.fillReport(path,parametro, conn);
+            
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Reportes\\Certificado"+Id+".pdf");
+            
+        } catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

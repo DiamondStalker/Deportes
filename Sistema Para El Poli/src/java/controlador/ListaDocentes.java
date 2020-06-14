@@ -7,6 +7,8 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,7 @@ public class ListaDocentes extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, InterruptedException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -43,6 +45,7 @@ public class ListaDocentes extends HttpServlet {
             
             for (int i = 0; i < 3; i++) {
                 reporte.Lista_docentes(Deporte);
+                Thread.sleep(1000);
             }
             
             out.println("<!DOCTYPE html>");
@@ -51,9 +54,9 @@ public class ListaDocentes extends HttpServlet {
             out.println("<title>ListaDocentes</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<div>");
-            out.println("<embed height='1000px' width='100%' src='Registros\\Reportes\\ListaDocentes"+Deporte+".pdf' type=\"application/pdf\">");
-            out.println("</div>");
+            out.println("<iframe src=\"Registros\\Reportes\\ListaDocentes"+Deporte+".pdf\" "
+                    + "width=\"100%\" height=\"940px\"></iframe>\n"
+                    + "");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,7 +74,11 @@ public class ListaDocentes extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDocentes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -85,7 +92,11 @@ public class ListaDocentes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDocentes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
