@@ -83,7 +83,15 @@
             oculta('Ver_Docente');
             oculta('profesor_deporte-contend');
             }
-
+            
+            //Menu reportes
+            
+            if (id == "Reporte_Docentes") {
+            oculta('Certificado');
+            }
+            if (id == "Certificado") {
+            oculta('Reporte_Docentes');
+            }
 
             }
 
@@ -223,9 +231,9 @@
                     <li><a href="#" onclick="muestra_oculta('Certificado')">Certificado de matricula</a></li>
                     <li><a href="ListaEstudiantes">Lista estudiantes</a></li>
                     <li><a href="#" onclick="muestra_oculta('Reporte_Docentes')">Lista profesores </a></li>
-                    <li><a href="#">Mejores estudiantse</a></li>
-                    <li><a href="#">Estudiantes que ganan</a></li>
-                    <li><a href="#">Estudiantes que pierden</a></li>
+                    <li><a href="MejoresEstudiantes">Mejores estudiantse</a></li>
+                    <li><a href="EstudiantesGanan">Estudiantes que ganan</a></li>
+                    <li><a href="EstudiantesPierden">Estudiantes que pierden</a></li>
                 </ul>
             </li>
             <li>

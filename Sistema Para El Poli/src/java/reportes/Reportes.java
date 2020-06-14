@@ -94,4 +94,73 @@ public class Reportes {
         }
     }
     
+    public  void Ganan(){
+         JasperPrint jprint = null;
+        try {
+            Conexion con = new Conexion();
+            
+            Connection conn = con.getConexion();
+            
+            JasperReport reporte = null;
+            String path = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\src\\java\\reportes\\Ganan.jasper";
+            
+            Map parametro = new HashMap();
+            
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+        
+            jprint = JasperFillManager.fillReport(path,null, conn);
+            
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Reportes\\EstudiantesGanan.pdf");
+            
+        } catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public  void Pierden(){
+         JasperPrint jprint = null;
+        try {
+            Conexion con = new Conexion();
+            
+            Connection conn = con.getConexion();
+            
+            JasperReport reporte = null;
+            String path = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\src\\java\\reportes\\Pierden.jasper";
+            
+            Map parametro = new HashMap();
+            
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+        
+            jprint = JasperFillManager.fillReport(path,null, conn);
+            
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Reportes\\EstudiantesPierden.pdf");
+            
+        } catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public  void Mejores(){
+         JasperPrint jprint = null;
+        try {
+            Conexion con = new Conexion();
+            
+            Connection conn = con.getConexion();
+            
+            JasperReport reporte = null;
+            String path = "C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\src\\java\\reportes\\MejoresDeportistas.jasper";
+            
+            Map parametro = new HashMap();
+            
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+        
+            jprint = JasperFillManager.fillReport(path,null, conn);
+            
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Reportes\\MejoresEstudiantes.pdf");
+            
+        } catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
