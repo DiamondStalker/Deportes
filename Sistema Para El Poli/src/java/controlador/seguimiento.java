@@ -40,10 +40,11 @@ public class seguimiento extends HttpServlet {
             String Id_estudiante = request.getParameter("Estudiante");
             String Cumplimiento = request.getParameter("Estudiante");
             String Seguimiento = request.getParameter("Estudiante");
+            String nota = request.getParameter("Nota");
             
             if(!Cumplimiento.isEmpty() && ! Seguimiento.isEmpty()){
                 Conectar Con = new Conectar();
-                Con.Insertar_seguimiento(Id_estudiante,Codigo_relacio,Cumplimiento,Seguimiento);
+                Con.Insertar_seguimiento(Id_estudiante,Codigo_relacio,Cumplimiento,Seguimiento,nota);
                 out.println(MensajesErrores.Seguimiento_correcto);
             }else{
                 out.println(MensajesErrores.Cumplimiento);

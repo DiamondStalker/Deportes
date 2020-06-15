@@ -168,7 +168,7 @@
                     String Datos_estudiante[][] = Con.Datos_estudiante(request.getParameter("id"));
             %>
 
-            <%-- Formulario refistro --%>
+            <%-- Formulario registro --%>
             <center>
                 <div class="card blue-grey darken-1" id="row" style="display: none">
                     <center>
@@ -177,13 +177,18 @@
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <i class="material-icons prefix">mode_edit</i>
-                                        <textarea id="icon_prefix2" class="materialize-textarea" name="Cumplimiento" required="" maxlength="30"></textarea>
+                                        <textarea id="icon_prefix2" class="materialize-textarea" name="Cumplimiento" required="" maxlength="80"></textarea>
                                         <label for="icon_prefix2">Cumplimientos</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <i class="material-icons prefix">mode_edit</i>
-                                        <textarea id="icon_prefix2" class="materialize-textarea" name="Cumplimiento" required="" maxlength="30"></textarea>
+                                        <textarea id="icon_prefix2" class="materialize-textarea" name="Cumplimiento" required="" maxlength="120"></textarea>
                                         <label for="icon_prefix2">Seguimiento</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="material-icons prefix">mode_edit</i>
+                                        <input type="text" id="icon_prefix2" class="materialize-textarea" name="Nota" required pattern="[0.0-5.0]{1,5}"></input>
+                                        <label for="icon_prefix2">Nota</label>
                                     </div>
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
                                         <i class="material-icons right">send</i>

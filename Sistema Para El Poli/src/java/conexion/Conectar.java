@@ -1590,7 +1590,7 @@ public class Conectar {
         return Count;
     }
 
-    public boolean Insertar_seguimiento(String Id_estudiante, String Codigor, String Cumplimiento, String Descripcion) {
+    public boolean Insertar_seguimiento(String Id_estudiante, String Codigor, String Cumplimiento, String Descripcion,String Nota) {
         String Coidgo_matricula = Codigo_matricula(Id_estudiante, Codigor);
         String Codigo = "";
         Random rm = new Random();
@@ -1600,13 +1600,14 @@ public class Conectar {
         try {
             Connection cn = conexion();
             PreparedStatement rs = cn.prepareStatement("INSERT INTO seguimiento"
-                    + "(codigo,cumplimiento,descripcion,codigo_matricula)"
-                    + "VALUES (?,?,?,?)");
+                    + "(codigo,cumplimiento,descripcion,codigo_matricula,Nota)"
+                    + "VALUES (?,?,?,?,?)");
 
             rs.setString(1, Codigo);
             rs.setString(2, Cumplimiento);
             rs.setString(3, Descripcion);
             rs.setString(4, Coidgo_matricula);
+            rs.setDouble(5, Double.parseDouble(Nota));
 
             rs.executeUpdate();
             return true;
