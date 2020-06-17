@@ -1,0 +1,53 @@
+
+ 
+ 
+ Informacion del usuario: 
+ Identificaion del estudiante : 88821378921
+ Nombre del estudiante : 4322222222222222222
+ Apellido del estudiante : 22222222222222222222
+ Fecha de nacimiento del estudiante : 2010-07-21
+
+ Informacion de la creacion del registro
+ 1/4/2020
+22:2:19
+
+Informacion del acudiente : 
+ Identificaion del acudiente : 65445654453
+ Nombre : 645634564356
+ Apellido : 43564356
+ Apellido : 43564356
+ Parentesco : Tia
+ Telefono  : 43564356
+ Celular  : 43564356
+ Direccion  : 43564356
+
+ Se añadio un acudiente
+ 1/4/2020
+ 22:2:20
+ 
+
+Matrícula: 
+ Codigo Matricula : 
+ Deporte : Futbol
+ Categoria : 10
+ Hora : Clase sabados 10 am a 12 am
+
+ Se añadio un acudiente
+ 1/4/2020
+ 22:2:32
+ 
+
+Informacion del acudiente : 
+ Identificaion del acudiente : 31245476356
+ Nombre : 756765
+ Apellido : 6575637567567
+ Apellido : 6575637567567
+ Parentesco : Tia
+ Telefono  : 6575637567567
+ Celular  : 6575637567567
+ Direccion  : 6575637567567
+
+ Se añadio un acudiente
+ 1/4/2020
+ 22:3:43
+ 

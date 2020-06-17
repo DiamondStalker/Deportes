@@ -38,7 +38,6 @@ public class Reportes {
         
             JasperPrint jprint = JasperFillManager.fillReport(path,null, conn);
             
-            JasperViewer view = new JasperViewer(jprint,false);
             
             JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli\\web\\Registros\\Reportes\\ListaEstudiantes.pdf");
             

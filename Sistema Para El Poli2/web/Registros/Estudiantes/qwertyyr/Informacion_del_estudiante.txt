@@ -1,0 +1,37 @@
+
+ 
+ Informacion del usuario: 
+ Identificaion del estudiante : 1143234234
+ Nombre del estudiante : qwertyyr
+ Apellido del estudiante : man
+ Fecha de nacimiento del estudiante : 2010-07-15
+
+ Informacion de la creacion del registro
+ 12/5/2020
+11:19:34
+
+Informacion del acudiente : 
+ Identificaion del acudiente : 66456432234
+ Nombre : 564
+ Apellido : 564
+ Apellido : 564
+ Parentesco : Vecino
+ Telefono  : 564
+ Celular  : 564
+ Direccion  : 564
+
+ Se añadio un acudiente
+ 12/5/2020
+ 11:19:34
+ 
+
+Matrícula: 
+ Codigo Matricula : 
+ Deporte : Futbol
+ Categoria : 10
+ Hora : Clase sabados 12 am a 2 pm
+
+ Se añadio un acudiente
+ 12/5/2020
+ 11:19:34
+ 

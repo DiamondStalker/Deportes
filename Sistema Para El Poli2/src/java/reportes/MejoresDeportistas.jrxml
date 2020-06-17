@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c21c39a6-1057-4377-96d4-8c0d15bac6fd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT estudiante.id,SUM(seguimiento.Nota),AVG(seguimiento.Nota) as final,
+     matricula.`codigo_matricula` AS matricula_codigo_matricula,
+     estudiante.`id` AS estudiante_id,
+     estudiante.`nombre` AS estudiante_nombre,
+     estudiante.`apellido` AS estudiante_apellido,
+     estudiante.`fecha_nacimiento` AS estudiante_fecha_nacimiento,
+     deporte.`nombre` AS deporte_nombre,
+     categoria.`descripcion_categoria` AS categoria_descripcion_categoria,
+     horario.`descripcion_horario` AS horario_descripcion_horario
+FROM
+     `matricula` matricula INNER JOIN `seguimiento` seguimiento ON matricula.`codigo_matricula` = seguimiento.`codigo_matricula`
+     INNER JOIN `estudiante` estudiante ON matricula.`id` = estudiante.`id`
+     INNER JOIN `deporte_categoria_horario` deporte_categoria_horario ON matricula.`codigo_relacion` = deporte_categoria_horario.`codigo_relacion`
+     INNER JOIN `deporte` deporte ON deporte_categoria_horario.`codigo_deporte` = deporte.`codigo_deporte`
+     INNER JOIN `categoria` categoria ON deporte_categoria_horario.`codigo_categoria` = categoria.`codigo_categoria`
+     INNER JOIN `horario` horario ON deporte_categoria_horario.`codigo_horario` = horario.`codigo_horario`
+     HAVING final >= 4.5]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SUM(seguimiento.Nota)" class="java.lang.Double"/>
+	<field name="final" class="java.lang.Double"/>
+	<field name="matricula_codigo_matricula" class="java.lang.String"/>
+	<field name="estudiante_id" class="java.lang.String"/>
+	<field name="estudiante_nombre" class="java.lang.String"/>
+	<field name="estudiante_apellido" class="java.lang.String"/>
+	<field name="estudiante_fecha_nacimiento" class="java.lang.String"/>
+	<field name="deporte_nombre" class="java.lang.String"/>
+	<field name="categoria_descripcion_categoria" class="java.lang.String"/>
+	<field name="horario_descripcion_horario" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="114" y="54" width="351" height="31" uuid="f600455b-b01b-4ec8-8fb0-74c471773c08"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Carrera 48 No. 7 – 151 | El Poblado | PBX: (+57 4) 444 76 54 - (+57 4) 319 79 00  NIT: 890980136-6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="10" width="403" height="24" uuid="449b9ec5-ed51-4020-9d1e-c806efdb2416"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[POLITECNICO COLOMBIANO JAIME ISAZA CADAVID]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="10" width="89" height="69" uuid="cf589d9a-6f95-4d84-a779-80f573dfddb8"/>
+				<imageExpression><![CDATA["C:\\Users\\user\\Downloads\\politecnico-jaime-isaza-cadavid_4716001832.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="116" y="34" width="349" height="20" uuid="b56e98ef-9949-4d73-ac0f-21390782b669"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ESCUELAFORMACION E INICIACION DEPORTIVA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="122" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="11" width="555" height="35" uuid="0175c441-7e9c-4b0b-9c16-9e7fc1edb6db"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Lista de estudiantes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="46" width="555" height="52" uuid="8745a708-676e-4bb3-a76b-6941ad993f48"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Este documento contiene la lista de los mejores estudiantes]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="453" y="98" width="100" height="20" uuid="bc381f94-4b4b-47f8-94b6-061e291f961c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="353" y="98" width="100" height="20" uuid="9f65f8db-7d52-44c5-b5ba-3307fbee96f1"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Fecha creacion:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="27" y="29" width="100" height="20" uuid="76766125-69ee-48a3-8a2c-961679c9b94a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IDENTIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="29" width="100" height="20" uuid="5e9db29c-d69c-47ba-88df-8f06ee6bbe54"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="29" width="100" height="20" uuid="a9164283-d98a-4674-b49b-8ce72088de62"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="29" width="100" height="20" uuid="63695f44-d674-4376-9733-367d04d8a7e8"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CATEGORIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="29" width="100" height="20" uuid="f3bafb74-769a-41a1-886a-d18586d63993"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORARIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="27" y="0" width="100" height="20" uuid="baf5e3b0-9d48-4e75-afa4-a1ae9415a55f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="0" width="100" height="20" uuid="3d60b645-aa04-41e8-b40f-e4d71f2291b6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{deporte_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="0" width="100" height="20" uuid="92721d74-181d-4383-886f-b6fabf5ae87f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{final}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="0" width="100" height="20" uuid="96c73269-9174-4901-9164-5832b5d92fde"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{categoria_descripcion_categoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="0" width="100" height="20" uuid="48ff2211-4daa-4563-8d44-4a3a973e413a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{horario_descripcion_horario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="207" y="15" width="80" height="20" uuid="b13b0b69-7edc-4cae-baa1-69bdf8c00bd8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="287" y="15" width="80" height="20" uuid="db8e9c64-4189-4753-aafb-43287dba0cf3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
