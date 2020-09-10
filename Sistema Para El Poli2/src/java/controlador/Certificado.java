@@ -53,7 +53,7 @@ public class Certificado extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-            out.println("<iframe src=\"Registros\\Reportes\\Certificado" + Id + ".pdf\" "
+            out.println("<iframe src=\"Registros\\Reportes\\GCertificado" + Id + ".pdf\" "
                     + "width=\"100%\" height=\"940px\"></iframe>\n"
                     + "");
             out.println("</body>");

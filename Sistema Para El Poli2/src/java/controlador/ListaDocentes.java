@@ -54,7 +54,7 @@ public class ListaDocentes extends HttpServlet {
             out.println("<title>ListaDocentes</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<iframe src=\"Registros\\Reportes\\ListaDocentes"+Deporte+".pdf\" "
+            out.println("<iframe src=\"Registros\\Reportes\\Docentes"+Deporte+".pdf\" "
                     + "width=\"100%\" height=\"940px\"></iframe>\n"
                     + "");
             out.println("</body>");

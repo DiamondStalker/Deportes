@@ -1590,7 +1590,7 @@ public class Conectar {
         return Count;
     }
 
-    public boolean Insertar_seguimiento(String Id_estudiante, String Codigor, String Cumplimiento, String Descripcion,String Nota) {
+    public boolean Insertar_seguimiento(String Id_estudiante, String Codigor, String Cumplimiento, String Descripcion, String Nota) {
         String Coidgo_matricula = Codigo_matricula(Id_estudiante, Codigor);
         String Codigo = "";
         Random rm = new Random();
@@ -1668,7 +1668,7 @@ public class Conectar {
 
     public Vector Estudiantes_matriculados() {
         Vector Estudiantes = new Vector();
-        
+
         try {
             Connection cn = conexion();
             PreparedStatement pstm = cn.prepareStatement(" SELECT DISTINCT matricula.id from matricula");
@@ -1679,6 +1679,84 @@ public class Conectar {
             for (int i = 0; i < Estudiantes.size(); i++) {
                 System.out.println(Estudiantes.elementAt(i));
             }
+        } catch (Exception e) {
+        }
+
+        return Estudiantes;
+    }
+
+    public String Pierden() {
+        String Estudiantes = "";
+
+        try {
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.id,SUM(seguimiento.Nota),AVG(seguimiento.Nota) as final,\n"
+                    + "     COUNT(estudiante.id)\n"
+                    + "FROM\n"
+                    + "     `matricula` matricula INNER JOIN `seguimiento` seguimiento ON matricula.`codigo_matricula` = seguimiento.`codigo_matricula`\n"
+                    + "     INNER JOIN `estudiante` estudiante ON matricula.`id` = estudiante.`id`\n"
+                    + "     INNER JOIN `deporte_categoria_horario` deporte_categoria_horario ON matricula.`codigo_relacion` = deporte_categoria_horario.`codigo_relacion`\n"
+                    + "     INNER JOIN `deporte` deporte ON deporte_categoria_horario.`codigo_deporte` = deporte.`codigo_deporte`\n"
+                    + "     INNER JOIN `categoria` categoria ON deporte_categoria_horario.`codigo_categoria` = categoria.`codigo_categoria`\n"
+                    + "     INNER JOIN `horario` horario ON deporte_categoria_horario.`codigo_horario` = horario.`codigo_horario`\n"
+                    + "     HAVING final < 3");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                Estudiantes = "COUNT(estudiante.id)";
+            }
+
+        } catch (Exception e) {
+        }
+
+        return Estudiantes;
+    }
+    
+    public String Ganan() {
+        String Estudiantes = "";
+
+        try {
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.id,SUM(seguimiento.Nota),AVG(seguimiento.Nota) as final,\n"
+                    + "     COUNT(estudiante.id)\n"
+                    + "FROM\n"
+                    + "     `matricula` matricula INNER JOIN `seguimiento` seguimiento ON matricula.`codigo_matricula` = seguimiento.`codigo_matricula`\n"
+                    + "     INNER JOIN `estudiante` estudiante ON matricula.`id` = estudiante.`id`\n"
+                    + "     INNER JOIN `deporte_categoria_horario` deporte_categoria_horario ON matricula.`codigo_relacion` = deporte_categoria_horario.`codigo_relacion`\n"
+                    + "     INNER JOIN `deporte` deporte ON deporte_categoria_horario.`codigo_deporte` = deporte.`codigo_deporte`\n"
+                    + "     INNER JOIN `categoria` categoria ON deporte_categoria_horario.`codigo_categoria` = categoria.`codigo_categoria`\n"
+                    + "     INNER JOIN `horario` horario ON deporte_categoria_horario.`codigo_horario` = horario.`codigo_horario`\n"
+                    + "     HAVING final >= 3");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                Estudiantes = "COUNT(estudiante.id)";
+            }
+
+        } catch (Exception e) {
+        }
+
+        return Estudiantes;
+    }
+    
+    public String Mejores() {
+        String Estudiantes = "";
+
+        try {
+            Connection cn = conexion();
+            PreparedStatement pstm = cn.prepareStatement(" SELECT estudiante.id,SUM(seguimiento.Nota),AVG(seguimiento.Nota) as final,\n"
+                    + "     COUNT(estudiante.id)\n"
+                    + "FROM\n"
+                    + "     `matricula` matricula INNER JOIN `seguimiento` seguimiento ON matricula.`codigo_matricula` = seguimiento.`codigo_matricula`\n"
+                    + "     INNER JOIN `estudiante` estudiante ON matricula.`id` = estudiante.`id`\n"
+                    + "     INNER JOIN `deporte_categoria_horario` deporte_categoria_horario ON matricula.`codigo_relacion` = deporte_categoria_horario.`codigo_relacion`\n"
+                    + "     INNER JOIN `deporte` deporte ON deporte_categoria_horario.`codigo_deporte` = deporte.`codigo_deporte`\n"
+                    + "     INNER JOIN `categoria` categoria ON deporte_categoria_horario.`codigo_categoria` = categoria.`codigo_categoria`\n"
+                    + "     INNER JOIN `horario` horario ON deporte_categoria_horario.`codigo_horario` = horario.`codigo_horario`\n"
+                    + "     HAVING final >= 4.5");
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                Estudiantes = "COUNT(estudiante.id)";
+            }
+
         } catch (Exception e) {
         }
 

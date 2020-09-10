@@ -7,6 +7,7 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -40,24 +41,29 @@ public class ListaEstudiantes extends HttpServlet {
 
             Reportes reporte = new Reportes();
 
-            for (int i = 0; i < 2; i++) {
                 reporte.Lista_estudiantes();
                 Thread.sleep(1000);
-            }
+                
+                
+            Calendar cal = Calendar.getInstance();
+            
+            
+        String fecha = cal.get(cal.DATE) + "/" + cal.get(cal.MONTH) + "/" + cal.get(cal.YEAR);
+        String hora = String.valueOf(cal.get(cal.HOUR_OF_DAY));
+        String minuto = String.valueOf(cal.get(cal.MINUTE));
+        String segundo = String.valueOf(cal.get(cal.SECOND));
 
-            for (int i = 0; i < 3; i++) {
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<title>ListaEstudiantes</title>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("<iframe src=\"Registros\\Reportes\\ListaEstudiantes.pdf\" "
+                out.println("<iframe src=\"Registros\\Reportes\\LEstudiantes.pdf\" "
                         + "width=\"100%\" height=\"940px\"></iframe>\n"
                         + "");
                 out.println("</body>");
                 out.println("</html>");
-            }
 
         }
     }

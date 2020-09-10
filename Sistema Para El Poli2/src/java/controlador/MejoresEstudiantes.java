@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import Metodos.MensajesErrores;
+import conexion.Conectar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -43,19 +45,27 @@ public class MejoresEstudiantes extends HttpServlet {
                 reporte.Mejores();
                   Thread.sleep(1000);
             }
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Mejores Estudiantes</title>");
-            out.println("</head>");
-            out.println("<body>");
             
-            out.println("<iframe src=\"Registros\\Reportes\\MejoresEstudiantes.pdf\" "
-                    + "width=\"100%\" height=\"940px\"></iframe>\n"
-                    + "");
-            out.println("</body>");
-            out.println("</html>");
+            Conectar con = new Conectar();
+            
+            String Mejores = con.Mejores();
+            
+            if(Mejores.isEmpty()){
+                 out.println(MensajesErrores.Mejor);
+            }else{
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Mejores Estudiantes</title>");
+                out.println("</head>");
+                out.println("<body>");
+
+                out.println("<iframe src=\"Registros\\Reportes\\LMejoresEstudiantes.pdf\" "
+                        + "width=\"100%\" height=\"940px\"></iframe>\n"
+                        + "");
+                out.println("</body>");
+                out.println("</html>");
+            }
         }
     }
 

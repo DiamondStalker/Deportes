@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f1bf70b-9d8b-4cf1-8600-2a7e5f408981">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<staticText>
+				<reportElement x="87" y="10" width="403" height="24" uuid="c90d2cc7-d06f-4571-89bc-cf758c100fc5"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[POLITECNICO COLOMBIANO JAIME ISAZA CADAVID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="34" width="349" height="20" uuid="c19bece7-0a51-4360-999b-298968139066"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ESCUELAFORMACION E INICIACION DEPORTIVA]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="10" width="89" height="69" uuid="740aa6dc-20d6-44ea-ade0-75f17e4b2ad8"/>
+				<imageExpression><![CDATA["C:\\Users\\user\\Downloads\\politecnico-jaime-isaza-cadavid_4716001832.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="114" y="54" width="351" height="31" uuid="a72ba5b6-83ee-4fa5-9f30-13df78245560"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Carrera 48 No. 7 – 151 | El Poblado | PBX: (+57 4) 444 76 54 - (+57 4) 319 79 00  NIT: 890980136-6]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="228" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

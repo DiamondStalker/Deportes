@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import Metodos.MensajesErrores;
+import conexion.Conectar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -42,21 +44,29 @@ public class EstudiantesPierden extends HttpServlet {
 
             for (int i = 0; i < 2; i++) {
                 reporte.Pierden();
-                  Thread.sleep(1000);
+                  Thread.sleep(2000);
             }
-
-            out.println("<!DOCTYPE html>");
+            
+            Conectar con = new Conectar();
+            
+            String pierden = con.Pierden();
+            if(pierden.isEmpty()){
+                 out.println(MensajesErrores.Pierden);
+            }else{
+                out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Estudiantes que pierden</title>");
             out.println("</head>");
             out.println("<body>");
             
-            out.println("<iframe src=\"Registros\\Reportes\\EstudiantesPierden.pdf\" "
+            out.println("<iframe src=\"Registros\\Reportes\\LPierden.pdf\" "
                     + "width=\"100%\" height=\"940px\"></iframe>\n"
                     + "");
             out.println("</body>");
             out.println("</html>");
+            }
+            
         }
     }
 

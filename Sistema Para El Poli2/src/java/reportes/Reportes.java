@@ -6,6 +6,7 @@
 package reportes;
 
 import java.sql.Connection;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -38,9 +39,13 @@ public class Reportes {
         
             JasperPrint jprint = JasperFillManager.fillReport(path,null, conn);
             
-            JasperViewer view = new JasperViewer(jprint,false);
-            
-            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\ListaEstudiantes.pdf");
+            Calendar cal = Calendar.getInstance();
+        String fecha = cal.get(cal.DATE) + "/" + cal.get(cal.MONTH) + "/" + cal.get(cal.YEAR);
+        String hora = String.valueOf(cal.get(cal.HOUR_OF_DAY));
+        String minuto = String.valueOf(cal.get(cal.MINUTE));
+        String segundo = String.valueOf(cal.get(cal.SECOND));
+        
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\LEstudiantes.pdf");
             
         } catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +68,7 @@ public class Reportes {
         
             JasperPrint jprint = JasperFillManager.fillReport(path,parametro, conn);
             
-            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\ListaDocentes"+Deporte+".pdf");
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\Docentes"+Deporte+".pdf");
             
         } catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,7 +92,7 @@ public class Reportes {
         
             jprint = JasperFillManager.fillReport(path,parametro, conn);
             
-            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\Certificado"+Id+".pdf");
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\GCertificado"+Id+".pdf");
             
         } catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,7 +115,7 @@ public class Reportes {
         
             jprint = JasperFillManager.fillReport(path,null, conn);
             
-            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\EstudiantesGanan.pdf");
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\LEstudiantesGanan.pdf");
             
         } catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,7 +138,7 @@ public class Reportes {
         
             jprint = JasperFillManager.fillReport(path,null, conn);
             
-            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\EstudiantesPierden.pdf");
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\LPierden.pdf");
             
         } catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,7 +161,7 @@ public class Reportes {
         
             jprint = JasperFillManager.fillReport(path,null, conn);
             
-            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\MejoresEstudiantes.pdf");
+            JasperExportManager.exportReportToPdfFile(jprint,"C:\\Users\\user\\Documents\\GitHub\\Deportes\\Sistema Para El Poli2\\web\\Registros\\Reportes\\LMejoresEstudiantes.pdf");
             
         } catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);

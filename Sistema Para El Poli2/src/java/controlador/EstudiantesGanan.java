@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import Metodos.MensajesErrores;
+import conexion.Conectar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -44,19 +46,27 @@ public class EstudiantesGanan extends HttpServlet {
                 reporte.Ganan();
                   Thread.sleep(1000);
             }
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Estudiantes que ganan</title>");
-            out.println("</head>");
-            out.println("<body>");
             
-            out.println("<iframe src=\"Registros\\Reportes\\EstudiantesGanan.pdf\" "
-                    + "width=\"100%\" height=\"940px\"></iframe>\n"
-                    + "");
-            out.println("</body>");
-            out.println("</html>");
+            Conectar con = new Conectar();
+            
+            String Ganan = con.Ganan();
+            
+            if(Ganan.isEmpty()){
+                 out.println(MensajesErrores.Ganan);
+            }else{
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Estudiantes que ganan</title>");
+                out.println("</head>");
+                out.println("<body>");
+
+                out.println("<iframe src=\"Registros\\Reportes\\LEstudiantesGanan.pdf\" "
+                        + "width=\"100%\" height=\"940px\"></iframe>\n"
+                        + "");
+                out.println("</body>");
+                out.println("</html>");
+            }
         }
     }
 
